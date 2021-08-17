@@ -3,6 +3,7 @@ package org.Encheres.dal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.Encheres.BusinessException;
@@ -32,28 +33,40 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				if (data.getNomArticle().length() < 30 && data.getDescription().length() < 300) {
 					prstms.setString(1, data.getNomArticle());
 					prstms.setString(2, data.getDescription());
+				} else {
+					BusinessException businessException = new BusinessException();
+					businessException.ajouterErreur(10002);
+					throw businessException;
+				}
+				if (data.getDateDebutEncheres().isBefore(LocalDate.now()) || data.getDateDebutEncheres() == null
+						|| data.getDateFinEncheres().isBefore(data.getDateDebutEncheres())
+						|| data.getDateFinEncheres() == null
+						|| data.getDateFinEncheres().equals(data.getDateDebutEncheres())) {
 					prstms.setDate(3, Date.valueOf(data.getDateDebutEncheres()));
 					prstms.setDate(4, Date.valueOf(data.getDateFinEncheres()));
-					if (data.getMiseAPrix() < 0) {
-						prstms.setInt(5, data.getMiseAPrix());
-					} else {
-						BusinessException businessException = new BusinessException();
-						businessException.ajouterErreur(10003);
-						throw businessException;
-					}
-					prstms.setInt(6, data.getNoUtilisateur());
-					prstms.setInt(7, data.getNoCategorie());
 				} else {
 					BusinessException businessException = new BusinessException();
 					businessException.ajouterErreur(10003);
 					throw businessException;
 				}
 
+				if (data.getMiseAPrix() < 0) {
+					prstms.setInt(5, data.getMiseAPrix());
+				} else {
+					BusinessException businessException = new BusinessException();
+					businessException.ajouterErreur(10004);
+					throw businessException;
+				}
+				prstms.setInt(6, data.getNoUtilisateur());
+				prstms.setInt(7, data.getNoCategorie());
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				cnx.rollback();
 			}
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(10001);
