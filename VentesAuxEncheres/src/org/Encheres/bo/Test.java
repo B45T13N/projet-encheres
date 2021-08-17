@@ -2,7 +2,7 @@ package org.Encheres.bo;
 
 import java.time.LocalDate;
 
-public class TestUtilisateur {
+public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
