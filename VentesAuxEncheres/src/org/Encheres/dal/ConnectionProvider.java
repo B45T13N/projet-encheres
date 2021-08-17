@@ -8,17 +8,18 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-abstract class ConnectionProvider {
+public class ConnectionProvider {
 	private static DataSource dataSource;
 
 	static {
-		try {
-			Context context = new InitialContext();
-			ConnectionProvider.dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
+		Context context;
 
+		try {
+			context = new InitialContext();
+			ConnectionProvider.dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
 		} catch (NamingException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Impossible d'acceder a  la base de donnees");
+			throw new RuntimeException("Impossible d'acceder a la base de donnee");
 		}
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource
+<Resource
 		name = "jdbc/pool_cnx"
 		driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
 		type = "javax.sql.DataSource"
