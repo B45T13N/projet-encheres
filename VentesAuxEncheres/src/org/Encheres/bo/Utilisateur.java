@@ -2,7 +2,6 @@ package org.Encheres.bo;
 
 public class Utilisateur {
 	
-	
 	int noUtilisateur, telephone, codePostal, credit;
 	String pseudo, nom, prenom, email, rue, ville, motDePasse;
 	boolean administrateur;
