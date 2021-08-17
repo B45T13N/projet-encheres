@@ -16,6 +16,13 @@ public class Retrait implements Serializable {
 	
 	
 	
+	public Retrait() {
+		super();
+	}
+
+
+
+
 	public Retrait(String rue, String codePostal, String ville) {
 		super();
 		this.rue = rue;
