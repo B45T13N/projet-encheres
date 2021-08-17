@@ -109,7 +109,7 @@ public class Article implements Serializable {
 
 	public Article(int idUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int prixVente, String etatVente) {
-		this.idUtilisateur = idUtilisateur;
+		this.setIdUtilisateur(idUtilisateur);
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -122,7 +122,7 @@ public class Article implements Serializable {
 
 	public Article(int idUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int miseAPrix, int prixVente, String etatVente) {
-		this.idUtilisateur = idUtilisateur;
+		this.setIdUtilisateur(idUtilisateur);
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -131,6 +131,14 @@ public class Article implements Serializable {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+	}
+
+	public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+	public void setIdUtilisateur(int idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
 	}
 
 }
