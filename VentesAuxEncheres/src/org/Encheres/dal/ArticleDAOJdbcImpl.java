@@ -98,6 +98,10 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				prstms.setInt(1, idArticle);
 				prstms.executeUpdate();
 
+				prstms.close();
+				cnx.commit();
+
+				cnx.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 				cnx.rollback();
