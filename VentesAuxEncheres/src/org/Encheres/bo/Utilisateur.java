@@ -20,8 +20,7 @@ public class Utilisateur {
 		this.ville = ville;
 		this.motDePasse = motDePasse;
 		this.credit = credit;
-		this.administrateur = administrateur;
-		
+		this.administrateur = administrateur;	
 	}
 
 
@@ -192,6 +191,14 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
+	
+	/**
+	 * @param articleEnVente the articleEnVente to set
+	 */
+	public void setArticleEnVente(int articleEnVente) {
+		this.articleEnVente = articleEnVente;
+	}
+
 
 	@Override
 	public String toString() {
