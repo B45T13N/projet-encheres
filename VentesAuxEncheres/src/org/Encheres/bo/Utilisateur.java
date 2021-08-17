@@ -2,11 +2,15 @@ package org.Encheres.bo;
 
 public class Utilisateur {
 	
-	int noUtilisateur,telephone,codePostal,credit;
-	String pseudo,nom,prenom,email,rue,ville,motDePasse;
+	
+	int noUtilisateur, telephone, codePostal, credit;
+	String pseudo, nom, prenom, email, rue, ville, motDePasse;
 	boolean administrateur;
 	int articleEnVente;
 
+	/*
+	 * Le Constructeur Utilisateur
+	 */
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone, String rue,
 			int codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.noUtilisateur = noUtilisateur;
@@ -22,8 +26,7 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;	
 	}
-
-
+	
 	/**
 	 * @return the noUtilisateur
 	 */
@@ -199,7 +202,6 @@ public class Utilisateur {
 		this.articleEnVente = articleEnVente;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom
@@ -208,6 +210,4 @@ public class Utilisateur {
 				+ administrateur + "]";
 	}
 	
-	
-
 }
