@@ -18,7 +18,7 @@ abstract class ConnectionProvider {
 
 		} catch (NamingException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Impossible d'accéder à la base de données");
+			throw new RuntimeException("Impossible d'acceder a  la base de donnees");
 		}
 	}
 
