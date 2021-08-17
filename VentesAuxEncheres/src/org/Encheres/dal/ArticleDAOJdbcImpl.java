@@ -67,6 +67,11 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				}
 				rs.close();
 				prstms.close();
+
+				// Insert Enchere
+
+				// Insert retrait
+
 				cnx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
