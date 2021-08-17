@@ -73,6 +73,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				// Insert retrait
 
 				cnx.commit();
+				cnx.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 				cnx.rollback();
