@@ -14,21 +14,14 @@ public class Article implements Serializable {
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private Categorie categorieArticle;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
 	private int miseAPrix;
 	private int prixVente;
 	private String lieuRetrait;
 	private String etatVente;
-
-	public Categorie getCategorieArticle() {
-		return categorieArticle;
-	}
-
-	public void setCategorieArticle(Categorie categorieArticle) {
-		this.categorieArticle = categorieArticle;
-	}
+	private Categorie categorie;
+	private String libelleCategorie;
 
 	public String getLieuRetrait() {
 		return lieuRetrait;
@@ -107,30 +100,40 @@ public class Article implements Serializable {
 	public Article() {
 	}
 
-	public Article(int noUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int prixVente, String etatVente) {
-		this.setNoUtilisateur(noUtilisateur);
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.categorieArticle = categorieArticle;
+		this.libelleCategorie = categorieArticle.getLibelle();
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.miseAPrix = prixVente;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
 
-	public Article(int noUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int miseAPrix, int prixVente, String etatVente) {
-		this.setNoUtilisateur(noUtilisateur);
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.categorieArticle = categorieArticle;
+		this.libelleCategorie = categorieArticle.getLibelle();
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+	}
+
+	public Article(int noUtilisateur, String nomArticle, String description, Categorie categorieArticle,
+			LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix) {
+		super();
+		this.noUtilisateur = noUtilisateur;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.libelleCategorie = categorieArticle.getLibelle();
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
 	}
 
 	public int getNoUtilisateur() {
@@ -144,12 +147,13 @@ public class Article implements Serializable {
 	@Override
 	public String toString() {
 		return "Article [noUtilisateur=" + noUtilisateur + ", noArticle=" + noArticle + ", nomArticle=" + nomArticle
-				+ ", description=" + description + ", categorieArticle=" + categorieArticle + ", dateDebutEncheres="
+				+ ", description=" + description + ", categorieArticle=" + libelleCategorie + ", dateDebutEncheres="
 				+ dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix
 				+ ", prixVente=" + prixVente + ", lieuRetrait=" + lieuRetrait + ", etatVente=" + etatVente + "]";
 	}
-	
-	
-	
+
+	public int getNoCategorie() {
+		return categorie.getNoCategorie();
+	}
 
 }
