@@ -10,7 +10,7 @@ public class Article implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int idUtilisateur;
+	private int noUtilisateur;
 	private int noArticle;
 	private String nomArticle;
 	private String description;
