@@ -107,9 +107,9 @@ public class Article implements Serializable {
 	public Article() {
 	}
 
-	public Article(int idUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int prixVente, String etatVente) {
-		this.setIdUtilisateur(idUtilisateur);
+		this.setNoUtilisateur(noUtilisateur);
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -120,9 +120,9 @@ public class Article implements Serializable {
 		this.etatVente = etatVente;
 	}
 
-	public Article(int idUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int miseAPrix, int prixVente, String etatVente) {
-		this.setIdUtilisateur(idUtilisateur);
+		this.setNoUtilisateur(noUtilisateur);
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -133,12 +133,23 @@ public class Article implements Serializable {
 		this.etatVente = etatVente;
 	}
 
-	public int getIdUtilisateur() {
-		return idUtilisateur;
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 
-	public void setIdUtilisateur(int idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
+
+	@Override
+	public String toString() {
+		return "Article [noUtilisateur=" + noUtilisateur + ", noArticle=" + noArticle + ", nomArticle=" + nomArticle
+				+ ", description=" + description + ", categorieArticle=" + categorieArticle + ", dateDebutEncheres="
+				+ dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix
+				+ ", prixVente=" + prixVente + ", lieuRetrait=" + lieuRetrait + ", etatVente=" + etatVente + "]";
+	}
+	
+	
+	
 
 }
