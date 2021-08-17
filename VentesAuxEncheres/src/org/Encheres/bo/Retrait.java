@@ -16,6 +16,13 @@ public class Retrait implements Serializable {
 	
 	
 	
+	public Retrait() {
+		super();
+	}
+
+
+
+
 	public Retrait(String rue, String codePostal, String ville) {
 		super();
 		this.rue = rue;
@@ -55,6 +62,6 @@ public class Retrait implements Serializable {
 	// METHODE TO STRING
 	@Override
 	public String toString() {
-		return "Retrait : [" + rue + codePostal + ville + "]";
+		return "Retrait : " + rue + codePostal + ville;
 	}
 }
