@@ -10,6 +10,7 @@ public class Article implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private int idUtilisateur;
 	private int noArticle;
 	private String nomArticle;
 	private String description;
@@ -106,8 +107,9 @@ public class Article implements Serializable {
 	public Article() {
 	}
 
-	public Article(int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int idUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int prixVente, String etatVente) {
+		this.idUtilisateur = idUtilisateur;
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -118,8 +120,9 @@ public class Article implements Serializable {
 		this.etatVente = etatVente;
 	}
 
-	public Article(int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int idUtilisateur, int noArticle, String nomArticle, String description, Categorie categorieArticle,
 			LocalDate dateDebutEncheres, int miseAPrix, int prixVente, String etatVente) {
+		this.idUtilisateur = idUtilisateur;
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
