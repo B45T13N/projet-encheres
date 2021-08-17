@@ -1,5 +1,5 @@
 package org.Encheres.bo;
 
-public class Utilisateur {
+public class Enchere {
 
 }

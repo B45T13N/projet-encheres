@@ -1,5 +1,5 @@
 package org.Encheres.bo;
 
 public enum Categorie {
-	Mobilier, Multimédia, Mode, Loisirs;
+	Informatique, Ameublement, Vétement, Sport_Loisirs;
 }
