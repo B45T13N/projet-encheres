@@ -55,6 +55,6 @@ public class Retrait implements Serializable {
 	// METHODE TO STRING
 	@Override
 	public String toString() {
-		return "Retrait : [" + rue + codePostal + ville + "]";
+		return "Retrait : " + rue + codePostal + ville;
 	}
 }
