@@ -32,7 +32,7 @@ public class ServletTestConnexionRetraits extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		RetraitDAOJdbcImpl daoRetrait = new RetraitDAOJdbcImpl();
 		
-		Retrait retrait = new Retrait(1, "50 rue Des Fleurs", "49190", "Angers");
+		Retrait retrait = new Retrait(1, "50 rue Des Fleurs ", " 49190 ", " Angers ");
 		System.out.println("Retrait");
 		System.out.println(retrait.toString());;
 		
