@@ -33,61 +33,18 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		try (Connection cnx = ConnectionProvider.getConnection()){	
 			cnx.setAutoCommit(false);
 			PreparedStatement prstms = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
-
-			// set Pseudo + nom + prenom + email statement
-			if(data.getPseudo().length() > 30 || data.getPseudo() == null ) {
-				
-				prstms.setString(1, data.getPseudo());
-				
-			} else {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10001);
-				throw businessException;	
-			}
-			
-
-			if(data.getNom().length() > 30 || data.getNom() == null) {
-				prstms.setString(2, data.getNom());
-			} else {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10002);
-				throw businessException;
-			}
-				
-			if(data.getPrenom().length() > 30 || data.getPrenom() == null) {
-				prstms.setString(3, data.getPrenom());
-			} else {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10003);
-				throw businessException;
-			}
-				
-			if(data.getEmail().length() > 20 || data.getEmail() == null) {	
-				prstms.setString(4, data.getEmail());
-			} else {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10004);
-				throw businessException;
-			}
-				
-			
+		
+			prstms.setString(1, data.getPseudo());
+			prstms.setString(2, data.getNom());
+			prstms.setString(3, data.getPrenom());
+			prstms.setString(4, data.getEmail());
 			prstms.setInt(5, data.getTelephone());
 			prstms.setString(6, data.getRue());
 			prstms.setInt(7, data.getCodePostal());
-			
-			if(data.getVille().length() > 30 || data.getMotDePasse().length() > 30) {
-				
-				prstms.setString(8, data.getVille());
-				prstms.setString(9, data.getMotDePasse());
-			
-			} else {
-				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10006);
-				throw businessException;
-			}
-
-			
+			prstms.setString(8, data.getVille());
+			prstms.setString(9, data.getMotDePasse());
 			prstms.setInt(10, data.getCredit());
+			
 			prstms.executeUpdate();
 			
 			//if pour administrateur
