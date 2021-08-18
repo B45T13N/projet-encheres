@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
@@ -14,7 +16,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 	
 	public static final String DELETE_USER = "DELETE FROM UTILISATEUR WHERE no_utilisateur = ?";
 	
-	public static final String UPDATE_USER = "UPDATE ";
+	public static final String UPDATE_USER = "UPDATE UTILISATEUR set pseudo = ?, nom = ?";
+	
+	public static final String SELECT_USER = "SELECT FROM UTILISATEUR WHERE no_utilisateur = ?";
 	
 
 	@Override
@@ -28,21 +32,12 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		
 		try (Connection cnx = ConnectionProvider.getConnection()){	
 			cnx.setAutoCommit(false);
-			PreparedStatement prstms = cnx.prepareStatement(INSERT_USER);
-			ResultSet rs = prstms.getGeneratedKeys();
-			
-			if(rs.next()) {
-				data.setNoUtilisateur(rs.getInt(1));
-			}
-			
+			PreparedStatement prstms = cnx.prepareStatement(INSERT_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+
 			// set Pseudo + nom + prenom + email statement
-			if(data.getPseudo().length() < 30 && data.getNom().length() < 30 
-					&& data.getPrenom().length() < 30 && data.getEmail().length() < 20 ) {
+			if(data.getPseudo().length() > 30 || data.getPseudo() == null ) {
 				
 				prstms.setString(1, data.getPseudo());
-				prstms.setString(2, data.getNom());
-				prstms.setString(3, data.getPrenom());
-				prstms.setString(4, data.getEmail());
 				
 			} else {
 				BusinessException businessException = new BusinessException();
@@ -50,11 +45,37 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 				throw businessException;	
 			}
 			
+
+			if(data.getNom().length() > 30 || data.getNom() == null) {
+				prstms.setString(2, data.getNom());
+			} else {
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(10002);
+				throw businessException;
+			}
+				
+			if(data.getPrenom().length() > 30 || data.getPrenom() == null) {
+				prstms.setString(3, data.getPrenom());
+			} else {
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(10003);
+				throw businessException;
+			}
+				
+			if(data.getEmail().length() > 20 || data.getEmail() == null) {	
+				prstms.setString(4, data.getEmail());
+			} else {
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(10004);
+				throw businessException;
+			}
+				
+			
 			prstms.setInt(5, data.getTelephone());
 			prstms.setString(6, data.getRue());
 			prstms.setInt(7, data.getCodePostal());
 			
-			if(data.getVille().length() < 30 && data.getMotDePasse().length() < 30) {
+			if(data.getVille().length() > 30 || data.getMotDePasse().length() > 30) {
 				
 				prstms.setString(8, data.getVille());
 				prstms.setString(9, data.getMotDePasse());
@@ -70,7 +91,6 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			prstms.executeUpdate();
 			
 			//if pour administrateur
-			rs.close();
 			prstms.close();
 			
 			
@@ -81,23 +101,32 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			e.printStackTrace();
 			System.out.println("Erreur lors de la connection au serveur SQL");
 		}
+	}
 			
 		
 		
-		
-	}
 
 	@Override
-	public void update(int noUtilisateur) throws BusinessException {
+	public void update(Utilisateur data) throws BusinessException {
 		
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
-				// Ajout d'un article
 				PreparedStatement prstms = cnx.prepareStatement(UPDATE_USER);
+				ResultSet rs = prstms.getResultSet();
+				
+				prstms.setString(1, data.getPseudo());
+				prstms.setString(2, data.getNom());
+				prstms.setString(3, data.getPrenom());
+				prstms.setString(4, data.getEmail());
+				prstms.setInt(5, data.getTelephone());
+				prstms.setString(6, data.getRue());
+				prstms.setInt(7, data.getCodePostal());
+				prstms.setString(8, data.getVille());
+				prstms.setString(9, data.getMotDePasse());
+				prstms.setInt(10, data.getCredit());
 				
 				prstms.executeUpdate();
-
 				prstms.close();
 				cnx.commit();
 
@@ -115,9 +144,31 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			throw businessException;
 		}
 		
-		
 	}
+	
+	
+	@Override
+	public List<Utilisateur> selectByNoUtilisateur(int noUtilisateur) throws BusinessException {
 		
+		List<Utilisateur> user = new ArrayList<Utilisateur>();
+		
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER);
+			ResultSet rs = prstms.getResultSet();
+			Utilisateur infos = new Utilisateur();
+			while(rs.next()) {	
+				infos = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email"),
+										rs.getInt("telephone"), rs.getString("rue"), rs.getInt("code_postal"), rs.getString("ville"));
+
+			}	
+			user.add(infos);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+
 
 	@Override
 	public void delete(int noUtilisateur) throws BusinessException {
