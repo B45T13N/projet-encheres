@@ -4,16 +4,13 @@ import java.io.Serializable;
 
 public class Retrait implements Serializable {
 
-	
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private String rue;
 	private String codePostal;
 	private String ville;
 	private int id;
-	
-		
+
 	public Retrait() {
 		super();
 	}
@@ -26,7 +23,6 @@ public class Retrait implements Serializable {
 		this.ville = ville;
 	}
 
-
 	public Retrait(String rue, String codePostal, String ville) {
 		super();
 		this.rue = rue;
@@ -34,9 +30,6 @@ public class Retrait implements Serializable {
 		this.ville = ville;
 	}
 
-		
-
-	
 	public String getRue() {
 		return rue;
 	}
@@ -61,8 +54,6 @@ public class Retrait implements Serializable {
 		this.ville = ville;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
@@ -74,6 +65,6 @@ public class Retrait implements Serializable {
 	// METHODE TO STRING
 	@Override
 	public String toString() {
-		return "Retrait : " + rue + codePostal + ville + "No Article : " + id;
+		return "Retrait : " + rue + " " + codePostal + " " + ville + " " + "No Article : " + id;
 	}
 }
