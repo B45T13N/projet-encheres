@@ -20,7 +20,15 @@ public class Article implements Serializable {
 	private int prixVente;
 	private String lieuRetrait;
 	private String etatVente;
-	private Categorie categorie;
+
+	public String getLibelleCategorie() {
+		return libelleCategorie;
+	}
+
+	public void setLibelleCategorie(String libelleCategorie) {
+		this.libelleCategorie = libelleCategorie;
+	}
+
 	private String libelleCategorie;
 
 	public String getLieuRetrait() {
@@ -150,10 +158,6 @@ public class Article implements Serializable {
 				+ ", description=" + description + ", categorieArticle=" + libelleCategorie + ", dateDebutEncheres="
 				+ dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix
 				+ ", prixVente=" + prixVente + ", lieuRetrait=" + lieuRetrait + ", etatVente=" + etatVente + "]";
-	}
-
-	public int getNoCategorie() {
-		return categorie.getNoCategorie();
 	}
 
 }

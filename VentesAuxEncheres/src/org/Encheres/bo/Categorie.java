@@ -1,20 +1,23 @@
 package org.Encheres.bo;
 
 public class Categorie {
-	private Integer noCategorie;
+	private int noCategorie;
 	private String libelle;
 
-	public Categorie(Integer noCategorie, String libelle) {
+	public Categorie(int noCategorie, String libelle) {
 		super();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
 
-	public Integer getNoCategorie() {
+	public Categorie() {
+	}
+
+	public int getNoCategorie() {
 		return noCategorie;
 	}
 
-	public void setNoCategorie(Integer noCategorie) {
+	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 

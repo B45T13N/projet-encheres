@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.Encheres.BusinessException;
@@ -16,6 +15,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
 			+ " VALUES(?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
+	public static final String UPDATE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	@Override
 	public void insert(Article data) throws BusinessException {
@@ -31,35 +31,19 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				// Ajout d'un article
 				PreparedStatement prstms = cnx.prepareStatement(INSERT_ARTICLE,
 						PreparedStatement.RETURN_GENERATED_KEYS);
-				if (data.getNomArticle().length() < 30 && data.getDescription().length() < 300) {
-					prstms.setString(1, data.getNomArticle());
-					prstms.setString(2, data.getDescription());
-				} else {
-					BusinessException businessException = new BusinessException();
-					businessException.ajouterErreur(10002);
-					throw businessException;
-				}
-				if (data.getDateDebutEncheres().isBefore(LocalDate.now()) || data.getDateDebutEncheres() == null
-						|| data.getDateFinEncheres().isBefore(data.getDateDebutEncheres())
-						|| data.getDateFinEncheres() == null
-						|| data.getDateFinEncheres().equals(data.getDateDebutEncheres())) {
-					prstms.setDate(3, Date.valueOf(data.getDateDebutEncheres()));
-					prstms.setDate(4, Date.valueOf(data.getDateFinEncheres()));
-				} else {
-					BusinessException businessException = new BusinessException();
-					businessException.ajouterErreur(10003);
-					throw businessException;
-				}
 
-				if (data.getMiseAPrix() < 0) {
-					prstms.setInt(5, data.getMiseAPrix());
-				} else {
-					BusinessException businessException = new BusinessException();
-					businessException.ajouterErreur(10004);
-					throw businessException;
-				}
+				prstms.setString(1, data.getNomArticle());
+				prstms.setString(2, data.getDescription());
+
+				prstms.setDate(3, Date.valueOf(data.getDateDebutEncheres()));
+				prstms.setDate(4, Date.valueOf(data.getDateFinEncheres()));
+
+				prstms.setInt(5, data.getMiseAPrix());
+
 				prstms.setInt(6, data.getNoUtilisateur());
-				prstms.setInt(7, data.getNoCategorie());
+				// Récupération du libelle categorie
+				CategorieDAOJdbcImpl categorie = new CategorieDAOJdbcImpl();
+				prstms.setInt(7, categorie.selectByLibelle(data.getLibelleCategorie()));
 				prstms.executeUpdate();
 				ResultSet rs = prstms.getGeneratedKeys();
 				if (rs.next()) {
@@ -69,11 +53,13 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				prstms.close();
 
 				// Insert Enchere
-
+//				Enchere enchereCourante = new Enchere(data.getDateDebutEncheres(), data.getMiseAPrix(),
+//						data.getNoArticle(), data.getNoUtilisateur());
+//				insert(enchereCourante);
 				// Insert retrait
+//				Retrait retraitCourant = new Retrait();
 
 				cnx.commit();
-				cnx.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 				cnx.rollback();
@@ -89,8 +75,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	}
 
 	@Override
-	public void delete(int idArticle) throws BusinessException {
-		if (idArticle < 0) {
+	public void delete(int noArticle) throws BusinessException {
+		if (noArticle < 0) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(10000);
 			throw businessException;
@@ -101,7 +87,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				cnx.setAutoCommit(false);
 				// Ajout d'un article
 				PreparedStatement prstms = cnx.prepareStatement(DELETE_ARTICLE);
-				prstms.setInt(1, idArticle);
+				prstms.setInt(1, noArticle);
 				prstms.executeUpdate();
 
 				prstms.close();
@@ -123,7 +109,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	}
 
 	@Override
-	public void update(int idArticle) throws BusinessException {
+	public void update(int noArticle) throws BusinessException {
 
 	}
 
