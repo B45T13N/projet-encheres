@@ -17,7 +17,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String DELETE_USER = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
-	public static final String UPDATE_USER = "UPDATE UTILISATEURS set pseudo = ?, nom = ?";
+	public static final String UPDATE_USER = "UPDATE UTILISATEURS SET pseudo =?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE no_utilisateur =?";
 
 	public static final String SELECT_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
@@ -69,7 +69,6 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			try {
 				cnx.setAutoCommit(false);
 				PreparedStatement prstms = cnx.prepareStatement(UPDATE_USER);
-
 				prstms.setString(1, data.getPseudo());
 				prstms.setString(2, data.getNom());
 				prstms.setString(3, data.getPrenom());
@@ -79,7 +78,6 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 				prstms.setString(7, data.getCodePostal());
 				prstms.setString(8, data.getVille());
 				prstms.setString(9, data.getMotDePasse());
-				prstms.setInt(10, data.getCredit());
 
 				prstms.executeUpdate();
 				prstms.close();
