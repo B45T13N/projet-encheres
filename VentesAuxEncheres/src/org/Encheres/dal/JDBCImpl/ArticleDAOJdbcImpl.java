@@ -19,8 +19,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
 			+ " VALUES(?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
-	public static final String UPDATE_ARTICLE = "UPDATE SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, date_fin_encheres = ?, no_categorie =? FROM ARTICLES_VENDUS WHERE no_article = ?";
-	public static final String SELECT_ALL = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON";
+	public static final String UPDATE_ARTICLE = "UPDATE SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, date_fin_encheres = ?, no_categorie =? WHERE no_article = ?";
+	public static final String SELECT_ALL = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur";
 
 	@Override
 	public void insert(Article data) throws BusinessException {
@@ -153,20 +153,12 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				cnx.setAutoCommit(false);
 				// Mise à jour article
 				PreparedStatement prstms = cnx.prepareStatement(SELECT_ALL);
-				if (LocalDate.now() != data.getDateDebutEncheres()) {
-					prstms.setString(1, data.getNomArticle());
-					prstms.setString(2, data.getDescription());
-					prstms.setInt(3, data.getMiseAPrix());
-					prstms.setDate(4, Date.valueOf(data.getDateDebutEncheres()));
-					prstms.setDate(5, Date.valueOf(data.getDateFinEncheres()));
-					// Récupération du libelle categorie
-					CategorieDAOJdbcImpl categorie = new CategorieDAOJdbcImpl();
-					String libelle = data.getlibelle().toLowerCase();
-					int noCategorie = categorie.selectByLibelle(libelle);
-					prstms.setInt(6, noCategorie);
+				ResultSet rs = prstms.executeQuery();
 
+				Article art = null;
+				while (rs.next()) {
+					art = new Article();
 				}
-				prstms.executeUpdate();
 				prstms.close();
 				cnx.commit();
 				cnx.close();

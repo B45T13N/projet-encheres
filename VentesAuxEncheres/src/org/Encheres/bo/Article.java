@@ -147,6 +147,14 @@ public class Article implements Serializable {
 		return noUtilisateur;
 	}
 
+	public Article(int noUtilisateur, String nomArticle, LocalDate dateFinEncheres, int miseAPrix) {
+		super();
+		this.noUtilisateur = noUtilisateur;
+		this.nomArticle = nomArticle;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+	}
+
 	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
