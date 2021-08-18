@@ -4,23 +4,27 @@ import java.io.Serializable;
 
 public class Retrait implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	
 	private String rue;
 	private String codePostal;
 	private String ville;
+	private int id;
 	
-	
-	
+		
 	public Retrait() {
 		super();
 	}
 
-
+	public Retrait(int id, String rue, String codePostal, String ville) {
+		super();
+		this.setId(id);
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
 
 
 	public Retrait(String rue, String codePostal, String ville) {
@@ -59,9 +63,17 @@ public class Retrait implements Serializable {
 
 
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	// METHODE TO STRING
 	@Override
 	public String toString() {
-		return "Retrait : " + rue + codePostal + ville;
+		return "Retrait : " + rue + codePostal + ville + "No Article : " + id;
 	}
 }
