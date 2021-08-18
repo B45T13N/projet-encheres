@@ -70,7 +70,6 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			try {
 				cnx.setAutoCommit(false);
 				PreparedStatement prstms = cnx.prepareStatement(UPDATE_USER);
-				ResultSet rs = prstms.getResultSet();
 				
 				prstms.setString(1, data.getPseudo());
 				prstms.setString(2, data.getNom());
