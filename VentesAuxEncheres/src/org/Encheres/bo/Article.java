@@ -20,6 +20,7 @@ public class Article implements Serializable {
 	private int prixVente;
 	private String lieuRetrait;
 	private String etatVente;
+	private String libelleCategorie;
 
 	public String getLibelleCategorie() {
 		return libelleCategorie;
@@ -28,8 +29,6 @@ public class Article implements Serializable {
 	public void setLibelleCategorie(String libelleCategorie) {
 		this.libelleCategorie = libelleCategorie;
 	}
-
-	private String libelleCategorie;
 
 	public String getLieuRetrait() {
 		return lieuRetrait;
@@ -108,37 +107,37 @@ public class Article implements Serializable {
 	public Article() {
 	}
 
-	public Article(int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noArticle, String nomArticle, String description, String libelleCategorie,
 			LocalDate dateDebutEncheres, int prixVente, String etatVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.libelleCategorie = categorieArticle.getLibelle();
+		this.libelleCategorie = libelleCategorie;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.miseAPrix = prixVente;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
 
-	public Article(int noArticle, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noArticle, String nomArticle, String description, String libelleCategorie,
 			LocalDate dateDebutEncheres, int miseAPrix, int prixVente, String etatVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.libelleCategorie = categorieArticle.getLibelle();
+		this.libelleCategorie = libelleCategorie;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 	}
 
-	public Article(int noUtilisateur, String nomArticle, String description, Categorie categorieArticle,
+	public Article(int noUtilisateur, String nomArticle, String description, String libelleCategorie,
 			LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.nomArticle = nomArticle;
 		this.description = description;
-		this.libelleCategorie = categorieArticle.getLibelle();
+		this.libelleCategorie = libelleCategorie;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
