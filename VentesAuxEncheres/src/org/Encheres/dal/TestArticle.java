@@ -12,11 +12,20 @@ public class TestArticle {
 	public static void main(String[] args) {
 
 		ArticleDAOJdbcImpl daoArticle = new ArticleDAOJdbcImpl();
+		UtilisateurDAOJdbcImpl user = new UtilisateurDAOJdbcImpl();
 
-		Utilisateur perso = new Utilisateur(1, "Eklypse", "Martins", "Pedro", "pedro@test.com", 0610101010, "Rue 50",
-				84500, "Boll�ne", "Pedro8408", 50, true);
+		Utilisateur perso = new Utilisateur("Eklypse", "Martins", "Pedro", "pedro@test.com", "0610101010", "Rue 50",
+				"84500", "Boll�ne", "Pedro8408");
 		System.out.println("Utilisateur :");
 		System.out.println(perso.toString());
+
+		try {
+			user.insert(perso);
+			System.out.println("Votre utilisateur a été enregistrer!");
+		} catch (BusinessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		LocalDate dateVente = LocalDate.now();
 		LocalDate dateFinVente = LocalDate.of(2021, 8, 31);

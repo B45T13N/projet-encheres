@@ -1,18 +1,17 @@
 package org.Encheres.bo;
 
 public class Utilisateur {
-	
-	int noUtilisateur, telephone, codePostal, credit;
-	String pseudo, nom, prenom, email, rue, ville, motDePasse;
+
+	int noUtilisateur, credit;
+	String pseudo, nom, prenom, email, rue, ville, motDePasse, codePostal, telephone;
 	boolean administrateur;
 	int articleEnVente;
 
 	/*
 	 * Le Constructeur Utilisateur
 	 */
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone, String rue,
-			int codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
-		this.noUtilisateur = noUtilisateur;
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -22,12 +21,12 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;	
+		this.administrateur = false;
+
 	}
-	
-	public Utilisateur(String pseudo, String nom, String prenom, String email, int telephone, String rue,
-			int codePostal, String ville) {
+
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -39,7 +38,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur() {
-		
+
 	}
 
 	/**
@@ -59,28 +58,28 @@ public class Utilisateur {
 	/**
 	 * @return the telephone
 	 */
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
 	/**
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
 	/**
 	 * @return the codePostal
 	 */
-	public int getCodePostal() {
+	public String getCodePostal() {
 		return codePostal;
 	}
 
 	/**
 	 * @param codePostal the codePostal to set
 	 */
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -199,7 +198,7 @@ public class Utilisateur {
 	/**
 	 * @return the administrateur
 	 */
-	public boolean isAdministrateur() {
+	public boolean getAdministrateur() {
 		return administrateur;
 	}
 
@@ -209,7 +208,7 @@ public class Utilisateur {
 	public void setAdministrateur(boolean administrateur) {
 		this.administrateur = administrateur;
 	}
-	
+
 	/**
 	 * @param articleEnVente the articleEnVente to set
 	 */
@@ -219,10 +218,10 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom
-				+ ", prenom=" + prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
-				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit + ", administrateur="
-				+ administrateur + "]";
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
+				+ ", administrateur=" + administrateur + "]";
 	}
-	
+
 }

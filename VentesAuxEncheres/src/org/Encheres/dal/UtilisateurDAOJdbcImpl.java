@@ -12,7 +12,7 @@ import org.Encheres.bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
-	public static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?) ";
+	public static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	public static final String DELETE_USER = "DELETE FROM UTILISATEUR WHERE no_utilisateur = ?";
 
@@ -37,12 +37,15 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			prstms.setString(2, data.getNom());
 			prstms.setString(3, data.getPrenom());
 			prstms.setString(4, data.getEmail());
-			prstms.setInt(5, data.getTelephone());
+			prstms.setString(5, data.getTelephone());
 			prstms.setString(6, data.getRue());
-			prstms.setInt(7, data.getCodePostal());
+			prstms.setString(7, data.getCodePostal());
 			prstms.setString(8, data.getVille());
 			prstms.setString(9, data.getMotDePasse());
 			prstms.setInt(10, data.getCredit());
+			if (data.getAdministrateur() == false) {
+				prstms.setInt(11, 0);
+			}
 
 			prstms.executeUpdate();
 
@@ -70,9 +73,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 				prstms.setString(2, data.getNom());
 				prstms.setString(3, data.getPrenom());
 				prstms.setString(4, data.getEmail());
-				prstms.setInt(5, data.getTelephone());
+				prstms.setString(5, data.getTelephone());
 				prstms.setString(6, data.getRue());
-				prstms.setInt(7, data.getCodePostal());
+				prstms.setString(7, data.getCodePostal());
 				prstms.setString(8, data.getVille());
 				prstms.setString(9, data.getMotDePasse());
 				prstms.setInt(10, data.getCredit());
@@ -108,8 +111,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			Utilisateur infos = new Utilisateur();
 			while (rs.next()) {
 				infos = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
-						rs.getString("email"), rs.getInt("telephone"), rs.getString("rue"), rs.getInt("code_postal"),
-						rs.getString("ville"));
+						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+						rs.getString("code_postal"), rs.getString("ville"));
 
 			}
 			user.add(infos);
