@@ -35,9 +35,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 				data.setNoUtilisateur(rs.getInt(1));
 			}
 			
-			// set Pseudo statement
-			if(data.getPseudo().length() < 30 || data.getNom().length() < 30 
-					|| data.getPrenom().length() < 30 || data.getEmail().length() < 20 ) {
+			// set Pseudo + nom + prenom + email statement
+			if(data.getPseudo().length() < 30 && data.getNom().length() < 30 
+					&& data.getPrenom().length() < 30 && data.getEmail().length() < 20 ) {
 				
 				prstms.setString(1, data.getPseudo());
 				prstms.setString(2, data.getNom());
@@ -54,7 +54,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			prstms.setString(6, data.getRue());
 			prstms.setInt(7, data.getCodePostal());
 			
-			if(data.getVille().length() < 30 || data.getMotDePasse().length() < 30) {
+			if(data.getVille().length() < 30 && data.getMotDePasse().length() < 30) {
 				
 				prstms.setString(8, data.getVille());
 				prstms.setString(9, data.getMotDePasse());
