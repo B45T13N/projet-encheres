@@ -1,11 +1,18 @@
 package org.Encheres.dal.DAO;
 
 import org.Encheres.bo.Article;
+import org.Encheres.bo.Utilisateur;
 import org.Encheres.dal.JDBCImpl.ArticleDAOJdbcImpl;
+import org.Encheres.dal.JDBCImpl.UtilisateurDAOJdbcImpl;
 
 public class DAOFactory {
 
-	public static DAO<Article> getRepasDAO() {
+	public static DAO<Article> getArticleDAO() {
 		return new ArticleDAOJdbcImpl();
 	}
+
+	public static DAO<Utilisateur> getUtilisateursDAO() {
+		return new UtilisateurDAOJdbcImpl();
+	}
+
 }

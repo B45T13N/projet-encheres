@@ -12,7 +12,7 @@ public interface DAOArticle extends DAO<Article> {
 
 	public void delete(int idArticle) throws BusinessException;
 
-	public void update(int idArticle) throws BusinessException;
+	public void update(Article data) throws BusinessException;
 
 	public List<Article> selectAll() throws BusinessException;
 
