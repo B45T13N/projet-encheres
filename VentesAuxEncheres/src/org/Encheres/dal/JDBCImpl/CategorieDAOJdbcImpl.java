@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Categorie;
+import org.Encheres.dal.CodesResultatDAL;
 import org.Encheres.dal.DAO.DAOCategorie;
 import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
@@ -18,7 +19,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 	public void insert(Categorie data) throws BusinessException {
 		if (data == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10000);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
 			throw businessException;
 		}
 
@@ -48,7 +49,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 		Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10001);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
 			throw businessException;
 		}
 	}
@@ -59,7 +60,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 
 		if (libelle == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10003);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
 			throw businessException;
 		}
 
@@ -81,7 +82,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10001);
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_LIBELLE_FAIL);
 			throw businessException;
 		}
 

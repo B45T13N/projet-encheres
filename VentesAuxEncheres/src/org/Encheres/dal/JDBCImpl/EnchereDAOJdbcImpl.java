@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Enchere;
+import org.Encheres.dal.CodesResultatDAL;
 import org.Encheres.dal.DAO.DAOEnchere;
 import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
@@ -21,6 +22,12 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 	// INSERT enchere
 	@Override
 	public void insert(Enchere data) throws BusinessException {
+
+		if (data == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
+			throw businessException;
+		}
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
@@ -39,7 +46,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 				e.printStackTrace();
 				cnx.rollback();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10011);
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_ENCHERE_FAIL);
 				throw businessException;
 
 			}
@@ -66,7 +73,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 				e.printStackTrace();
 				cnx.rollback();
 				BusinessException businessException = new BusinessException();
-				businessException.ajouterErreur(10013);
+				businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
 				throw businessException;
 
 			}
@@ -105,7 +112,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 			}
 		} catch (Exception e) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10013);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_FAIL);
 			throw businessException;
 		}
 

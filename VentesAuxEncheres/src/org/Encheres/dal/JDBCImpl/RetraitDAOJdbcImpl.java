@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Retrait;
+import org.Encheres.dal.CodesResultatDAL;
 import org.Encheres.dal.DAO.DAORetrait;
 import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
@@ -21,9 +22,9 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 	@Override
 	public void insert(Retrait data) throws BusinessException {
 		if (data == null) {
-			BusinessException busi = new BusinessException();
-			busi.ajouterErreur(10000);
-			throw busi;
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
+			throw businessException;
 		}
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -45,7 +46,11 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 
 			} catch (Exception e) {
 				e.printStackTrace();
+
 				cnx.rollback();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.INSERT_RETRAIT_FAIL);
+				throw businessException;
 
 			}
 
@@ -79,6 +84,9 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 			} catch (Exception e) {
 				e.printStackTrace();
 				cnx.rollback();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
+				throw businessException;
 			}
 		} catch (
 
@@ -91,7 +99,7 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 	}
 
 	@Override
-	public Retrait selectRetraitByIdArticle(int noArticle) {
+	public Retrait selectRetraitByIdArticle(int noArticle) throws BusinessException {
 		Retrait retraitCourant = new Retrait();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement prstms = cnx.prepareStatement(SELECT_RETRAITS);
@@ -107,9 +115,10 @@ public class RetraitDAOJdbcImpl implements DAORetrait {
 			}
 
 		} catch (SQLException e) {
-			BusinessException busi = new BusinessException();
-			busi.ajouterErreur(10003);
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_RETRAIT_FAIL);
+			throw businessException;
 		}
 		return retraitCourant;
 	}

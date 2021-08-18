@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
+import org.Encheres.dal.CodesResultatDAL;
 import org.Encheres.dal.DAO.DAOUtilisateur;
 import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
@@ -26,7 +27,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		if (data == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10000);
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
 			throw businessException;
 		}
 
@@ -58,12 +59,20 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Erreur lors de la connection au serveur SQL");
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_UTILISATEUR_FAIL);
+			throw businessException;
 		}
 	}
 
 	@Override
 	public void update(Utilisateur data) throws BusinessException {
+
+		if (data == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
+			throw businessException;
+		}
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
@@ -93,7 +102,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10001);
+			businessException.ajouterErreur(CodesResultatDAL.UPDATE_UTILISATEUR_FAIL);
 			throw businessException;
 		}
 
@@ -126,7 +135,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		if (noUtilisateur < 0) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10003);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
 			throw businessException;
 		}
 
@@ -151,7 +160,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10004);
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
 			throw businessException;
 		}
 
