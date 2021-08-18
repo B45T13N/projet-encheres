@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
+import org.Encheres.bo.Enchere;
+import org.Encheres.bo.Retrait;
+import org.Encheres.bo.Utilisateur;
 
 public class ArticleDAOJdbcImpl implements DAOArticle {
 
@@ -53,11 +56,17 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				prstms.close();
 
 				// Insert Enchere
-//				Enchere enchereCourante = new Enchere(data.getDateDebutEncheres(), data.getMiseAPrix(),
-//						data.getNoArticle(), data.getNoUtilisateur());
-//				insert(enchereCourante);
+				EnchereDAOJdbcImpl enchereDAO = new EnchereDAOJdbcImpl();
+				Enchere enchereCourant = new Enchere(data.getNoUtilisateur(), data.getNoArticle(),
+						data.getDateDebutEncheres(), data.getMiseAPrix());
+				enchereDAO.insert(enchereCourant);
 				// Insert retrait
-//				Retrait retraitCourant = new Retrait();
+				RetraitDAOJdbcImpl retraitDAO = new RetraitDAOJdbcImpl();
+				UtilisateurDAOJdbcImpl utilisateurDAO = new UtilisateurDAOJdbcImpl();
+				Utilisateur utilisateurCourant = utilisateurDAO.selectByNoUtilisateur(data.getNoUtilisateur());
+				Retrait retraitCourant = new Retrait(data.getNoArticle(), utilisateurCourant.getRue(),
+						utilisateurCourant.getCodePostal(), utilisateurCourant.getVille());
+				retraitDAO.insert(retraitCourant);
 
 				cnx.commit();
 			} catch (Exception e) {

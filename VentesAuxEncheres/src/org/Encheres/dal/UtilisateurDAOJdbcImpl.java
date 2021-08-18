@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
@@ -101,21 +99,20 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 	}
 
 	@Override
-	public List<Utilisateur> selectByNoUtilisateur(int noUtilisateur) throws BusinessException {
+	public Utilisateur selectByNoUtilisateur(int noUtilisateur) throws BusinessException {
 
-		List<Utilisateur> user = new ArrayList<Utilisateur>();
+		Utilisateur user = new Utilisateur();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER);
 			ResultSet rs = prstms.getResultSet();
-			Utilisateur infos = new Utilisateur();
 			while (rs.next()) {
-				infos = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
-						rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-						rs.getString("code_postal"), rs.getString("ville"));
-
+				if (rs.getInt("no_utilisateur") == noUtilisateur) {
+					user = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
+							rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+							rs.getString("code_postal"), rs.getString("ville"));
+				}
 			}
-			user.add(infos);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
