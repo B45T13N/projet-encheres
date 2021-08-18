@@ -3,59 +3,50 @@ package org.Encheres.dal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Enchere;
 
 public class EnchereDAOJdbcImpl implements DAOEnchere {
-	
-	
+
 	public static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur)"
 			+ " VALUES(?,?,?,?)";
 	public static final String DELETE_ENCHERE = "DELETE FROM ENCHERES WHERE no_article=?";
-	
-	public static final String UPDATE_ENCHERE ="UPDATE ENCHERES SET montant_enchere= ?, no_utilisateur=?  WHERE no_article = ?";
-	
-	
-	//INSERT enchere
+
+	public static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere= ?, no_utilisateur=?  WHERE no_article = ?";
+
+	// INSERT enchere
 	@Override
 	public void insert(Enchere data) throws BusinessException {
-		
+
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
 				// Ajout d'une enchère
 				PreparedStatement prstms = cnx.prepareStatement(INSERT_ENCHERE);
-				
-					prstms.setDate(1, Date.valueOf(data.getDateEnchere()));
-					prstms.setInt(2, data.getMontantEnchere());
-					prstms.setInt(3, data.getNoArticle());
-					prstms.setInt(4, data.getNoUtilisateur());
-					
-					prstms.close();
-					cnx.commit();
-					cnx.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			cnx.rollback();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10011);
-			throw businessException;
-			
-		}
-	} catch (SQLException e1) {
-		e1.printStackTrace();
+
+				prstms.setDate(1, Date.valueOf(data.getDateEnchere()));
+				prstms.setInt(2, data.getMontantEnchere());
+				prstms.setInt(3, data.getNoArticle());
+				prstms.setInt(4, data.getNoUtilisateur());
+				prstms.executeUpdate();
+				prstms.close();
+				cnx.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(10011);
+				throw businessException;
+
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 	}
 
-	
-	
-	//Delete enchere
+	// Delete enchere
 	@Override
 	public void delete(int noArticle) throws BusinessException {
 
@@ -69,21 +60,18 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 				prstms.close();
 				cnx.commit();
 				cnx.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			cnx.rollback();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(10013);
-			throw businessException;
-			
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(10013);
+				throw businessException;
+
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
-	} catch (SQLException e1) {
-		e1.printStackTrace();
 	}
-}
-		
-
-
 
 //	private Enchere enchereBuilder(ResultSet rs) throws SQLException {
 //	        Enchere encherePlusHaute;
@@ -91,8 +79,8 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 //	        encherePlusHaute.setDateEnchere(rs.getDate("date_enchere").toLocalDate());
 //	        encherePlusHaute.setMontantEnchere(rs.getInt("montant_enchere"));
 //	        return encherePlusHaute;
-	
-	//Update enchere
+
+	// Update enchere
 	@Override
 	public void update(int noArticle, int noUtilisateur, int montantEnchere) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -107,21 +95,18 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 				prstms.close();
 				cnx.commit();
 				cnx.close();
-				
 
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+
+			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			cnx.rollback();
-			
-		}
-	} catch (Exception e) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(10013);
 			throw businessException;
-	}	
-		
-		
-		
+		}
+
 	}
 
 }

@@ -15,10 +15,10 @@ public class Test {
 		LocalDate dateFinVente;
 		Categorie categorie = new Categorie(1, "Ameublement");
 
-		Article article = new Article(1, "Table", "Un plateau et 4 pieds", categorie, dateVente, 500, 500, "en cours");
-		article.setNoUtilisateur(perso.getNoUtilisateur());
-		System.out.println("Article :");
-		System.out.println(article.toString());
+//		Article article = new Article(1, "Table", "Un plateau et 4 pieds", categorie, dateVente, 500, 500, "en cours");
+//		article.setNoUtilisateur(perso.getNoUtilisateur());
+//		System.out.println("Article :");
+//		System.out.println(article.toString());
 
 	}
 

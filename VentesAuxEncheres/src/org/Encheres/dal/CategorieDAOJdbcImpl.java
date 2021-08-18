@@ -10,7 +10,7 @@ import org.Encheres.bo.Categorie;
 public class CategorieDAOJdbcImpl implements DAOCategorie {
 
 	private static final String INSERT_CATEGORIE = "INSERT INTO CATEGORIES(libelle) VALUES (?)";
-	private static final String SELECT_BY_LIBELLE = "SELECT no_categorie FROM CATEGORIES WHERE libelle=?";
+	private static final String SELECT_BY_LIBELLE = "SELECT * FROM CATEGORIES WHERE libelle like ?";
 
 	@Override
 	public void insert(Categorie data) throws BusinessException {
@@ -69,7 +69,7 @@ public class CategorieDAOJdbcImpl implements DAOCategorie {
 
 			ResultSet rs = prstms.executeQuery();
 			if (rs.next()) {
-				if (rs.getString("libelle").equals(libelle)) {
+				if (libelle.equalsIgnoreCase(rs.getString("libelle").trim())) {
 					noCategorie = rs.getInt("no_categorie");
 				}
 			}

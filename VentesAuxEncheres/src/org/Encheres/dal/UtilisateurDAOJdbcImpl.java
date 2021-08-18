@@ -7,16 +7,17 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
+
 // commmentaires
 public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-	public static final String DELETE_USER = "DELETE FROM UTILISATEUR WHERE no_utilisateur = ?";
+	public static final String DELETE_USER = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
-	public static final String UPDATE_USER = "UPDATE UTILISATEUR set pseudo = ?, nom = ?";
+	public static final String UPDATE_USER = "UPDATE UTILISATEURS set pseudo = ?, nom = ?";
 
-	public static final String SELECT_USER = "SELECT FROM UTILISATEUR WHERE no_utilisateur = ?";
+	public static final String SELECT_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
 	@Override
 	public void insert(Utilisateur data) throws BusinessException {
@@ -105,9 +106,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER);
-			ResultSet rs = prstms.getResultSet();
+			prstms.setInt(1, noUtilisateur);
+			ResultSet rs = prstms.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_utilisateur") == noUtilisateur) {
+				if (noUtilisateur == rs.getInt("no_utilisateur")) {
 					user = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
 							rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 							rs.getString("code_postal"), rs.getString("ville"));

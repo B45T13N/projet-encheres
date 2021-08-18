@@ -8,9 +8,6 @@ import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
-import org.Encheres.bo.Enchere;
-import org.Encheres.bo.Retrait;
-import org.Encheres.bo.Utilisateur;
 
 public class ArticleDAOJdbcImpl implements DAOArticle {
 
@@ -18,7 +15,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
 			+ " VALUES(?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
-	public static final String UPDATE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
+	public static final String UPDATE_ARTICLE = "UPDATE FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	@Override
 	public void insert(Article data) throws BusinessException {
@@ -46,7 +43,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				prstms.setInt(6, data.getNoUtilisateur());
 				// Récupération du libelle categorie
 				CategorieDAOJdbcImpl categorie = new CategorieDAOJdbcImpl();
-				prstms.setInt(7, categorie.selectByLibelle(data.getLibelleCategorie()));
+				String libelle = data.getlibelle().toLowerCase();
+				int noCategorie = categorie.selectByLibelle(libelle);
+				prstms.setInt(7, noCategorie);
 				prstms.executeUpdate();
 				ResultSet rs = prstms.getGeneratedKeys();
 				if (rs.next()) {
@@ -54,20 +53,6 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				}
 				rs.close();
 				prstms.close();
-
-				// Insert Enchere
-				EnchereDAOJdbcImpl enchereDAO = new EnchereDAOJdbcImpl();
-				Enchere enchereCourant = new Enchere(data.getNoUtilisateur(), data.getNoArticle(),
-						data.getDateDebutEncheres(), data.getMiseAPrix());
-				enchereDAO.insert(enchereCourant);
-				// Insert retrait
-				RetraitDAOJdbcImpl retraitDAO = new RetraitDAOJdbcImpl();
-				UtilisateurDAOJdbcImpl utilisateurDAO = new UtilisateurDAOJdbcImpl();
-				Utilisateur utilisateurCourant = utilisateurDAO.selectByNoUtilisateur(data.getNoUtilisateur());
-				Retrait retraitCourant = new Retrait(data.getNoArticle(), utilisateurCourant.getRue(),
-						utilisateurCourant.getCodePostal(), utilisateurCourant.getVille());
-				retraitDAO.insert(retraitCourant);
-
 				cnx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -119,6 +104,29 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 
 	@Override
 	public void update(int noArticle) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				cnx.setAutoCommit(false);
+				// Mise à jour enchère
+				PreparedStatement prstms = cnx.prepareStatement(UPDATE_ARTICLE);
+//				prstms.setInt(1, montantEnchere);
+//				prstms.setInt(2, noUtilisateur);
+				prstms.setInt(3, noArticle);
+				prstms.executeUpdate();
+				prstms.close();
+				cnx.commit();
+				cnx.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+
+			}
+		} catch (Exception e) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10013);
+			throw businessException;
+		}
 
 	}
 
