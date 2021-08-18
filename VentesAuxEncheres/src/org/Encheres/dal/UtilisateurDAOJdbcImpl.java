@@ -12,7 +12,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 	
 	public static final String INSERT_USER = "INSERT INTO UTILISATEURS VALUES(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, )";
 	
-	public static final String DELETE_USER = "DELETE FROM WHERE no_utilisateur = ?";
+	public static final String DELETE_USER = "DELETE FROM UTILISATEUR WHERE no_utilisateur = ?";
 	
 	public static final String UPDATE_USER = "UPDATE ";
 	
