@@ -1,6 +1,7 @@
 package org.Encheres.dal;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.Encheres.BusinessException;
+import org.Encheres.bo.Article;
 import org.Encheres.bo.Utilisateur;
 
 /**
@@ -39,12 +41,21 @@ public class ServletTestConnexion extends HttpServlet {
 				"84500", "Bollene", "Pedro8408");
 		System.out.println("Utilisateur :");
 		System.out.println(perso.toString());
-
 		try {
 			user.insert(perso);
 		} catch (BusinessException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			System.out.println("Insertion erreur");
+		}
+
+		ArticleDAOJdbcImpl articleDAO = new ArticleDAOJdbcImpl();
+		Article articleCourant = new Article(perso.getNoUtilisateur(), "Babouche", "deux chaussures", "Vêtement",
+				LocalDate.of(2021, 8, 19), LocalDate.of(2021, 8, 31), 300);
+		try {
+			articleDAO.insert(articleCourant);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			System.out.println("Erreur insertion article");
 		}
 
 	}
