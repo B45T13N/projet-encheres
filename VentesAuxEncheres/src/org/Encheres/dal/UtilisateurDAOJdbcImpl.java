@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
-
+// commmentaire
 public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String INSERT_USER = "INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe,credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
