@@ -1,4 +1,4 @@
-package org.Encheres.dal;
+package org.Encheres.dal.JDBCImpl;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
+import org.Encheres.dal.DAO.DAOArticle;
+import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
 public class ArticleDAOJdbcImpl implements DAOArticle {
 
@@ -15,7 +17,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
 			+ " VALUES(?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
-	public static final String UPDATE_ARTICLE = "UPDATE FROM ARTICLES_VENDUS WHERE no_article = ?";
+	public static final String UPDATE_ARTICLE = "UPDATE SET FROM ARTICLES_VENDUS WHERE no_article = ?";
 
 	@Override
 	public void insert(Article data) throws BusinessException {

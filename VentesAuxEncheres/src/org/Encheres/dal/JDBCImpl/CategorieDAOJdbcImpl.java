@@ -1,4 +1,4 @@
-package org.Encheres.dal;
+package org.Encheres.dal.JDBCImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Categorie;
+import org.Encheres.dal.DAO.DAOCategorie;
+import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
 public class CategorieDAOJdbcImpl implements DAOCategorie {
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Retrait;
+import org.Encheres.dal.JDBCImpl.RetraitDAOJdbcImpl;
 
 /**
  * Servlet implementation class ServletTestConnexionRetraits

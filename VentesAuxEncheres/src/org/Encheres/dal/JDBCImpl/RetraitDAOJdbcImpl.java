@@ -1,4 +1,4 @@
-package org.Encheres.dal;
+package org.Encheres.dal.JDBCImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Retrait;
+import org.Encheres.dal.DAO.DAORetrait;
+import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
 public class RetraitDAOJdbcImpl implements DAORetrait {
 

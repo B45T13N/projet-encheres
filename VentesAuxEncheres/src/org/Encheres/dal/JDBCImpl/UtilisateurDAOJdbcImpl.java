@@ -1,4 +1,4 @@
-package org.Encheres.dal;
+package org.Encheres.dal.JDBCImpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
+import org.Encheres.dal.DAO.DAOUtilisateur;
+import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
 // commmentaires
 public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {

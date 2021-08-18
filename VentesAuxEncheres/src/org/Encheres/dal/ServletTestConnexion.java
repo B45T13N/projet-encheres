@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
+import org.Encheres.dal.JDBCImpl.ArticleDAOJdbcImpl;
 
 /**
  * Servlet implementation class ServletTestConnexion

@@ -1,4 +1,4 @@
-package org.Encheres.dal;
+package org.Encheres.dal.DAO;
 
 import java.util.List;
 
