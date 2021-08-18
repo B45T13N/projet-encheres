@@ -3,6 +3,8 @@ package org.Encheres.dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.Encheres.BusinessException;
@@ -13,6 +15,8 @@ public class RetraitDAOJdbcImpl implements DAORetrait{
 	public static final String INSERT_RETRAITS = "INSERT INTO RETRAITS(no_article, rue, code_postal, ville) VALUES(?,?,?,?)";
 	
 	public static final String DELETE_RETRAITS = "DELETE FROM RETRAITS WHERE no_article=?";
+	
+	public static final String SELECT_RETRAITS = "SELECT FROM RETRAITS WHERE no_article=?";
 	
 	@Override
 	public void insert(Retrait data) throws BusinessException{
@@ -101,7 +105,27 @@ public class RetraitDAOJdbcImpl implements DAORetrait{
 
 	@Override
 	public Retrait selectRetraitByIdArticle(int noArticle) {
-		return null;
+		Retrait retraitCourant = new Retrait();
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement prstms = cnx.prepareStatement(SELECT_RETRAITS);
+			prstms.setInt(1, noArticle);
+			ResultSet rs = prstms.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getInt("no_article") == noArticle) {
+					retraitCourant = new Retrait(noArticle, rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"));
+					
+					
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			BusinessException busi = new BusinessException();
+			busi.ajouterErreur(10003);
+			e.printStackTrace();
+		}
+		return retraitCourant;
 	}
 	
 	
