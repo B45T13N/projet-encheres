@@ -106,43 +106,43 @@ public class UtilisateurManager {
 	private void validerUtilisateur(Utilisateur utilisateur, BusinessException exception) {
 		BusinessException businessException = new BusinessException();
 		if (utilisateur == null) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.INSERT_NULL);
 		}
 		if (utilisateur.getPseudo() == null || utilisateur.getPseudo().trim().length() == 0
 				|| utilisateur.getPseudo().trim().length() > 30) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_PSEUDO);
 		}
 		if (utilisateur.getNom() == null || utilisateur.getNom().trim().length() == 0
 				|| utilisateur.getNom().trim().length() > 30) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_NOM);
 		}
 		if (utilisateur.getPrenom() == null || utilisateur.getPrenom().trim().length() == 0
 				|| utilisateur.getPrenom().trim().length() > 30) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_PRENOM);
 		}
 		if (utilisateur.getEmail() == null || utilisateur.getEmail().trim().length() == 0
 				|| utilisateur.getEmail().trim().length() > 50) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_EMAIL);
 		}
 		if (utilisateur.getTelephone() == null || utilisateur.getTelephone().trim().length() == 0
 				|| utilisateur.getTelephone().trim().length() > 15) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_TELEPHONE);
 		}
 		if (utilisateur.getRue() == null || utilisateur.getRue().trim().length() == 0
 				|| utilisateur.getRue().trim().length() > 30) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_RUE);
 		}
 		if (utilisateur.getCodePostal() == null || utilisateur.getCodePostal().trim().length() == 0
 				|| utilisateur.getCodePostal().trim().length() > 10) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_CPO);
 		}
 		if (utilisateur.getVille() == null || utilisateur.getVille().trim().length() == 0
 				|| utilisateur.getVille().trim().length() > 30) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_VILLE);
 		}
 		if (utilisateur.getMotDePasse() == null || utilisateur.getMotDePasse().trim().length() == 0
 				|| utilisateur.getMotDePasse().trim().length() > 30) {
-			businessException.ajouterErreur(10025);
+			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_MDP);
 		}
 	}
 

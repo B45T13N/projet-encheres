@@ -29,7 +29,7 @@ public class EnchereManager {
 
 	public void validerMontantEnchere(int montantInitEnchere, int montantEnchere, BusinessException exception) {
 		if (montantInitEnchere > montantEnchere || montantInitEnchere == montantEnchere) {
-			exception.ajouterErreur(20003);
+			exception.ajouterErreur(CodesResultatBLL.ENCHERE_ERROR_AMOUNT);
 		}
 
 	}

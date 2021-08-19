@@ -73,26 +73,26 @@ public class ArticleManager {
 
 	private void validerNomArticle(String nomArticle, BusinessException exception) {
 		if (nomArticle == null || nomArticle.length() > 30) {
-			exception.ajouterErreur(20001);
+			exception.ajouterErreur(CodesResultatBLL.ARTICLE_ERROR_NOM);
 		}
 	}
 
 	private void validerDescription(String description, BusinessException exception) {
 		if (description == null || description.length() > 300) {
-			exception.ajouterErreur(20001);
+			exception.ajouterErreur(CodesResultatBLL.ARTICLE_ERROR_DESCRIPTION);
 		}
 	}
 
 	private void validerArticle(Article article, BusinessException exception) {
 		if (article == null) {
-			exception.ajouterErreur(10002);
+			exception.ajouterErreur(CodesResultatBLL.INSERT_NULL);
 		}
 		this.validerDateHeure(article.getDateDebutEncheres(), article.getDateFinEncheres(), exception);
 		if (article.getDescription().trim().length() == 0 || article.getDescription() == null) {
-			exception.ajouterErreur(10002);
+			exception.ajouterErreur(CodesResultatBLL.ARTICLE_ERROR_DESCRIPTION);
 		}
 		if (article.getNomArticle().trim().length() == 0 || article.getNomArticle() == null) {
-			exception.ajouterErreur(10002);
+			exception.ajouterErreur(CodesResultatBLL.ARTICLE_ERROR_NOM);
 		}
 	}
 
