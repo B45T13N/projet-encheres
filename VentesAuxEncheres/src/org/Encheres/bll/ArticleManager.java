@@ -10,18 +10,17 @@ import org.Encheres.bo.Utilisateur;
 import org.Encheres.dal.DAO.DAOArticle;
 import org.Encheres.dal.DAO.DAOFactory;
 import org.Encheres.dal.JDBCImpl.CategorieDAOJdbcImpl;
-import org.Encheres.dal.JDBCImpl.EnchereDAOJdbcImpl;
 
 public class ArticleManager {
 
 	private DAOArticle articleDAO;
 	private CategorieDAOJdbcImpl categorieDAO;
-	private EnchereDAOJdbcImpl enchereDAO;
+	private EnchereManager enchereManager;
 
 	public ArticleManager() {
 		this.articleDAO = DAOFactory.getArticleDAO();
 		this.categorieDAO = new CategorieDAOJdbcImpl();
-		this.enchereDAO = new EnchereDAOJdbcImpl();
+		this.enchereManager = new EnchereManager();
 	}
 
 	public Article addArticle(LocalDate dateDebutEnchere, LocalDate dateFinEnchere, String description,
@@ -56,7 +55,7 @@ public class ArticleManager {
 			enchere.setMontantEnchere(miseAPrix);
 			enchere.setNoArticle(article.getNoArticle());
 			enchere.setNoUtilisateur(article.getNoUtilisateur());
-			this.enchereDAO.insert(enchere);
+			this.enchereManager.addEnchere(enchere);
 		} else {
 			throw businessException;
 		}
@@ -97,7 +96,19 @@ public class ArticleManager {
 		}
 	}
 
-	private Article updateVenteArticle(Article article, Utilisateur utilisateurCourant, int montantEnchere)
+	public void updateArticle(Article updateArticle) throws BusinessException {
+		BusinessException exception = new BusinessException();
+
+		this.validerArticle(updateArticle, exception);
+		if (!exception.hasError()) {
+			articleDAO.update(updateArticle);
+		} else {
+			throw exception;
+		}
+
+	}
+
+	public Article updateVenteArticle(Article article, Utilisateur utilisateurCourant, int montantEnchere)
 			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Article articleAModif = article;
@@ -119,7 +130,7 @@ public class ArticleManager {
 
 	}
 
-	private void deleteArticle(Article article) throws BusinessException {
+	public void deleteArticle(Article article) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
 		// test des infos à supprimer
@@ -130,11 +141,11 @@ public class ArticleManager {
 		}
 	}
 
-	private List<String> selectAllArticle() throws BusinessException {
+	public List<String> selectAllArticle() throws BusinessException {
 		return this.articleDAO.selectAll();
 	}
 
-	private List<String> selectArticleByCategorie(String libelle) throws BusinessException {
+	public List<String> selectArticleByCategorie(String libelle) throws BusinessException {
 		int noCategorie = categorieDAO.selectByLibelle(libelle);
 
 		return this.articleDAO.selectByCategorie(noCategorie);

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
+import org.Encheres.bo.Enchere;
 import org.Encheres.bo.Utilisateur;
 import org.Encheres.dal.JDBCImpl.EnchereDAOJdbcImpl;
 
@@ -30,6 +31,11 @@ public class EnchereManager {
 		if (montantInitEnchere > montantEnchere || montantInitEnchere == montantEnchere) {
 			exception.ajouterErreur(20003);
 		}
+
+	}
+
+	public void addEnchere(Enchere enchere) throws BusinessException {
+		enchereDAO.insert(enchere);
 
 	}
 
