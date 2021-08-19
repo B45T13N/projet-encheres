@@ -84,12 +84,26 @@ public class ArticleManager {
 		}
 	}
 
+	private void validerArticle(Article article, BusinessException exception) {
+		if (article == null) {
+			exception.ajouterErreur(10002);
+		}
+		this.validerDateHeure(article.getDateDebutEncheres(), article.getDateFinEncheres(), exception);
+		if (article.getDescription().trim().length() == 0 || article.getDescription() == null) {
+			exception.ajouterErreur(10002);
+		}
+		if (article.getNomArticle().trim().length() == 0 || article.getNomArticle() == null) {
+			exception.ajouterErreur(10002);
+		}
+	}
+
 	private Article updateVenteArticle(Article article, Utilisateur utilisateurCourant, int montantEnchere)
 			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Article articleAModif = article;
 
 		// Test des infos à enregistrer
+		this.validerArticle(articleAModif, businessException);
 		this.validerDateHeure(LocalDate.now(), article.getDateFinEncheres(), businessException);
 		if (!businessException.hasError()) {
 			articleAModif.setPrixVente(montantEnchere);
@@ -103,6 +117,17 @@ public class ArticleManager {
 
 		return articleAModif;
 
+	}
+
+	private void deleteArticle(Article article) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+
+		// test des infos à supprimer
+		this.validerArticle(article, businessException);
+
+		if (!businessException.hasError()) {
+			articleDAO.delete(article.getNoArticle());
+		}
 	}
 
 	private List<String> selectAllArticle() throws BusinessException {
