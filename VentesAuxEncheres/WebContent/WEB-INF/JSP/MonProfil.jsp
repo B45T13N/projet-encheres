@@ -46,7 +46,7 @@
 	<br>
 	<br>
 	
-	<a href=""><input type="submit" value="Modifier"></a>
+	<a href="/WEB-INF/JSP/ModifierProfil.jsp"><input type="submit" value="Modifier"></a>
 	
 	
 </body>
