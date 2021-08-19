@@ -119,8 +119,7 @@ public class ArticleManager {
 		if (!businessException.hasError()) {
 			articleAModif.setPrixVente(montantEnchere);
 			articleDAO.update(articleAModif);
-			enchereDAO.update(article.getNoArticle(), utilisateurCourant.getNoUtilisateur(), montantEnchere,
-					LocalDate.now());
+			enchereManager.updateEnchere(article, utilisateurCourant, montantEnchere);
 
 		} else {
 			throw businessException;

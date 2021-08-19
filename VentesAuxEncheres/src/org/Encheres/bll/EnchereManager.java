@@ -16,7 +16,7 @@ public class EnchereManager {
 		this.enchereDAO = new EnchereDAOJdbcImpl();
 	}
 
-	private void updateEnchere(Article article, Utilisateur utilisateur, int montantEnchere) throws BusinessException {
+	public void updateEnchere(Article article, Utilisateur utilisateur, int montantEnchere) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
 		this.validerMontantEnchere(article.getPrixVente(), montantEnchere, businessException);
@@ -27,7 +27,7 @@ public class EnchereManager {
 		}
 	}
 
-	private void validerMontantEnchere(int montantInitEnchere, int montantEnchere, BusinessException exception) {
+	public void validerMontantEnchere(int montantInitEnchere, int montantEnchere, BusinessException exception) {
 		if (montantInitEnchere > montantEnchere || montantInitEnchere == montantEnchere) {
 			exception.ajouterErreur(20003);
 		}
