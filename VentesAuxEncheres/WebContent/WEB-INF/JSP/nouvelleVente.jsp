@@ -40,7 +40,11 @@
 		<textarea rows="1" cols="3" name="rue"></textarea>
 		<label for="ville">Ville :</label>
 		<textarea rows="1" cols="3" name="rue"></textarea>
-		</div>	
+		</div>
+		
+		<input type="submit" value="Enregistrer">
+		<a href="<%=request.getContextPath()%>/accueil"><input type="button" value="Annuler"></a>
+			
 	</form>
 	
 	
