@@ -9,10 +9,12 @@ import org.Encheres.dal.DAO.DAOUtilisateur;
 public class UtilisateurManager {
 
 	private static DAOUtilisateur daoUtilisateur;
+	private ArticleManager articleManager;
 
 	public UtilisateurManager() {
 
 		daoUtilisateur = DAOFactory.getUtilisateursDAO();
+		articleManager = new ArticleManager();
 
 	}
 
@@ -27,10 +29,27 @@ public class UtilisateurManager {
 	 * @throws BusinessException
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#insert(org.Encheres.bo.Utilisateur)
 	 */
-	public Utilisateur addUtilisateur(Utilisateur newUtilisateur, BusinessException exception)
-			throws BusinessException {
-		validerUtilisateur(newUtilisateur, exception);
-		daoUtilisateur.insert(newUtilisateur);
+	public Utilisateur addUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) throws BusinessException {
+		BusinessException exception = new BusinessException();
+
+		Utilisateur newUtilisateur = new Utilisateur();
+		newUtilisateur.setPseudo(pseudo);
+		newUtilisateur.setNom(nom);
+		newUtilisateur.setPrenom(prenom);
+		newUtilisateur.setEmail(email);
+		newUtilisateur.setTelephone(telephone);
+		newUtilisateur.setRue(rue);
+		newUtilisateur.setCodePostal(codePostal);
+		newUtilisateur.setVille(ville);
+		newUtilisateur.setMotDePasse(motDePasse);
+
+		this.validerUtilisateur(newUtilisateur, exception);
+		if (!exception.hasError()) {
+			daoUtilisateur.insert(newUtilisateur);
+		} else {
+			throw exception;
+		}
 		return newUtilisateur;
 	}
 
@@ -39,10 +58,25 @@ public class UtilisateurManager {
 	 * @throws BusinessException
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#update(org.Encheres.bo.Utilisateur)
 	 */
-	public void updateUtilisateur(Utilisateur utilisateur, BusinessException exception) throws BusinessException {
-		validerUtilisateur(utilisateur, exception);
-		daoUtilisateur.update(utilisateur);
+	public void updateUtilisateur(Utilisateur updateUser) throws BusinessException {
+		BusinessException exception = new BusinessException();
 
+//		Utilisateur updateUser = new Utilisateur();
+//		updateUser.getNoUtilisateur();
+//		updateUser.setPseudo(pseudo);
+//		updateUser.setNom(nom);
+//		updateUser.setPrenom(prenom);
+//		updateUser.setEmail(email);
+//		updateUser.setTelephone(telephone);
+//		updateUser.setRue(rue);
+//		updateUser.setCodePostal(codePostal);
+//		updateUser.setVille(ville);
+//		updateUser.setMotDePasse(motDePasse);
+
+		this.validerUtilisateur(updateUser, exception);
+		if (!exception.hasError()) {
+			daoUtilisateur.update(updateUser);
+		}
 	}
 
 	/**
@@ -55,19 +89,18 @@ public class UtilisateurManager {
 	}
 
 	public void addArticle(Article newArticle) throws BusinessException {
-		ArticleManager article = new ArticleManager();
-		article.addArticle(newArticle.getDateDebutEncheres(), newArticle.getDateFinEncheres(),
+		articleManager.addArticle(newArticle.getDateDebutEncheres(), newArticle.getDateFinEncheres(),
 				newArticle.getDescription(), newArticle.getNomArticle(), newArticle.getMiseAPrix(),
 				newArticle.getLieuRetrait(), newArticle.getlibelle());
 
 	}
 
-	public void updateArticle(Article article) throws BusinessException {
-
+	public void updateArticle(Article updateArticle) throws BusinessException {
+		articleManager.updateArticle(updateArticle);
 	}
 
-	public void deleteArticle(Article article) throws BusinessException {
-
+	public void deleteArticle(Article deleteArticle) throws BusinessException {
+		articleManager.deleteArticle(deleteArticle);
 	}
 
 	private void validerUtilisateur(Utilisateur utilisateur, BusinessException exception) {
