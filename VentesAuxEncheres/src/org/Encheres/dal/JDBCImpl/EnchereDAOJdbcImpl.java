@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Enchere;
@@ -17,7 +18,7 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 			+ " VALUES(?,?,?,?)";
 	public static final String DELETE_ENCHERE = "DELETE FROM ENCHERES WHERE no_article=?";
 
-	public static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere= ?, no_utilisateur=?  WHERE no_article = ?";
+	public static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET date_enchere = ?, montant_enchere= ?, no_utilisateur=?  WHERE no_article = ?";
 
 	// INSERT enchere
 	@Override
@@ -91,15 +92,16 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 
 	// Update enchere
 	@Override
-	public void update(int noArticle, int noUtilisateur, int montantEnchere) throws BusinessException {
+	public void update(int noArticle, int noUtilisateur, int montantEnchere, LocalDate date) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
 				// Mise à jour enchère
 				PreparedStatement prstms = cnx.prepareStatement(UPDATE_ENCHERE);
-				prstms.setInt(1, montantEnchere);
-				prstms.setInt(2, noUtilisateur);
-				prstms.setInt(3, noArticle);
+				prstms.setDate(1, Date.valueOf(date));
+				prstms.setInt(2, montantEnchere);
+				prstms.setInt(3, noUtilisateur);
+				prstms.setInt(4, noArticle);
 				prstms.executeUpdate();
 				prstms.close();
 				cnx.commit();

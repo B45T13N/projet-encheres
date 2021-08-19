@@ -21,6 +21,8 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String SELECT_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
+	public static final String SELECT_USER_BY_PASSWORD = "SELECT * FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
+
 	@Override
 	public void insert(Utilisateur data) throws BusinessException {
 
@@ -156,6 +158,31 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			throw businessException;
 		}
 
+	}
+
+	@Override
+	public Utilisateur selectUtilisateurCourant(String login, String password) throws BusinessException {
+		Utilisateur user = new Utilisateur();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER);
+			prstms.setString(1, login);
+			prstms.setString(2, password);
+			ResultSet rs = prstms.executeQuery();
+			while (rs.next()) {
+				if (login == rs.getString("pseudo") && password == rs.getString("mot_de_passe")) {
+					user = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
+							rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+							rs.getString("code_postal"), rs.getString("ville"));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10004);
+			throw businessException;
+		}
+		return user;
 	}
 
 }
