@@ -161,7 +161,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 	}
 
 	@Override
-	public Utilisateur selectUtilisateurCourant(String login, String password) {
+	public Utilisateur selectUtilisateurCourant(String login, String password) throws BusinessException {
 		Utilisateur user = new Utilisateur();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -178,6 +178,9 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10004);
+			throw businessException;
 		}
 		return user;
 	}
