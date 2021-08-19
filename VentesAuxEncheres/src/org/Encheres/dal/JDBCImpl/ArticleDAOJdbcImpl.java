@@ -17,8 +17,8 @@ import org.Encheres.dal.JDBCTools.ConnectionProvider;
 public class ArticleDAOJdbcImpl implements DAOArticle {
 
 	public static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, "
-			+ "date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
-			+ " VALUES(?,?,?,?,?,?,?)";
+			+ "date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
+			+ " VALUES(?,?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 	public static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, "
 			+ "date_fin_encheres = ?, no_categorie =? WHERE no_article = ?";
@@ -52,11 +52,11 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				prstms.setInt(5, data.getMiseAPrix());
 
 				prstms.setInt(6, data.getNoUtilisateur());
-				// Récupération du libelle categorie
-				CategorieDAOJdbcImpl categorie = new CategorieDAOJdbcImpl();
-				String libelle = data.getlibelle().toLowerCase();
-				int noCategorie = categorie.selectByLibelle(libelle);
-				prstms.setInt(7, noCategorie);
+//				// Récupération du libelle categorie
+//				CategorieDAOJdbcImpl categorie = new CategorieDAOJdbcImpl();
+//				String libelle = data.getlibelle().toLowerCase();
+//				int noCategorie = categorie.selectByLibelle(libelle);
+				prstms.setInt(7, data.getNoCategorie());
 				prstms.executeUpdate();
 				ResultSet rs = prstms.getGeneratedKeys();
 				if (rs.next()) {

@@ -20,11 +20,18 @@ public class Article implements Serializable {
 	private int miseAPrix;
 	private int prixVente;
 	private String lieuRetrait;
-	private String etatVente;
 	private String libelle;
 
 	public String getlibelle() {
 		return libelle;
+	}
+
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
 	}
 
 	public void setlibelle(String libelle) {
@@ -95,21 +102,13 @@ public class Article implements Serializable {
 		this.prixVente = prixVente;
 	}
 
-	public String getEtatVente() {
-		return etatVente;
-	}
-
-	public void setEtatVente(String etatVente) {
-		this.etatVente = etatVente;
-	}
-
 	// Constructeurs
 
 	public Article() {
 	}
 
 	public Article(int noArticle, String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
-			int prixVente, String etatVente) {
+			int prixVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -117,11 +116,11 @@ public class Article implements Serializable {
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.miseAPrix = prixVente;
 		this.prixVente = prixVente;
-		this.etatVente = etatVente;
+
 	}
 
 	public Article(int noArticle, String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
-			int miseAPrix, int prixVente, String etatVente) {
+			int miseAPrix, int prixVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -129,7 +128,6 @@ public class Article implements Serializable {
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
-		this.etatVente = etatVente;
 	}
 
 	public Article(int noArticle, String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
@@ -146,17 +144,6 @@ public class Article implements Serializable {
 
 	public int getNoUtilisateur() {
 		return noUtilisateur;
-	}
-
-	public Article(int noUtilisateur, String nomArticle, String description, String libelle, LocalDate dateFinEncheres,
-			int miseAPrix) {
-		super();
-		this.noUtilisateur = noUtilisateur;
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
-		this.libelle = libelle;
 	}
 
 	public void setNoUtilisateur(int noUtilisateur) {
