@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletAccueilDeconnecte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	// pas super
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
