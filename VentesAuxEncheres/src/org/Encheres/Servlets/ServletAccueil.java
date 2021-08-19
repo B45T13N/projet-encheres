@@ -21,6 +21,7 @@ public class ServletAccueil extends HttpServlet {
      */
     public ServletAccueil() {
         super();
+        
     }
 
 	/**
