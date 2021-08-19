@@ -88,10 +88,8 @@ public class UtilisateurManager {
 		daoUtilisateur.delete(utilisateur.getNoUtilisateur());
 	}
 
-	public void addArticle(Article newArticle) throws BusinessException {
-		articleManager.addArticle(newArticle.getDateDebutEncheres(), newArticle.getDateFinEncheres(),
-				newArticle.getDescription(), newArticle.getNomArticle(), newArticle.getMiseAPrix(),
-				newArticle.getLieuRetrait(), newArticle.getlibelle());
+	public void addArticle(Article newArticle, String rue, String codePostal, String ville) throws BusinessException {
+		articleManager.addArticle(newArticle, rue, ville, codePostal);
 
 	}
 
