@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Loggin
+ * Servlet implementation class ModifierProfil
  */
-@WebServlet("/Loggin")
-public class ServletLoggin extends HttpServlet {
+@WebServlet("/ModifierProfil")
+public class ServletModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletLoggin() {
+    public ServletModifierProfil() {
         super();
         // TODO Auto-generated constructor stub
     }
