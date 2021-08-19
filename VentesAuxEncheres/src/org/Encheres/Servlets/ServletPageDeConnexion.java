@@ -31,7 +31,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 			response.sendRedirect("/ServletAccueil");
 			
 		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/PageDeConnexion.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
 			rd.forward(request, response);
 		}
 		
@@ -59,7 +59,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
 		rd.forward(request, response);
 	}
 
