@@ -12,16 +12,15 @@ public class UtilisateurManager {
 
 	public UtilisateurManager() {
 
-		daoUtilisateur = (DAOUtilisateur) DAOFactory.getUtilisateursDAO();
+		daoUtilisateur = DAOFactory.getUtilisateursDAO();
 
 	}
 
 	public Utilisateur getUtilisateur() {
 		Utilisateur utilisateur = null;
 		try {
-			utilisateur = daoUtilisateur.selectByNoUtilisateur(1);
+			utilisateur = daoUtilisateur.selectUtilisateurCourant(1);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return utilisateur;
