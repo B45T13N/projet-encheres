@@ -144,4 +144,9 @@ public class UtilisateurManager {
 		}
 	}
 
+	public Utilisateur selectByNoUtilisateur(int noUtilisateur) throws BusinessException {
+
+		return this.daoUtilisateur.selectByNoUtilisateur(noUtilisateur);
+
+	}
 }
