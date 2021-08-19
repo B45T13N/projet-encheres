@@ -35,14 +35,11 @@ public class ServletMonProfil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/MonProfil.jsp");
-		rd.forward(request, response);
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
 		try {
-			utilisateur = user.selectByNoUtilisateur(10);
+			utilisateur = user.selectByNoUtilisateur(1);
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		request.setAttribute("pseudo", utilisateur.getPseudo());
@@ -53,6 +50,9 @@ public class ServletMonProfil extends HttpServlet {
 		request.setAttribute("rue", utilisateur.getRue());
 		request.setAttribute("code_postal", utilisateur.getCodePostal());
 		request.setAttribute("ville", utilisateur.getVille());
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/MonProfil.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

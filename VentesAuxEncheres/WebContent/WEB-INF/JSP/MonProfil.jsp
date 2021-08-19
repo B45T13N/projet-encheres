@@ -8,20 +8,20 @@
 </head>
 <body>
 <%
-	String pseudo = String.valueOf(application.getAttribute("pseudo"));
-	String nom = request.getParameter("nom");
-	String prenom = request.getParameter("prenom");
-	String email = request.getParameter("email");
-	String telephone = request.getParameter("telephone");
-	String rue = request.getParameter("rue");
-	String codePostal = request.getParameter("code_postal");
-	String ville = request.getParameter("ville");
+	String pseudo = String.valueOf(request.getAttribute("pseudo"));
+	String nom = String.valueOf(request.getAttribute("nom"));
+	String prenom = String.valueOf(request.getAttribute("prenom"));
+	String email = String.valueOf(request.getAttribute("email"));
+	String telephone = String.valueOf(request.getAttribute("telephone"));
+	String rue = String.valueOf(request.getAttribute("rue"));
+	String codePostal = String.valueOf(request.getAttribute("code_postal"));
+	String ville = String.valueOf(request.getAttribute("ville"));
 %>
 
 	<h1>Mon Profil</h1>
 	<br>
 	<b>Pseudo :</b>
-	<%= pseudo %>
+	<%=pseudo%>
 	<br>
 	<b>Nom :</b>
 	<%= nom %>
@@ -46,7 +46,8 @@
 	<br>
 	<br>
 	
-	<input type="submit" value="Modifier">
+	<a href=""><input type="submit" value="Modifier"></a>
+	
 	
 </body>
 </html>
