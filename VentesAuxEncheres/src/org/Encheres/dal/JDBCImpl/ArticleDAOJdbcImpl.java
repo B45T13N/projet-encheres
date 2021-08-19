@@ -20,9 +20,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "date_debut_encheres, date_fin_encheres, prix_initial, no_utilisateur, no_categorie)"
 			+ " VALUES(?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
-	public static final String UPDATE_ARTICLE = "UPDATE SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, "
+	public static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, "
 			+ "date_fin_encheres = ?, no_categorie =? WHERE no_article = ?";
-	public static final String SELECT_ALL = "SELECT nom_article, prix_initial, date_fin_encheres, pseudo "
+	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, prix_initial, date_fin_encheres, pseudo "
 			+ "FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur";
 	public static final String SELECT_BY_CATEGORIE = "SELECT nom_article, prix_initial, date_fin_encheres, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur WHERE no_categorie=?";
@@ -140,6 +140,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					String libelle = data.getlibelle().toLowerCase();
 					int noCategorie = categorie.selectByLibelle(libelle);
 					prstms.setInt(6, noCategorie);
+					prstms.setInt(7, data.getNoArticle());
 
 				}
 				prstms.executeUpdate();
@@ -177,12 +178,10 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					list.add(art);
 				}
 				prstms.close();
-				cnx.commit();
 				cnx.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				cnx.rollback();
 
 			}
 		} catch (Exception e) {
@@ -212,12 +211,10 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					list.add(art);
 				}
 				prstms.close();
-				cnx.commit();
 				cnx.close();
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				cnx.rollback();
 
 			}
 		} catch (Exception e) {

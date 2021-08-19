@@ -131,10 +131,10 @@ public class Article implements Serializable {
 		this.etatVente = etatVente;
 	}
 
-	public Article(int noUtilisateur, String nomArticle, String description, String libelle,
-			LocalDate dateDebutEncheres, LocalDate dateFinEncheres, int miseAPrix) {
+	public Article(int noArticle, String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix) {
 		super();
-		this.noUtilisateur = noUtilisateur;
+		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.libelle = libelle;
