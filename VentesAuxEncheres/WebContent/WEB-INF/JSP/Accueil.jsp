@@ -10,34 +10,32 @@
 	<header>
 		<h2>ENI-Enchères</h2>
 		<p><a href="<%=request.getContextPath() %>/ServletModifierProfil">S'inscrire - </a></p>
-		<p><a href="<%=request.getContextPath() %>/"> Se connecter </a></p> <!-- Mettre URL page connection -->
+		<p><a href="<%=request.getContextPath() %>/ServletLoggin"> Se connecter </a></p>
 	</header>
 	<h1>Liste des enchères</h1>
 	<br/>
 	
-	
-	<form>
-		<label>Filtres :</label><br/>
+	<div>	
+		<h4>Filtres :</h4>
+		<br/>
 		<div>
-			<div>
-				<input placeholder="Le nom de l'article contient" type="search" id="site-search" name="recherche">
-			</div>
-			<div>
-				<button>Rechercher</button>
-			</div>
-		</div>	
-	</form>
-	<br/>
-	<div>
-		<label for="Selection-categorie">Catégories</label>
-		<select class="" name="Categorie" id="Selection-categorie"> <!-- Class à définir -->
-				<option value="Toutes">Toutes </option>
-				<option value="Informatique">Informatique </option>
-				<option value="Ameublement">Ameublement </option>
-				<option value="Vêtement">Vêtement </option>
-				<option value="Sport_Loisirs">Sport et Loisirs </option>
-		</select>		
+			<form action="accueil" method="POST">
+				<input type="search" placeholder="Le nom de l'article contient">
+				<br/>
+				<br/>
+				<label for="categorie">Catégorie : </label>
+				<select name="categorie" id="categorie">
+				    <option value="Toutes les catégories">Toutes</option>
+				    <option value="Informatique">Informatique</option>
+				    <option value="Ameublement">Ameublement</option>
+				    <option value="Vetement">Vêtement</option>
+				    <option value="Sport_loisir">Sports et Loisirs</option>
+				</select>
+		        <input type="submit" name="btValider" value="Rechercher">
+			</form>	
+		</div>
 	</div>
+	
 	<br/>
 	<section>
 		<article>
