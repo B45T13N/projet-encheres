@@ -22,9 +22,10 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 	public static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, "
 			+ "date_fin_encheres = ?, no_categorie =? WHERE no_article = ?";
-	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, prix_initial, date_fin_encheres, pseudo "
-			+ "FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur";
-	public static final String SELECT_BY_CATEGORIE = "SELECT nom_article, prix_initial, date_fin_encheres, "
+	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, description, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie "
+			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie";
+	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, prix_initial, date_fin_encheres, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur WHERE no_categorie=?";
 
 	@Override
@@ -162,8 +163,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	}
 
 	@Override
-	public List<Article> selectAll() throws BusinessException {
-		List<Article> list = new ArrayList<Article>();
+	public List<String> selectAll() throws BusinessException {
+		List<String> list = new ArrayList<String>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
@@ -174,8 +175,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				Article art = null;
 				while (rs.next()) {
 					art = new Article(rs.getInt("no_utilisateur"), rs.getString("nom_article"),
-							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"));
-					list.add(art);
+							rs.getString("description"), rs.getString("libelle"),
+							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"));
+					list.add(art.toString() + rs.getString("pseudo"));
 				}
 				prstms.close();
 				cnx.close();
@@ -194,8 +196,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	}
 
 	@Override
-	public List<Article> selectByCategorie(int noCategorie) throws BusinessException {
-		List<Article> list = new ArrayList<Article>();
+	public List<String> selectByCategorie(int noCategorie) throws BusinessException {
+		List<String> list = new ArrayList<String>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
@@ -207,8 +209,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				Article art = null;
 				while (rs.next()) {
 					art = new Article(rs.getInt("no_utilisateur"), rs.getString("nom_article"),
-							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"));
-					list.add(art);
+							rs.getString("description"), rs.getString("libelle"),
+							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"));
+					list.add(art.toString() + rs.getString("pseudo"));
 				}
 				prstms.close();
 				cnx.close();

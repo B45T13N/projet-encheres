@@ -12,6 +12,7 @@ public class Article implements Serializable {
 
 	private int noUtilisateur;
 	private int noArticle;
+	private int noCategorie;
 	private String nomArticle;
 	private String description;
 	private LocalDate dateDebutEncheres;
@@ -147,12 +148,15 @@ public class Article implements Serializable {
 		return noUtilisateur;
 	}
 
-	public Article(int noUtilisateur, String nomArticle, LocalDate dateFinEncheres, int miseAPrix) {
+	public Article(int noUtilisateur, String nomArticle, String description, String libelle, LocalDate dateFinEncheres,
+			int miseAPrix) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.nomArticle = nomArticle;
+		this.description = description;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
+		this.libelle = libelle;
 	}
 
 	public void setNoUtilisateur(int noUtilisateur) {
@@ -161,10 +165,8 @@ public class Article implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Article [noUtilisateur=" + noUtilisateur + ", noArticle=" + noArticle + ", nomArticle=" + nomArticle
-				+ ", description=" + description + ", categorieArticle=" + libelle + ", dateDebutEncheres="
-				+ dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix
-				+ ", prixVente=" + prixVente + ", lieuRetrait=" + lieuRetrait + ", etatVente=" + etatVente + "]";
+		return "Nom d'article : " + nomArticle + ", description : " + description + ",categorie d'article : " + libelle
+				+ ", date fin d'encheres : " + dateFinEncheres + ", Prix de vente : " + prixVente;
 	}
 
 }

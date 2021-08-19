@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Utilisateur;
-import org.Encheres.dal.CodesResultatDAL;
 import org.Encheres.dal.DAO.DAOUtilisateur;
 import org.Encheres.dal.JDBCTools.ConnectionProvider;
 
@@ -18,7 +17,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String DELETE_USER = "DELETE FROM UTILISATEURS WHERE no_utilisateur = ?";
 
-	public static final String UPDATE_USER = "UPDATE UTILISATEURS SET pseudo =?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=? WHERE no_utilisateur =?";
+	public static final String UPDATE_USER = "UPDATE UTILISATEURS SET pseudo =?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur =?";
 
 	public static final String SELECT_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?";
 
@@ -27,7 +26,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		if (data == null) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
+			businessException.ajouterErreur(10000);
 			throw businessException;
 		}
 
@@ -59,20 +58,12 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_UTILISATEUR_FAIL);
-			throw businessException;
+			System.out.println("Erreur lors de la connection au serveur SQL");
 		}
 	}
 
 	@Override
 	public void update(Utilisateur data) throws BusinessException {
-
-		if (data == null) {
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.INSERT_NULL);
-			throw businessException;
-		}
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
@@ -87,6 +78,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 				prstms.setString(7, data.getCodePostal());
 				prstms.setString(8, data.getVille());
 				prstms.setString(9, data.getMotDePasse());
+				prstms.setInt(10, data.getNoUtilisateur());
 
 				prstms.executeUpdate();
 				prstms.close();
@@ -102,7 +94,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.UPDATE_UTILISATEUR_FAIL);
+			businessException.ajouterErreur(10001);
 			throw businessException;
 		}
 
@@ -135,7 +127,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 		if (noUtilisateur < 0) {
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
+			businessException.ajouterErreur(10003);
 			throw businessException;
 		}
 
@@ -160,7 +152,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
+			businessException.ajouterErreur(10004);
 			throw businessException;
 		}
 
