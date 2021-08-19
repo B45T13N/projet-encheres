@@ -142,6 +142,16 @@ public class Article implements Serializable {
 		this.miseAPrix = miseAPrix;
 	}
 
+	public Article(String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix) {
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.libelle = libelle;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+	}
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}

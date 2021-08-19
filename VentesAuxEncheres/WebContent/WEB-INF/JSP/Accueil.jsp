@@ -25,13 +25,13 @@
 				<br/>
 				<label for="categorie">Catégorie : </label>
 				<select name="categorie" id="categorie">
-				    <option value="Toutes les catégories">Toutes</option>
-				    <option value="Informatique">Informatique</option>
-				    <option value="Ameublement">Ameublement</option>
-				    <option value="Vetement">Vêtement</option>
-				    <option value="Sport_loisir">Sports et Loisirs</option>
+				    <option>Toutes</option>
+				    <option value="informatique">Informatique</option>
+				    <option value="ameublement">Ameublement</option>
+				    <option value="vetement">Vêtement</option>
+				    <option value="sport_loisirs">Sports et Loisirs</option>
 				</select>
-		        <input type="submit" name="btValider" value="Rechercher">
+		        <input type="submit" name="btnValider" value="Rechercher">
 			</form>	
 		</div>
 	</div>

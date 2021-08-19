@@ -6,6 +6,7 @@ import java.util.List;
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
 import org.Encheres.bo.Enchere;
+import org.Encheres.bo.Retrait;
 import org.Encheres.bo.Utilisateur;
 import org.Encheres.dal.DAO.DAOArticle;
 import org.Encheres.dal.DAO.DAOFactory;
@@ -16,51 +17,81 @@ public class ArticleManager {
 	private DAOArticle articleDAO;
 	private CategorieDAOJdbcImpl categorieDAO;
 	private EnchereManager enchereManager;
+	private RetraitManager retraitManager;
 
 	public ArticleManager() {
 		this.articleDAO = DAOFactory.getArticleDAO();
 		this.categorieDAO = new CategorieDAOJdbcImpl();
 		this.enchereManager = new EnchereManager();
+		this.retraitManager = new RetraitManager();
 	}
 
-	public Article addArticle(LocalDate dateDebutEnchere, LocalDate dateFinEnchere, String description,
-			String nomArticle, int miseAPrix, String lieuRetrait, String libelle) throws BusinessException {
+	public Article addArticle(Article newArticle, String rue, String ville, String codePostal)
+			throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
 		// Test des infos à enregistrer
-		this.validerDateHeure(dateDebutEnchere, dateFinEnchere, businessException);
-		this.validerDescription(description, businessException);
-		this.validerNomArticle(nomArticle, businessException);
+		this.validerDateHeure(newArticle.getDateDebutEncheres(), newArticle.getDateFinEncheres(), businessException);
+		this.validerDescription(newArticle.getDescription(), businessException);
+		this.validerNomArticle(newArticle.getNomArticle(), businessException);
 		Article article = null;
 		Enchere enchere = null;
+		Retrait retrait = null;
 		// insertion des donnees
 		if (!businessException.hasError()) {
 			article = new Article();
 			enchere = new Enchere();
+			retrait = new Retrait();
 			// Création de mon article
-			article.setDateDebutEncheres(dateDebutEnchere);
-			article.setDateFinEncheres(dateFinEnchere);
-			article.setDescription(description);
-			article.setNomArticle(nomArticle);
-			article.setMiseAPrix(miseAPrix);
-			article.setPrixVente(miseAPrix);
+			article.setDateDebutEncheres(newArticle.getDateDebutEncheres());
+			article.setDateFinEncheres(newArticle.getDateFinEncheres());
+			article.setDescription(newArticle.getDescription());
+			article.setNomArticle(newArticle.getNomArticle());
+			article.setMiseAPrix(newArticle.getMiseAPrix());
+			if (newArticle.getPrixVente() != 0) {
+				article.setPrixVente(newArticle.getPrixVente());
+			} else {
+				article.setPrixVente(newArticle.getMiseAPrix());
+			}
 			int noCategorie = 0;
-			noCategorie = categorieDAO.selectByLibelle(libelle);
+			noCategorie = categorieDAO.selectByLibelle(newArticle.getlibelle());
 			article.setNoCategorie(noCategorie);
-			article.setLieuRetrait(lieuRetrait);
 			// Insert de mon article
 			this.articleDAO.insert(article);
 			// Creation de la première enchere
-			enchere.setDateEnchere(dateDebutEnchere);
-			enchere.setMontantEnchere(miseAPrix);
-			enchere.setNoArticle(article.getNoArticle());
-			enchere.setNoUtilisateur(article.getNoUtilisateur());
+			enchere = enchereBuilder(newArticle.getDateDebutEncheres(), newArticle.getMiseAPrix(),
+					newArticle.getNoArticle(), newArticle.getNoUtilisateur());
 			this.enchereManager.addEnchere(enchere);
+			// Création du retrait
+			retrait = retraitBuilder(rue, ville, codePostal, article.getNoArticle());
+			this.retraitManager.addRetrait(retrait);
 		} else {
 			throw businessException;
 		}
 
 		return article;
+	}
+
+	private Retrait retraitBuilder(String rue, String ville, String codePostal, int idArticle) {
+
+		Retrait retrait = new Retrait();
+		retrait.setCodePostal(codePostal);
+		retrait.setRue(rue);
+		retrait.setId(idArticle);
+		retrait.setVille(ville);
+
+		return retrait;
+	}
+
+	private Enchere enchereBuilder(LocalDate dateDebut, int montantMiseAPrix, int idArticle, int idUtilisateur) {
+
+		Enchere enchere = new Enchere();
+		enchere.setDateEnchere(dateDebut);
+		enchere.setMontantEnchere(montantMiseAPrix);
+		enchere.setNoArticle(idArticle);
+		enchere.setNoUtilisateur(idUtilisateur);
+
+		return enchere;
 	}
 
 	private void validerDateHeure(LocalDate dateEnchere, LocalDate dateFinEnchere, BusinessException exception) {
