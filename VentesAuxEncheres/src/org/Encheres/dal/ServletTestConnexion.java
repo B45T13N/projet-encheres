@@ -2,6 +2,7 @@ package org.Encheres.dal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.Encheres.BusinessException;
 import org.Encheres.dal.JDBCImpl.ArticleDAOJdbcImpl;
 
 /**
@@ -60,15 +62,15 @@ public class ServletTestConnexion extends HttpServlet {
 //
 //		}
 
-//		try {
-//			List<Article> list = article.selectAll();
-//			for (Article art : list) {
-//				out.print(art);
-//			}
-//		} catch (BusinessException e) {
-//			e.printStackTrace();
-//			System.out.println("Erreur connexion bdd");
-//		}
+		try {
+			List<String> list = article.selectAll();
+			for (String art : list) {
+				out.println(art);
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			System.out.println("Erreur connexion bdd");
+		}
 
 	}
 
