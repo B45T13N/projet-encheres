@@ -28,15 +28,8 @@ public class ServletPageDeConnexion extends HttpServlet {
 
 		if (request.getParameter("connecte") != null) {
 			response.sendRedirect("/ServletAccueil");
-<<<<<<< HEAD
-			
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
-=======
-
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/PageDeConnexion.jsp");
->>>>>>> refs/remotes/origin/master
 			rd.forward(request, response);
 		}
 
@@ -63,13 +56,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
-=======
-
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Accueil");
->>>>>>> refs/remotes/origin/master
 		rd.forward(request, response);
 	}
 
