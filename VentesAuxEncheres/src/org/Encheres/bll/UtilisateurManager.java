@@ -16,13 +16,9 @@ public class UtilisateurManager {
 
 	}
 
-	public Utilisateur getUtilisateur() {
+	public Utilisateur getUtilisateur(String login, String password) throws BusinessException {
 		Utilisateur utilisateur = null;
-		try {
-			utilisateur = daoUtilisateur.selectUtilisateurCourant(1);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-		}
+		utilisateur = daoUtilisateur.selectUtilisateurCourant(login, password);
 		return utilisateur;
 	}
 
