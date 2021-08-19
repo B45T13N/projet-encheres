@@ -3,19 +3,16 @@ package org.Encheres.bll;
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
 import org.Encheres.bo.Utilisateur;
-import org.Encheres.dal.DAO.DAOArticle;
 import org.Encheres.dal.DAO.DAOFactory;
 import org.Encheres.dal.DAO.DAOUtilisateur;
 
 public class UtilisateurManager {
 
 	private static DAOUtilisateur daoUtilisateur;
-	private static DAOArticle articleDAO;
 
 	public UtilisateurManager() {
 
 		daoUtilisateur = DAOFactory.getUtilisateursDAO();
-		articleDAO = DAOFactory.getArticleDAO();
 
 	}
 
@@ -30,8 +27,9 @@ public class UtilisateurManager {
 	 * @throws BusinessException
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#insert(org.Encheres.bo.Utilisateur)
 	 */
-	public Utilisateur addUtilisateur(Utilisateur newUtilisateur) throws BusinessException {
-		validerUtilisateur(newUtilisateur);
+	public Utilisateur addUtilisateur(Utilisateur newUtilisateur, BusinessException exception)
+			throws BusinessException {
+		validerUtilisateur(newUtilisateur, exception);
 		daoUtilisateur.insert(newUtilisateur);
 		return newUtilisateur;
 	}
@@ -41,8 +39,8 @@ public class UtilisateurManager {
 	 * @throws BusinessException
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#update(org.Encheres.bo.Utilisateur)
 	 */
-	public void updateUtilisateur(Utilisateur utilisateur) throws BusinessException {
-		validerUtilisateur(utilisateur);
+	public void updateUtilisateur(Utilisateur utilisateur, BusinessException exception) throws BusinessException {
+		validerUtilisateur(utilisateur, exception);
 		daoUtilisateur.update(utilisateur);
 
 	}
@@ -58,7 +56,7 @@ public class UtilisateurManager {
 
 	public void addArticle(Article newArticle) throws BusinessException {
 		ArticleManager article = new ArticleManager();
-		articleDAO.insert(newArticle.getDateDebutEncheres(), newArticle.getDateFinEncheres(),
+		article.addArticle(newArticle.getDateDebutEncheres(), newArticle.getDateFinEncheres(),
 				newArticle.getDescription(), newArticle.getNomArticle(), newArticle.getMiseAPrix(),
 				newArticle.getLieuRetrait(), newArticle.getlibelle());
 
@@ -72,7 +70,7 @@ public class UtilisateurManager {
 
 	}
 
-	private void validerUtilisateur(Utilisateur utilisateur, BusinessException exception) throws BusinessException {
+	private void validerUtilisateur(Utilisateur utilisateur, BusinessException exception) {
 		BusinessException businessException = new BusinessException();
 		if (utilisateur == null) {
 			businessException.ajouterErreur(10025);
