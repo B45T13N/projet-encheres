@@ -13,7 +13,7 @@
 <label for="identifiant">Identifiant :</label>
 <input type="text" name="identifiant" required>
 <label for="mdp">Mot de passe :</label>
-<input type="text" name="mdp" required>
+<input type="password" name="mdp" required>
 <input type="submit" value="connexion">
 <input type="checkbox" name="souvenir"> 
 <label for="souvenir">Se souvenir de moi</label>
