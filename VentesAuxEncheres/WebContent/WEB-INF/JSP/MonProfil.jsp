@@ -22,27 +22,26 @@
 	<header>
 		<h2>ENI-Enchères</h2>
 	</header>
+	<div>
+		<p><a>Pseudo : </a><%=pseudo%></p>
 		<div>
-			<p><a>Pseudo : </a><%=pseudo%></p>
+			<p><a>Nom : </a><%=nom%>
+			<br>
+			<a>Prenom : </a><%=prenom%>
+			<br>
+			<a>Email : </a><%=email%>
+			<br>
+			<a>Teléphone : </a><%=telephone%>
+			<br>
+			<a>Rue : </a><%=rue%>
+			<br>
+			<a>Code Postal : </a><%=codePostal%>
+			<br>
+			<a>Ville : </a><%=ville%></p>
 			<div>
-				<p><a>Nom : </a><%=nom%>
-				<br>
-				<a>Prenom : </a><%=prenom%>
-				<br>
-				<a>Email : </a><%=email%>
-				<br>
-				<a>Teléphone : </a><%=telephone%>
-				<br>
-				<a>Rue : </a><%=rue%>
-				<br>
-				<a>Code Postal : </a><%=codePostal%>
-				<br>
-				<a>Ville : </a><%=ville%></p>
-			
-				<div>
-					<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
-				</div>
+				<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
