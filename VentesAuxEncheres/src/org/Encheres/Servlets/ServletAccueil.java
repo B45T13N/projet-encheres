@@ -10,14 +10,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.ArticleManager;
+import org.apache.naming.factory.BeanFactory;
 
 /**
  * Servlet implementation class ServletAccueil
+ * @param <BeanFiltreRecherche>
  */
 @WebServlet("/ServletAccueil")
-public class ServletAccueil extends HttpServlet {
+public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -47,6 +50,9 @@ public class ServletAccueil extends HttpServlet {
 		String categorie;
 		ArticleManager am = new ArticleManager();
 		
+		HttpSession sessionScope = request.getSession(); //Init de sessionScope
+		
+				
 		try {
 			if (request.getParameter("categorie")!=null) {
 				categorie = request.getParameter("categorie");
@@ -55,12 +61,15 @@ public class ServletAccueil extends HttpServlet {
 			else { //Afficher toutes les catégories dispo
 				
 			}
-								
+		//Radio boutons et checkbox
+			if()
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 				
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
 		rd.forward(request, response);
 	}
 

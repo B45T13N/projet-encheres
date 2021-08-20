@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" 
+	contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="org.Encheres.bo.Article" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +12,16 @@
 <body>
 	<header>
 		<h2>ENI-Enchères</h2>
-		<p><a href="<%=request.getContextPath() %>/ServletModifierProfil">S'inscrire - </a></p>
-		<p><a href="<%=request.getContextPath() %>/ServletPageDeConnexion"> Se connecter </a></p>
+		
+		<c:if test="${sessionScope.isConnecte == false }">
+		<p><a href="<%=request.getContextPath() %>/ServletPageDeConnexion">S'inscrire - Se connecter</a></p>
+		</c:if>
+		<c:if test="${sessionScope.isConnecte == true }">
+		<li><a href="${pageContext.request.contextPath()}/ServletDetailVente">Enchères</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletVente">Vendre un article</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletMonProfile">Mon profil</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletAccueil">Déconnexion</a></li>
+		</c:if>
 	</header>
 	<h1>Liste des enchères</h1>
 	<br/>
@@ -39,41 +50,41 @@
 	
 	<form action="<%=request.getContextPath() %>/ServletAccueil">
 		<div>
-			<input type="radio" id="achats" name="filtre" value="1"/>
+			<input type="radio" id="achats" name="filtreAchat" value="1"/>
 			<label for="achats">Achats</label>
 				<ul>
 					<li>
 						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" value="1"/>Enchères en cours</label>
+							<input type="checkbox" id="encheresEnCours" name="enCours" value="1"/>Enchères en cours</label>
 					</li>
 					<li>
 						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" value="2"/>Mes enchères en cours</label>
+							<input type="checkbox" id="encheresEnCours" name="mesEnCours" value="2"/>Mes enchères en cours</label>
 					</li>
 					<li>
 						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" value="3"/>Mes enchères remportées</label>
+							<input type="checkbox" id="encheresEnCours" name="remportes" value="3"/>Mes enchères remportées</label>
 					</li>
 				</ul>
 		</div>
 		
 		<div>
-			<input type="radio" id="ventes" name="filtre" value="2"/>
+			<input type="radio" id="ventes" name="filtreVente" value="2"/>
 			<label for="ventes">Mes ventes</label>
 			<ul>
 					<li>
 						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="ventesEnCours" value="1"/>Mes ventes en cours</label>
+						<input type="checkbox" id="ventesEnCours" name="venteEnCours" value="1"/>Mes ventes en cours</label>
 					</li>
 					
 					<li>
 						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="encheresEnCours" value="2"/>Enchères non débutées</label>
+						<input type="checkbox" id="encheresEnCours" name="venteNonDebut" value="2"/>Enchères non débutées</label>
 					</li>
 					
 					<li>
 						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="encheresEnCours" value="3"/>Ventes terminées</label>
+						<input type="checkbox" id="encheresEnCours" name="venteTerminee" value="3"/>Ventes terminées</label>
 					</li>
 				</ul>
 		</div>
