@@ -11,7 +11,7 @@
 <h1>Mon profil</h1>
 
 
-<form action="<%=request.getContextPath()%>/CreationCompte" method="post">
+<form action="<%=request.getContextPath()%>/ServletCreationCompte" method="post">
 	<p>
 	<label for="pseudo">Pseudo :</label>
 	<input type="text" name="pseudo" required>

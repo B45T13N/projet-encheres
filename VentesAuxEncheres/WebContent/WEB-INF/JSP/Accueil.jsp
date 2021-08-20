@@ -14,13 +14,13 @@
 		<h2>ENI-Enchères</h2>
 		
 		<c:if test="${sessionScope.isConnecte == false }">
-		<p><a href="<%=request.getContextPath() %>/PageDeConnexion">S'inscrire - Se connecter</a></p>
+		<p><a href="<%=request.getContextPath() %>/ServletPageDeConnexion">S'inscrire - Se connecter</a></p>
 		</c:if>
 		<c:if test="${sessionScope.isConnecte == true }">
-		<li><a href="${pageContext.request.contextPath()}/DetailVente">Enchères</a></li>
-		<li><a href="${pageContext.request.contextPath()}/NouvelleVente">Vendre un article</a></li>
-		<li><a href="${pageContext.request.contextPath()}/MonProfil">Mon profil</a></li>
-		<li><a href="${pageContext.request.contextPath()}/Accueil">Déconnexion</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletDetailVente">Enchères</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletVente">Vendre un article</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletMonProfile">Mon profil</a></li>
+		<li><a href="${pageContext.request.contextPath()}/ServletAccueil">Déconnexion</a></li>
 		</c:if>
 	</header>
 	<h1>Liste des enchères</h1>
@@ -30,7 +30,7 @@
 		<h4>Filtres :</h4>
 		<br/>
 		<div>
-			<form action="<%=request.getContextPath() %>/Accueil" method="POST">
+			<form action="<%=request.getContextPath() %>/ServletAccueil" method="POST">
 				<input type="search" placeholder="Le nom de l'article contient">
 				<br/>
 				<br/>
@@ -48,7 +48,7 @@
 		</div>
 	</div>
 	
-	<form action="<%=request.getContextPath() %>/Accueil">
+	<form action="<%=request.getContextPath() %>/ServletAccueil">
 		<div>
 			<input type="radio" id="achats" name="filtreAchat" value="1"/>
 			<label for="achats">Achats</label>
@@ -91,7 +91,7 @@
 	</form>
 	
 	<br/>
-	<section> <!-- Virer section et mettre en liste -->
+	<section>
 		<article>
 			<img alt="Descriptif de l'image pour mal voyant" src="../WebContent/images/#"> <!-- URL image à faire ainsi que les ALT -->
 			<div>

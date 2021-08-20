@@ -23,7 +23,7 @@ import org.Encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletVente
  */
-@WebServlet("/NouvelleVente")
+@WebServlet("/nouvelleVente")
 public class ServletVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class ServletVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/NouvelleVente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/nouvelleVente.jsp");
 		rd.forward(request, response);
 	}
 
@@ -93,7 +93,7 @@ public class ServletVente extends HttpServlet {
 
 			try {
 				am.addArticle(article, rue, ville, codePostal);
-				RequestDispatcher rd = request.getRequestDispatcher("/DetailVente");
+				RequestDispatcher rd = request.getRequestDispatcher("/detailVente");
 				rd.forward(request, response);
 			} catch (BusinessException e) {
 				e.printStackTrace();

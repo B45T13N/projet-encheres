@@ -9,7 +9,7 @@
 <body>
 
 
-<form action="<%=request.getContextPath()%>/PageDeConnexion" method="post">
+<form action="<%=request.getContextPath()%>/ServletPageConnexion" method="post">
 <label for="identifiant">Identifiant :</label>
 <input type="text" name="identifiant" required>
 <label for="mdp">Mot de passe :</label>
@@ -17,8 +17,8 @@
 <input type="submit" value="connexion">
 <input type="checkbox" name="souvenir"> 
 <label for="souvenir">Se souvenir de moi</label>
-<a href="#">Mot de passe oublié</a> <!-- Changer adresse -->
-<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" value="Créer un compte"> </a>
+<a href="adresse_MotDePasseOublié">Mot de passe oublié</a>
+<a href="adresse_PageCréationCompte"> <input type="button" value="Créer un compte"> </a>
 </form>
 
 </body>
