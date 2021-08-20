@@ -55,7 +55,7 @@
 				<ul>
 					<li>
 						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" name="enCours" value="1"/>Enchères en cours</label>
+							<input type="checkbox" id="encheresEnCours" name="enCours" value="1"/>Enchères ouvertes</label>
 					</li>
 					<li>
 						<label for="filtreCheckBox">

@@ -61,8 +61,24 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			else { //Afficher toutes les catégories dispo
 				
 			}
+			
 		//Radio boutons et checkbox
-//			if()
+			if(request.getParameter("filtreAchat")!=null) 
+			{
+				if(request.getParameter("filtreAchat").equals("1")) 
+				{				
+					if (request.getParameter("enCours")!=null)
+					{
+					//	am.setEnCours(true);   //methode sur ArticleManager
+					}
+					else {
+					//	am.setEnCours(false);  //methode sur ArticleManager
+					}
+					if (request.getParameter("mesEnCours")!=null) {
+						
+					}
+				}
+			}
 			
 			
 		}catch (Exception e) {
