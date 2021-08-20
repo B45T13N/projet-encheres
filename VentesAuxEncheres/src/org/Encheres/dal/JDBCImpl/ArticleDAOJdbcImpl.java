@@ -50,13 +50,14 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				prstms.setDate(4, Date.valueOf(data.getDateFinEncheres()));
 
 				prstms.setInt(5, data.getMiseAPrix());
+				prstms.setInt(6, data.getMiseAPrix());
 
-				prstms.setInt(6, data.getNoUtilisateur());
+				prstms.setInt(7, data.getNoUtilisateur());
 //				// Récupération du libelle categorie
 //				CategorieDAOJdbcImpl categorie = new CategorieDAOJdbcImpl();
 //				String libelle = data.getlibelle().toLowerCase();
 //				int noCategorie = categorie.selectByLibelle(libelle);
-				prstms.setInt(7, data.getNoCategorie());
+				prstms.setInt(8, data.getNoCategorie());
 				prstms.executeUpdate();
 				ResultSet rs = prstms.getGeneratedKeys();
 				if (rs.next()) {

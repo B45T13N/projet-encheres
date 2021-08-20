@@ -16,8 +16,8 @@
 		<input type="text" required="required" name="nomArticle">
 		<label for="description">Description :</label>
 		<textarea rows="4" cols="3" required="required" name="description"></textarea>
-		<label for="libelle">Catégorie</label>
-		<select required="required" name="libelle">
+		<label for="categorie">Catégorie</label>
+		<select required="required" name="libelle">			
 			<option value="informatique">Informatique</option>
 			<option value="ameublement">Ameublement</option>
 			<option value="vetement">Vêtement</option>

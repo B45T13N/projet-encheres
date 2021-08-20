@@ -56,6 +56,7 @@ public class ArticleManager {
 			int noCategorie = 0;
 			noCategorie = categorieDAO.selectByLibelle(newArticle.getlibelle());
 			article.setNoCategorie(noCategorie);
+			article.setNoUtilisateur(newArticle.getNoUtilisateur());
 			// Insert de mon article
 			this.articleDAO.insert(article);
 			// Creation de la première enchere

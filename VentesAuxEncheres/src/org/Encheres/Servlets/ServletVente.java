@@ -49,12 +49,13 @@ public class ServletVente extends HttpServlet {
 		String description = "";
 		String libelle = "";
 		int miseAPrix = 0;
+		int noUser = 1;
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		Article article = null;
-		String rue = currentUser.getRue();
-		String codePostal = currentUser.getCodePostal();
-		String ville = currentUser.getVille();
+		String rue = ""; // currentUser.getRue();
+		String codePostal = "";// currentUser.getCodePostal();
+		String ville = "";// currentUser.getVille();
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -90,6 +91,7 @@ public class ServletVente extends HttpServlet {
 		} else {
 			ArticleManager am = new ArticleManager();
 			article = new Article(description, nomArticle, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
+			article.setNoUtilisateur(1);
 
 			try {
 				am.addArticle(article, rue, ville, codePostal);
