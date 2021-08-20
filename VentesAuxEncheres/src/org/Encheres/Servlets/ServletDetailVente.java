@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bll.EnchereManager;
+import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Article;
 import org.Encheres.bo.Utilisateur;
 
@@ -47,6 +48,14 @@ public class ServletDetailVente extends HttpServlet {
 		Article article = (Article) session.getAttribute("article");
 
 		EnchereManager em = new EnchereManager();
+		UtilisateurManager um = new UtilisateurManager();
+
+		try {
+			Utilisateur seller = um.selectByNoUtilisateur(article.getNoUtilisateur());
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+			listeCodesErreur.add(30000);
+		}
 
 		prixEnchere = Integer.parseInt(request.getParameter("prixEnchere"));
 
