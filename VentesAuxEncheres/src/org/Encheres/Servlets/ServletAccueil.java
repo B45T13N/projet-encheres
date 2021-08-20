@@ -62,7 +62,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 				
 			}
 		//Radio boutons et checkbox
-			if()
+//			if()
 			
 			
 		}catch (Exception e) {
