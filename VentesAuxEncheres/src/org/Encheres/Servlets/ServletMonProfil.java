@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bll.UtilisateurManager;
@@ -37,6 +38,12 @@ public class ServletMonProfil extends HttpServlet {
 
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
+		HttpSession session = request.getSession();
+
+		/*
+		 * TODO faire sessions pour recup int de noUtilisateur courant
+		 */
+
 		int currentUser = 16;
 		try {
 			utilisateur = user.selectByNoUtilisateur(currentUser);
