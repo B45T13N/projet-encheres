@@ -74,7 +74,7 @@ public class ServletCreationCompte extends HttpServlet {
 			
 // à faire : gestion d'erreur > pseudo ou email deja existant.
 //			|| pseudo != pseudoExistant || email != emailExistant
-			
+			//
 			if(mdp.equals(confirmationMdp)) {
 				
 			utilisateur = utilisateurManager.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp);
@@ -83,6 +83,7 @@ public class ServletCreationCompte extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 			}else {
+				// modifier en liste code erreur 
 			request.setAttribute("erreurMDP", erreur);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
 			rd.forward(request, response);
