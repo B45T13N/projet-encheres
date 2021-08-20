@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	
-	<form action="<%=request.getContextPath() %>.ServletAccueil">
+	<form action="<%=request.getContextPath() %>/ServletAccueil">
 		<div>
 			<input type="radio" id="achats" name="filtre" value="1"/>
 			<label for="achats">Achats</label>
