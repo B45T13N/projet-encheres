@@ -46,7 +46,7 @@
 	<input type="submit" value="Créer">
  	</p>
  	<p>
-	<input type="reset" value="Annuler">
+	<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler"></a>
 	</p>
 </form>
 

@@ -55,11 +55,6 @@ public class ServletCreationCompte extends HttpServlet {
 		String erreur = "Veuillez saisir un mot de passe identique";
 		String pseudoExistant;
 		String emailExistant;
-		
-		
-		
-		
-		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
 		HttpSession session = request.getSession();
@@ -81,13 +76,15 @@ public class ServletCreationCompte extends HttpServlet {
 //			|| pseudo != pseudoExistant || email != emailExistant
 			
 			if(mdp.equals(confirmationMdp)) {
+				
+			utilisateur = utilisateurManager.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp);
 			session = request.getSession(true);
 			request.setAttribute("connecte", utilisateur);
 			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 			}else {
 			request.setAttribute("erreurMDP", erreur);
-			RequestDispatcher rd = request.getRequestDispatcher("/CreationCompte");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
 			rd.forward(request, response);
 			}
 			
