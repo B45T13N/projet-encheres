@@ -55,28 +55,31 @@ public class UtilisateurManager {
 
 	/**
 	 * @param data
+	 * @return
 	 * @throws BusinessException
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#update(org.Encheres.bo.Utilisateur)
 	 */
-	public void updateUtilisateur(Utilisateur updateUser) throws BusinessException {
+	public Utilisateur updateUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) throws BusinessException {
 		BusinessException exception = new BusinessException();
-
-//		Utilisateur updateUser = new Utilisateur();
-//		updateUser.getNoUtilisateur();
-//		updateUser.setPseudo(pseudo);
-//		updateUser.setNom(nom);
-//		updateUser.setPrenom(prenom);
-//		updateUser.setEmail(email);
-//		updateUser.setTelephone(telephone);
-//		updateUser.setRue(rue);
-//		updateUser.setCodePostal(codePostal);
-//		updateUser.setVille(ville);
-//		updateUser.setMotDePasse(motDePasse);
+		Utilisateur updateUser = new Utilisateur();
+		updateUser.getNoUtilisateur();
+		updateUser.setPseudo(pseudo);
+		updateUser.setNom(nom);
+		updateUser.setPrenom(prenom);
+		updateUser.setEmail(email);
+		updateUser.setTelephone(telephone);
+		updateUser.setRue(rue);
+		updateUser.setCodePostal(codePostal);
+		updateUser.setVille(ville);
+		updateUser.setMotDePasse(motDePasse);
 
 		this.validerUtilisateur(updateUser, exception);
 		if (!exception.hasError()) {
 			daoUtilisateur.update(updateUser);
 		}
+
+		return updateUser;
 	}
 
 	/**
@@ -106,40 +109,31 @@ public class UtilisateurManager {
 		if (utilisateur == null) {
 			businessException.ajouterErreur(CodesResultatBLL.INSERT_NULL);
 		}
-		if (utilisateur.getPseudo() == null || utilisateur.getPseudo().trim().length() == 0
-				|| utilisateur.getPseudo().trim().length() > 30) {
+		if (utilisateur.getPseudo().trim().length() == 0 || utilisateur.getPseudo().trim().length() > 30) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_PSEUDO);
 		}
-		if (utilisateur.getNom() == null || utilisateur.getNom().trim().length() == 0
-				|| utilisateur.getNom().trim().length() > 30) {
+		if (utilisateur.getNom().trim().length() == 0 || utilisateur.getNom().trim().length() > 30) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_NOM);
 		}
-		if (utilisateur.getPrenom() == null || utilisateur.getPrenom().trim().length() == 0
-				|| utilisateur.getPrenom().trim().length() > 30) {
+		if (utilisateur.getPrenom().trim().length() == 0 || utilisateur.getPrenom().trim().length() > 30) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_PRENOM);
 		}
-		if (utilisateur.getEmail() == null || utilisateur.getEmail().trim().length() == 0
-				|| utilisateur.getEmail().trim().length() > 50) {
+		if (utilisateur.getEmail().trim().length() == 0 || utilisateur.getEmail().trim().length() > 50) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_EMAIL);
 		}
-		if (utilisateur.getTelephone() == null || utilisateur.getTelephone().trim().length() == 0
-				|| utilisateur.getTelephone().trim().length() > 15) {
+		if (utilisateur.getTelephone().trim().length() == 0 || utilisateur.getTelephone().trim().length() > 15) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_TELEPHONE);
 		}
-		if (utilisateur.getRue() == null || utilisateur.getRue().trim().length() == 0
-				|| utilisateur.getRue().trim().length() > 30) {
+		if (utilisateur.getRue().trim().length() == 0 || utilisateur.getRue().trim().length() > 30) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_RUE);
 		}
-		if (utilisateur.getCodePostal() == null || utilisateur.getCodePostal().trim().length() == 0
-				|| utilisateur.getCodePostal().trim().length() > 10) {
+		if (utilisateur.getCodePostal().trim().length() == 0 || utilisateur.getCodePostal().trim().length() > 10) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_CPO);
 		}
-		if (utilisateur.getVille() == null || utilisateur.getVille().trim().length() == 0
-				|| utilisateur.getVille().trim().length() > 30) {
+		if (utilisateur.getVille().trim().length() == 0 || utilisateur.getVille().trim().length() > 30) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_VILLE);
 		}
-		if (utilisateur.getMotDePasse() == null || utilisateur.getMotDePasse().trim().length() == 0
-				|| utilisateur.getMotDePasse().trim().length() > 30) {
+		if (utilisateur.getMotDePasse().trim().length() == 0 || utilisateur.getMotDePasse().trim().length() > 30) {
 			businessException.ajouterErreur(CodesResultatBLL.UTILISATEUR_ERROR_MDP);
 		}
 	}

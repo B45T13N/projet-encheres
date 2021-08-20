@@ -37,8 +37,9 @@ public class ServletMonProfil extends HttpServlet {
 
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
+		int currentUser = 16;
 		try {
-			utilisateur = user.selectByNoUtilisateur(1);
+			utilisateur = user.selectByNoUtilisateur(currentUser);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}

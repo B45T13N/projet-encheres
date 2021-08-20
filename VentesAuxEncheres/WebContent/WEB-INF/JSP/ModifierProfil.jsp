@@ -8,12 +8,8 @@
 <title>Modifier Profil</title>
 </head>
 <body>
-<%
-	String credit = String.valueOf(request.getAttribute("credit"));	
-%>
-
-<h1>Mon Profil</h1>
-	<form action="<%=request.getContextPath()%>/servletModifierProfil" method="post">
+	<h2>Modifier mon profil</h2>
+	<form action="<%=request.getContextPath()%>/ServletModifierProfil" method="post">
 	<br>
 	<b>Pseudo : </b>
 	<input type="text" name="Pseudo">
@@ -31,20 +27,17 @@
 	<input type="text" name="rue">
 	<br>
 	<b>Code Postal :</b>
-	<input type="text" name="codePostal">
+	<input type="text" name="codepostal">
 	<b>Ville : </b>
 	<input type="text" name="ville">
 	<br>
 	<b>Mot de passe actuel : </b>
-	<input type="text" name="mdpActu">
+	<input type="text" name="motDePasse">
 	<br>
 	<b>Nouveau mot de passe : </b>
-	<input type="text" name="newMdp">
+	<input type="text" name="newMotDePasse">
 	<b>Confirmation : </b>
 	<input type="text" name="confirmMdp">
-	<br>
-	<b>Crédit </b>
-	<b><%= credit %></b>
 	<br>
 	<br>
 	<input type="submit" value="Enregistrer" id="register">

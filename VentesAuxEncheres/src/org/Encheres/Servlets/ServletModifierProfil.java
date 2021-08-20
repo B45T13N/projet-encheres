@@ -8,13 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.UtilisateurManager;
+import org.Encheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class ModifierProfil
  */
-@WebServlet("/ModifierProfil")
+@WebServlet("/ServletModifierProfil")
 public class ServletModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,17 +36,41 @@ public class ServletModifierProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
 
-		UtilisateurManager user = new UtilisateurManager();
+		HttpSession currentUser = request.getSession();
+
 		String pseudo;
 		String nom;
 		String prenom;
 		String email;
 		String telephone;
 		String rue;
-		String code_postal;
+		String codePostal;
 		String ville;
+		String motDePasse;
+		int noUtilisateur;
+
+		try {
+			pseudo = request.getParameter("pseudo");
+			nom = request.getParameter("nom");
+			prenom = request.getParameter("prenom");
+			email = request.getParameter("email");
+			telephone = request.getParameter("telephone");
+			rue = request.getParameter("rue");
+			codePostal = request.getParameter("codepostal");
+			ville = request.getParameter("ville");
+			motDePasse = request.getParameter("motDePasse");
+
+			UtilisateurManager utilisateurManager = new UtilisateurManager();
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal,
+					ville, motDePasse);
+			request.setAttribute("updated", utilisateur);
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
+			rd.forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
