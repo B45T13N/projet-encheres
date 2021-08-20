@@ -1,6 +1,8 @@
 package org.Encheres.Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,17 +52,14 @@ public class ServletAccueil extends HttpServlet {
 				categorie = request.getParameter("categorie");
 				am.selectArticleByCategorie(categorie);
 			}
-			else {
+			else { //Afficher toutes les catégories dispo
 				
 			}
-				
-			
-			
+								
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+				
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil");
 		rd.forward(request, response);
 	}
