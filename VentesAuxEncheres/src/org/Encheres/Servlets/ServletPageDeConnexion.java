@@ -32,7 +32,6 @@ public class ServletPageDeConnexion extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/PageDeConnexion.jsp");
 			rd.forward(request, response);
 		}
-
 	}
 
 	/**
