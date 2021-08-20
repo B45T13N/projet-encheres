@@ -58,10 +58,10 @@ public class ServletPageDeConnexion extends HttpServlet {
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
 			if (utilisateur != null) {
 				currentUser.setAttribute("connecte", utilisateur);
-				rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
+				rd = request.getRequestDispatcher("/ServletAccueil");
 				rd.forward(request, response);
 			} else {
-				rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+				rd = request.getRequestDispatcher("/ServletPageDeConnexion");
 				rd.forward(request, response);
 				listeCodesErreur.add(30000);
 			}
