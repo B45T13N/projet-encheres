@@ -18,7 +18,7 @@ import org.Encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletPageDeConnexion
  */
-@WebServlet("/page_de_connexion")
+@WebServlet("/ServletPageDeConnexion")
 public class ServletPageDeConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -58,10 +58,10 @@ public class ServletPageDeConnexion extends HttpServlet {
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
 			if (utilisateur != null) {
 				currentUser.setAttribute("connecte", utilisateur);
-				rd = request.getRequestDispatcher("/ServletAccueil");
+				rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
 				rd.forward(request, response);
 			} else {
-				rd = request.getRequestDispatcher("/ServletPageDeConnexion");
+				rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
 				rd.forward(request, response);
 				listeCodesErreur.add(30000);
 			}
