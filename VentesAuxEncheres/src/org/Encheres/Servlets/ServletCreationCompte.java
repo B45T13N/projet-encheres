@@ -75,7 +75,7 @@ public class ServletCreationCompte extends HttpServlet {
 			if(mdp.equals(confirmationMdp)) {
 			session = request.getSession(true);
 			request.setAttribute("connecte", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
 			rd.forward(request, response);
 			}else {
 			request.setAttribute("erreurMDP", erreur);
