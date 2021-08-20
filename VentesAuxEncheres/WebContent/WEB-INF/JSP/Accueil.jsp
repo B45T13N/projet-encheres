@@ -10,7 +10,7 @@
 	<header>
 		<h2>ENI-Enchères</h2>
 		<p><a href="<%=request.getContextPath() %>/ServletModifierProfil">S'inscrire - </a></p>
-		<p><a href="<%=request.getContextPath() %>/ServletLoggin"> Se connecter </a></p>
+		<p><a href="<%=request.getContextPath() %>/ServletPageDeConnexion"> Se connecter </a></p>
 	</header>
 	<h1>Liste des enchères</h1>
 	<br/>
