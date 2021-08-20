@@ -53,13 +53,20 @@ public class ServletCreationCompte extends HttpServlet {
 		String mdp;
 		String confirmationMdp;
 		String erreur = "Veuillez saisir un mot de passe identique";
+		String pseudoExistant;
+		String emailExistant;
+		
+		
+		
+		
+		
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
 		HttpSession session = request.getSession();
 		try
 		{
 			pseudo = request.getParameter("pseudo");
-			nom = request.getParameter("mdp");
+			nom = request.getParameter("nom");
 			prenom = request.getParameter("prenom");
 			email = request.getParameter("email");
 			telephone = request.getParameter("telephone");
@@ -69,17 +76,18 @@ public class ServletCreationCompte extends HttpServlet {
 			mdp = request.getParameter("mdp");
 			confirmationMdp = request.getParameter("confirmationmdp");
 			
-// à faire : gestion d'erreur > pseudo ou email deja existant.
 			
+// à faire : gestion d'erreur > pseudo ou email deja existant.
+//			|| pseudo != pseudoExistant || email != emailExistant
 			
 			if(mdp.equals(confirmationMdp)) {
 			session = request.getSession(true);
 			request.setAttribute("connecte", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
 			rd.forward(request, response);
 			}else {
 			request.setAttribute("erreurMDP", erreur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/ServletCreationCompte");
 			rd.forward(request, response);
 			}
 			
