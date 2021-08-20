@@ -16,7 +16,7 @@ import org.Encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ModifierProfil
  */
-@WebServlet("/ServletModifierProfil")
+@WebServlet("/ModifierProfil")
 public class ServletModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -66,7 +66,7 @@ public class ServletModifierProfil extends HttpServlet {
 			utilisateur = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal,
 					ville, motDePasse);
 			request.setAttribute("updated", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
