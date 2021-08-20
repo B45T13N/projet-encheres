@@ -44,7 +44,7 @@ public class ServletVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Utilisateur currentUser = (Utilisateur) session.getAttribute("utilisateur");
+		Utilisateur currentUser = (Utilisateur) session.getAttribute("connecte");
 		String nomArticle = "";
 		String description = "";
 		String libelle = "";
@@ -93,6 +93,7 @@ public class ServletVente extends HttpServlet {
 
 			try {
 				am.addArticle(article, rue, ville, codePostal);
+				session.setAttribute("article", article);
 				RequestDispatcher rd = request.getRequestDispatcher("/detailVente");
 				rd.forward(request, response);
 			} catch (BusinessException e) {
