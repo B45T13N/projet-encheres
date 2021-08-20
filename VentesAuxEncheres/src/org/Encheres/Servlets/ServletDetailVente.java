@@ -46,7 +46,7 @@ public class ServletDetailVente extends HttpServlet {
 			e1.printStackTrace();
 			listeCodesErreur.add(30000);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/detailVente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/DetailVente.jsp");
 		rd.forward(request, response);
 	}
 

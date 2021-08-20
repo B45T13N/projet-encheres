@@ -18,14 +18,14 @@
 		<div class="container">
 			
 	        <%@include file="AffichageDUnArticle.jsp" %>
-			<c:if test="${!empty session.getAttribute(\"utilisateur\")}">
+			<c:if test="${!empty sessionScope.utilisateur)}">
 				<form>
 					<label for="prixEnchere">Ma proposition : </label>
 					<input type="number" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 					<input type="submit" value="Enchérir">
 				</form>	
 			</c:if>
-			<c:if test="${empty session.getAttribute(\"utilisateur\")}">
+			<c:if test="${empty sessionScope.utilisateur}">
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
 	        <p>Tel : ${seller.getTelelephone()}</p>
-			<c:if test="${!empty session.getAttribute(\"utilisateur\")}">
+			<c:if test="${!empty sessionScope.utilisateur}">
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>	
@@ -45,7 +45,6 @@
 		<h3>Vente terminée !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>
-	        <p>Tel : ${seller.getTelelephone()}</p>
 			<c:if test="${!empty session.getAttribute(\"utilisateur\")}">
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
