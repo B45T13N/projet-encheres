@@ -9,6 +9,7 @@
 <body>
 
 <h1>Mon Profil</h1>
+	<form action="post">
 	<br>
 	<b>Pseudo :</b>
 	<input type="text" name="Pseudo">
@@ -35,6 +36,7 @@
 	<input type="text" name="ville">
 	<br>
 	<br>
+	</form>
 
 </body>
 </html>

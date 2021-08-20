@@ -46,7 +46,7 @@
 	<br>
 	<br>
 	
-	<a href="/WEB-INF/JSP/ModifierProfil.jsp"><input type="submit" value="Modifier"></a>
+	<a href="<%= request.getContextPath() %>/ModifierProfil"><input type="button" value="Modifier"></a>
 	
 	
 </body>
