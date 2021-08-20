@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Utilisateur;
@@ -37,7 +36,7 @@ public class ServletModifierProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession currentUser = request.getSession();
+		// HttpSession currentUser = request.getSession();
 
 		String pseudo;
 		String nom;
@@ -48,7 +47,7 @@ public class ServletModifierProfil extends HttpServlet {
 		String codePostal;
 		String ville;
 		String motDePasse;
-		int noUtilisateur;
+		// int noUtilisateur;
 
 		try {
 			pseudo = request.getParameter("pseudo");
