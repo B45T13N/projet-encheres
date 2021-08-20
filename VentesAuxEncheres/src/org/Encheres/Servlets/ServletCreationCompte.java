@@ -18,7 +18,7 @@ import org.Encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletCreationCompte
  */
-@WebServlet("/ServletCreationCompte")
+@WebServlet("/CreationCompte")
 public class ServletCreationCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +27,7 @@ public class ServletCreationCompte extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("connecte") != null) {
-			response.sendRedirect("/ServletAccueil");
+			response.sendRedirect("/Accueil");
 			
 		}else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
@@ -83,11 +83,11 @@ public class ServletCreationCompte extends HttpServlet {
 			if(mdp.equals(confirmationMdp)) {
 			session = request.getSession(true);
 			request.setAttribute("connecte", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletAccueil");
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 			}else {
 			request.setAttribute("erreurMDP", erreur);
-			RequestDispatcher rd = request.getRequestDispatcher("/ServletCreationCompte");
+			RequestDispatcher rd = request.getRequestDispatcher("/CreationCompte");
 			rd.forward(request, response);
 			}
 			

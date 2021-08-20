@@ -19,7 +19,7 @@ import org.apache.naming.factory.BeanFactory;
  * Servlet implementation class ServletAccueil
  * @param <BeanFiltreRecherche>
  */
-@WebServlet("/ServletAccueil")
+@WebServlet("/Accueil")
 public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -62,14 +62,14 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 				
 			}
 		//Radio boutons et checkbox
-			if()
+//			if()
 			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 				
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 		rd.forward(request, response);
 	}
 

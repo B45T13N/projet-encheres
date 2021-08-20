@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>Modifier mon profil</h2>
-	<form action="<%=request.getContextPath()%>/ServletModifierProfil" method="post">
+	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
 	<br>
 	<b>Pseudo : </b>
 	<input type="text" name="Pseudo">

@@ -11,7 +11,7 @@
 	
 	<h2>Nouvelle vente</h2>
 	
-	<form action="post">
+	<form action="<%=request.getContextPath()%>/NouvelleVente" methode="post">
 		<label for="nomArticle">Article :</label>
 		<input type="text" required="required" name="nomArticle">
 		<label for="description">Description :</label>
@@ -43,7 +43,7 @@
 		</div>
 		
 		<input type="submit" value="Enregistrer">
-		<a href="<%=request.getContextPath()%>/accueil"><input type="button" value="Annuler"></a>
+		<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler"></a>
 			
 	</form>
 	

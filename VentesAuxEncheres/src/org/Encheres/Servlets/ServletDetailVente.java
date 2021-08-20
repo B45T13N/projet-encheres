@@ -21,7 +21,7 @@ import org.Encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletDetailVente
  */
-@WebServlet("/detailVente")
+@WebServlet("/DetailVente")
 public class ServletDetailVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -46,7 +46,7 @@ public class ServletDetailVente extends HttpServlet {
 			e1.printStackTrace();
 			listeCodesErreur.add(30000);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/detailVente.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/DetailVente.jsp");
 		rd.forward(request, response);
 	}
 

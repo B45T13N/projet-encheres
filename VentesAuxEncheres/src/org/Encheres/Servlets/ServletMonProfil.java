@@ -17,7 +17,7 @@ import org.Encheres.bo.Utilisateur;
 /**
  * Servlet implementation class ServletMonProfil
  */
-@WebServlet("/ServletMonProfil")
+@WebServlet("/MonProfil")
 public class ServletMonProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

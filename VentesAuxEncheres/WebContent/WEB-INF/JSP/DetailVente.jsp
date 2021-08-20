@@ -26,7 +26,7 @@
 				</form>	
 			</c:if>
 			<c:if test="${empty session.getAttribute(\"utilisateur\")}">
-				<a href="<%=request.getContextPath()%>/ServletAccueil">Retour</a>
+				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>
 	</c:if>
@@ -36,7 +36,7 @@
 	        <%@include file="AffichageDUnArticle.jsp" %>
 	        <p>Tel : ${seller.getTelelephone()}</p>
 			<c:if test="${!empty session.getAttribute(\"utilisateur\")}">
-				<a href="<%=request.getContextPath()%>/ServletAccueil">Retour</a>
+				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>	
 	</c:if>
@@ -47,7 +47,7 @@
 	        <%@include file="AffichageDUnArticle.jsp" %>
 	        <p>Tel : ${seller.getTelelephone()}</p>
 			<c:if test="${!empty session.getAttribute(\"utilisateur\")}">
-				<a href="<%=request.getContextPath()%>/ServletAccueil">Retour</a>
+				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>	
 	</c:if>
