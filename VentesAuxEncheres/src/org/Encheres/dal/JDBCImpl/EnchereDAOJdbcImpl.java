@@ -3,6 +3,7 @@ package org.Encheres.dal.JDBCImpl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -17,6 +18,8 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 	public static final String INSERT_ENCHERE = "INSERT INTO ENCHERES(date_enchere, montant_enchere, no_article, no_utilisateur)"
 			+ " VALUES(?,?,?,?)";
 	public static final String DELETE_ENCHERE = "DELETE FROM ENCHERES WHERE no_article=?";
+
+	public static final String SELECT_GAGNANT = "SELECT * FROM ENCHERES WHERE no_article = ?";
 
 	public static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET date_enchere = ?, montant_enchere= ?, no_utilisateur=?  WHERE no_article = ?";
 
@@ -117,6 +120,38 @@ public class EnchereDAOJdbcImpl implements DAOEnchere {
 			businessException.ajouterErreur(CodesResultatDAL.UPDATE_ENCHERE_FAIL);
 			throw businessException;
 		}
+
+	}
+
+	@Override
+	public int selectBuyer(int noArticle) throws BusinessException {
+		int noBuyer = 0;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				// Selection du gagnant d'une enchère
+				PreparedStatement prstms = cnx.prepareStatement(SELECT_GAGNANT);
+				prstms.setInt(1, noArticle);
+				ResultSet rs = prstms.executeQuery();
+				if (rs.next()) {
+					noBuyer = rs.getInt("no_utilisateur");
+				}
+				rs.close();
+				prstms.close();
+				cnx.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.LECTURE_ENCHERE_FAIL);
+				throw businessException;
+
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		return noBuyer;
 
 	}
 

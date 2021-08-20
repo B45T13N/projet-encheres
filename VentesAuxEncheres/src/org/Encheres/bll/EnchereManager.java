@@ -39,4 +39,9 @@ public class EnchereManager {
 
 	}
 
+	public void selectAcheteur(int noArticle) throws BusinessException {
+		enchereDAO.selectBuyer(noArticle);
+
+	}
+
 }

@@ -26,6 +26,8 @@ public abstract class CodesResultatDAL {
 
 	public final static int INSERT_ENCHERE_FAIL = 10007;
 
+	public final static int LECTURE_ENCHERE_FAIL = 10012;
+
 	public final static int UPDATE_ENCHERE_FAIL = 10008;
 
 	// table retrait

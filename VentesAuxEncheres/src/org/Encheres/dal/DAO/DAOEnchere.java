@@ -13,4 +13,6 @@ public interface DAOEnchere extends DAO<Enchere> {
 	public void delete(int noArticle) throws BusinessException;
 
 	public void update(int noArticle, int noUtilisateur, int montantEnchere, LocalDate date) throws BusinessException;
+
+	public int selectBuyer(int noArticle) throws BusinessException;
 }

@@ -31,6 +31,21 @@ public class ServletDetailVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List<Integer> listeCodesErreur = new ArrayList<>();
+		HttpSession session = request.getSession();
+		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
+		Article currentArticle = (Article) session.getAttribute("article");
+		EnchereManager em = new EnchereManager();
+		UtilisateurManager um = new UtilisateurManager();
+		Utilisateur seller = new Utilisateur();
+
+		try {
+			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
+			em.selectAcheteur(currentArticle.getNoArticle());
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+			listeCodesErreur.add(30000);
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/detailVente.jsp");
 		rd.forward(request, response);
 	}
@@ -45,22 +60,14 @@ public class ServletDetailVente extends HttpServlet {
 		int prixEnchere = 0;
 		HttpSession session = request.getSession();
 		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
-		Article article = (Article) session.getAttribute("article");
+		Article currentArticle = (Article) session.getAttribute("article");
 
 		EnchereManager em = new EnchereManager();
-		UtilisateurManager um = new UtilisateurManager();
-
-		try {
-			Utilisateur seller = um.selectByNoUtilisateur(article.getNoUtilisateur());
-		} catch (BusinessException e1) {
-			e1.printStackTrace();
-			listeCodesErreur.add(30000);
-		}
 
 		prixEnchere = Integer.parseInt(request.getParameter("prixEnchere"));
 
 		try {
-			em.updateEnchere(article, user, prixEnchere);
+			em.updateEnchere(currentArticle, user, prixEnchere);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(30000);
