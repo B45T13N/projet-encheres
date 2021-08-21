@@ -60,8 +60,8 @@ public class ArticleManager {
 			// Insert de mon article
 			this.articleDAO.insert(article);
 			// Creation de la première enchere
-			enchere = enchereBuilder(newArticle.getDateDebutEncheres(), newArticle.getMiseAPrix(),
-					newArticle.getNoArticle(), newArticle.getNoUtilisateur());
+			enchere = enchereBuilder(article.getDateDebutEncheres(), article.getMiseAPrix(), article.getNoArticle(),
+					article.getNoUtilisateur());
 			this.enchereManager.addEnchere(enchere);
 			// Création du retrait
 			retrait = retraitBuilder(rue, ville, codePostal, article.getNoArticle());

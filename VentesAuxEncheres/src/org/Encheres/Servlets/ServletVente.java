@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.Encheres.BusinessException;
 import org.Encheres.bll.ArticleManager;
 import org.Encheres.bo.Article;
+import org.Encheres.bo.Enchere;
 import org.Encheres.bo.Utilisateur;
 
 /**
@@ -90,11 +91,18 @@ public class ServletVente extends HttpServlet {
 			request.setAttribute("listeCodeErreur", listeCodeErreur);
 		} else {
 			ArticleManager am = new ArticleManager();
+//			EnchereManager em = new EnchereManager();
 			article = new Article(description, nomArticle, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
 			article.setNoUtilisateur(1);
+			Enchere enchere = new Enchere();
 
 			try {
 				am.addArticle(article, rue, ville, codePostal);
+//				enchere.setDateEnchere(article.getDateDebutEncheres());
+//				enchere.setMontantEnchere(article.getMiseAPrix());
+//				enchere.setNoArticle(article.getNoArticle());
+//				enchere.setNoUtilisateur(article.getNoUtilisateur());
+//				em.addEnchere(enchere);
 				RequestDispatcher rd = request.getRequestDispatcher("/DetailVente");
 				rd.forward(request, response);
 			} catch (BusinessException e) {

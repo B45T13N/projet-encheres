@@ -40,8 +40,8 @@ public class ServletDetailVente extends HttpServlet {
 		Utilisateur seller = new Utilisateur();
 
 		try {
-			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
-			em.selectAcheteur(currentArticle.getNoArticle());
+			seller = um.selectByNoUtilisateur(1);
+			em.selectAcheteur(9);
 		} catch (BusinessException e1) {
 			e1.printStackTrace();
 			listeCodesErreur.add(30000);
