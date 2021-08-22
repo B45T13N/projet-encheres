@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.ArticleManager;
+import org.Encheres.bll.UtilisateurManager;
+import org.Encheres.bo.Utilisateur;
 import org.apache.naming.factory.BeanFactory;
 
 /**
@@ -49,10 +51,21 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		
 		String categorie;
 		ArticleManager am = new ArticleManager();
+		UtilisateurManager um = new UtilisateurManager();
+		int noUtilisateur;
+		String articleRechercher ="";
 		
 		HttpSession sessionScope = request.getSession(); //Init de sessionScope
 		
-				
+		//Verification si utilisateur connecté et init noUtilisateur
+		if(request.getSession().getAttribute("utilisateur")!=null) {
+			Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
+			noUtilisateur = utilisateur.getNoUtilisateur();
+		} else {
+			noUtilisateur = 0;
+		}
+		
+		//Traitement choix catégories
 		try {
 			if (request.getParameter("categorie")!=null) {
 				categorie = request.getParameter("categorie");

@@ -30,7 +30,7 @@
 		<h4>Filtres :</h4>
 		<br/>
 		<div>
-			<form action="<%=request.getContextPath()%>/Accueil" method="POST">
+			<form action="<%=request.getContextPath()%>/Accueil" method="POST"> <!-- Method="GET" ???? -->
 				<input type="search" placeholder="Le nom de l'article contient">
 				<br/>
 				<br/>
