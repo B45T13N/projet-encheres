@@ -102,6 +102,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			}
 			//check box filtreVente
 			if(request.getParameter("radioBtn")!=null && request.getParameter("radioBtn").equals("2")) 
+				
 			{
 								
 					if (request.getParameter("venteEnCours")!=null)
