@@ -18,10 +18,7 @@ import org.Encheres.bo.Article;
 import org.Encheres.bo.Utilisateur;
 import org.apache.naming.factory.BeanFactory;
 
-/**
- * Servlet implementation class ServletAccueil
- * @param <BeanFiltreRecherche>
- */
+
 @WebServlet("/Accueil")
 public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 	private static final long serialVersionUID = 1L;
