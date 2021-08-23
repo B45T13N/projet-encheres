@@ -7,7 +7,6 @@ import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
 import org.Encheres.bo.Enchere;
 import org.Encheres.bo.Retrait;
-import org.Encheres.bo.Utilisateur;
 import org.Encheres.dal.DAO.DAOArticle;
 import org.Encheres.dal.DAO.DAOFactory;
 import org.Encheres.dal.JDBCImpl.CategorieDAOJdbcImpl;
@@ -140,8 +139,7 @@ public class ArticleManager {
 
 	}
 
-	public Article updateVenteArticle(Article article, Utilisateur utilisateurCourant, int montantEnchere)
-			throws BusinessException {
+	public Article updateVenteArticle(Article article, int idutilisateur, int montantEnchere) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 		Article articleAModif = article;
 
@@ -151,7 +149,7 @@ public class ArticleManager {
 		if (!businessException.hasError()) {
 			articleAModif.setPrixVente(montantEnchere);
 			articleDAO.update(articleAModif);
-			enchereManager.updateEnchere(article, utilisateurCourant, montantEnchere);
+			enchereManager.updateEnchere(article, idutilisateur, montantEnchere);
 
 		} else {
 			throw businessException;

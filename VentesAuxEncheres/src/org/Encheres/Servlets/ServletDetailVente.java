@@ -59,7 +59,7 @@ public class ServletDetailVente extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		int prixEnchere = 0;
 		HttpSession session = request.getSession();
-		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
+		int iduser = (int) session.getAttribute("id");
 		Article currentArticle = (Article) session.getAttribute("article");
 
 		EnchereManager em = new EnchereManager();
@@ -67,7 +67,7 @@ public class ServletDetailVente extends HttpServlet {
 		prixEnchere = currentArticle.getPrixVente();
 
 		try {
-			em.updateEnchere(currentArticle, user, prixEnchere);
+			em.updateEnchere(currentArticle, iduser, prixEnchere);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(30000);

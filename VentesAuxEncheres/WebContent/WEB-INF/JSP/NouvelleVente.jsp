@@ -35,11 +35,11 @@
 		<div>
 		<h4>Retrait</h4>
 		<label for="rue">Rue :</label>
-		<input required="required" type="text" name="rue">
+		<input required="required" type="text" name="rue" value="${rue}">
 		<label for="cpo">Code Postal :</label>
-		<input required="required" type="text" name="cpo">
+		<input required="required" type="text" name="cpo" value="${codePostal}">
 		<label for="ville">Ville :</label>
-		<input required="required" type="text" name="ville">
+		<input required="required" type="text" name="ville" value="${ville}">
 		</div>
 		
 		<input type="submit" value="Enregistrer">

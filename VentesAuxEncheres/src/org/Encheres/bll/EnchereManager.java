@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import org.Encheres.BusinessException;
 import org.Encheres.bo.Article;
 import org.Encheres.bo.Enchere;
-import org.Encheres.bo.Utilisateur;
 import org.Encheres.dal.JDBCImpl.EnchereDAOJdbcImpl;
 
 public class EnchereManager {
@@ -16,12 +15,12 @@ public class EnchereManager {
 		this.enchereDAO = new EnchereDAOJdbcImpl();
 	}
 
-	public void updateEnchere(Article article, Utilisateur utilisateur, int montantEnchere) throws BusinessException {
+	public void updateEnchere(Article article, int idutilisateur, int montantEnchere) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
 		this.validerMontantEnchere(article.getPrixVente(), montantEnchere, businessException);
 		if (!businessException.hasError()) {
-			enchereDAO.update(article.getNoArticle(), utilisateur.getNoUtilisateur(), montantEnchere, LocalDate.now());
+			enchereDAO.update(article.getNoArticle(), idutilisateur, montantEnchere, LocalDate.now());
 		} else {
 			throw businessException;
 		}

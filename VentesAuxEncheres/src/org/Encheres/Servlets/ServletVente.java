@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bll.ArticleManager;
+import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Article;
 import org.Encheres.bo.Utilisateur;
 
@@ -44,18 +45,26 @@ public class ServletVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Utilisateur currentUser = (Utilisateur) session.getAttribute("utilisateur");
+		int idUser = (int) session.getAttribute("id");
+		List<Integer> listException = new ArrayList<Integer>();
+		UtilisateurManager um = new UtilisateurManager();
+		Utilisateur currentUser = new Utilisateur();
+		try {
+			currentUser = um.selectByNoUtilisateur(idUser);
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+			listException.add(30004);
+		}
 		String nomArticle = "";
 		String description = "";
 		String libelle = "";
 		int miseAPrix = 0;
-		int noUser = currentUser.getNoUtilisateur();
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		Article article = null;
-		String rue = "";
-		String codePostal = "";
-		String ville = "";
+		String rue = currentUser.getRue();
+		String codePostal = currentUser.getCodePostal();
+		String ville = currentUser.getVille();
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -92,7 +101,7 @@ public class ServletVente extends HttpServlet {
 			ArticleManager am = new ArticleManager();
 //			EnchereManager em = new EnchereManager();
 			article = new Article(description, nomArticle, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
-			article.setNoUtilisateur(noUser);
+			article.setNoUtilisateur(idUser);
 //			Enchere enchere = new Enchere();
 
 			try {
@@ -105,9 +114,9 @@ public class ServletVente extends HttpServlet {
 				session.setAttribute("article", article);
 				RequestDispatcher rd = request.getRequestDispatcher("/DetailVente");
 				rd.forward(request, response);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-
+			} catch (BusinessException e1) {
+				e1.printStackTrace();
+				listException.add(30004);
 			}
 		}
 

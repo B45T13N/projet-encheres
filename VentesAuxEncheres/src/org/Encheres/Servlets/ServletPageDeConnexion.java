@@ -31,12 +31,11 @@ public class ServletPageDeConnexion extends HttpServlet {
 
 		if (request.getParameter("utilisateur") != null) {
 			response.sendRedirect("/Accueil");
-		} 
-			else {			
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
-		rd.forward(request, response);
-	}
-		
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+			rd.forward(request, response);
+		}
+
 	}
 
 	/**
@@ -53,25 +52,20 @@ public class ServletPageDeConnexion extends HttpServlet {
 		UtilisateurManager utilisateurManager;
 		Utilisateur utilisateur;
 		RequestDispatcher rd;
+		int id = 0;
 // cookie > se souvenir de moi		
 		try {
-			
+
 			identifiant = request.getParameter("identifiant");
 			mdp = request.getParameter("mdp");
 			utilisateurManager = new UtilisateurManager();
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
 			System.out.println(utilisateur.toString());
-			int id = utilisateur.getNoUtilisateur();
+			id = utilisateur.getNoUtilisateur();
 			session.setAttribute("id", id);
-			
-			if (id < 0) {
-				response.sendRedirect(request.getContextPath() + "/Accueil");
-			}
-			else {
-					System.out.println(utilisateur.toString());
-				rd = request.getRequestDispatcher("/PageDeConnexion");
-				rd.forward(request, response);
-			}
+
+			rd = request.getRequestDispatcher("/Accueil");
+			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			listeCodesErreur.add(30000);
