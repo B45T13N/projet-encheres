@@ -170,10 +170,18 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			prstms.setString(2, password);
 			ResultSet rs = prstms.executeQuery();
 			while (rs.next()) {
-				if (login == rs.getString("pseudo") && password == rs.getString("mot_de_passe")) {
+				if (rs.getString("pseudo").equals(login) && rs.getString("mot_de_passe").equals(password)) {
 					user = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
 							rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 							rs.getString("code_postal"), rs.getString("ville"));
+					if (rs.getByte("administrateur") == 1) {
+						user.setAdministrateur(true);
+					} else {
+
+						user.setAdministrateur(false);
+					}
+					user.setCredit(rs.getInt("credit"));
+					user.setNoUtilisateur(rs.getInt("no_utilisateur"));
 				}
 			}
 		} catch (SQLException e) {
