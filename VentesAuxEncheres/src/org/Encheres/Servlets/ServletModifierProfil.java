@@ -47,7 +47,9 @@ public class ServletModifierProfil extends HttpServlet {
 		String rue;
 		String codePostal;
 		String ville;
-		String motDePasse;
+		String oldPass;
+		String newPass;
+		String confirmPass;
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		int noUtilisateur = (int) session.getAttribute("id");
 
@@ -59,14 +61,21 @@ public class ServletModifierProfil extends HttpServlet {
 		rue = request.getParameter("rue");
 		codePostal = request.getParameter("codepostal");
 		ville = request.getParameter("ville");
-		motDePasse = request.getParameter("motDePasse");
+		oldPass = request.getParameter("motDePasse");
+		newPass = request.getParameter("newMotDePasse");
+		confirmPass = request.getParameter("confirmMotDePasse");
 
 		try {
 
 			Utilisateur updatedUser = new Utilisateur();
 
-			updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal,
-					ville, motDePasse, noUtilisateur);
+			if (newPass.equals(confirmPass)) {
+				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
+						codePostal, ville, newPass, noUtilisateur);
+			} else {
+				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
+						codePostal, ville, oldPass, noUtilisateur);
+			}
 
 			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);

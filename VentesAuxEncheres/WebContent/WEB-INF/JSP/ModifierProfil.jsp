@@ -37,7 +37,7 @@
 	<b>Nouveau mot de passe : </b>
 	<input type="password" name="newMotDePasse">
 	<b>Confirmation : </b>
-	<input type="password" name="confirmMdp">
+	<input type="password" name="confirmMotDePasse">
 	<br>
 	<br>
 	<input type="submit" value="Enregistrer" id="register">
