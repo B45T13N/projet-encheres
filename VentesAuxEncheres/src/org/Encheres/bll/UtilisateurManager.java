@@ -66,19 +66,6 @@ public class UtilisateurManager {
 		Utilisateur updateUtilisateur = new Utilisateur();
 		Utilisateur user = this.selectByNoUtilisateur(utilisateur);
 
-//		updateUtilisateur.setPseudo(pseudo);
-//		updateUtilisateur.setNom(nom);
-//		updateUtilisateur.setPrenom(prenom);
-//		updateUtilisateur.setEmail(email);
-//		updateUtilisateur.setTelephone(telephone);
-//		updateUtilisateur.setRue(rue);
-//		updateUtilisateur.setCodePostal(codePostal);
-//		updateUtilisateur.setVille(ville);
-//		updateUtilisateur.setMotDePasse(motDePasse);
-//		updateUtilisateur.setNoUtilisateur(utilisateur);
-
-		daoUtilisateur.update(updateUtilisateur);
-
 		if (pseudo.equals("")) {
 			updateUtilisateur.setPseudo(user.getPseudo());
 		} else {
@@ -130,7 +117,6 @@ public class UtilisateurManager {
 		if (!exception.hasError()) {
 			daoUtilisateur.update(updateUtilisateur);
 		}
-
 		return updateUtilisateur;
 	}
 

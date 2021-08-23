@@ -49,7 +49,7 @@ public class ServletModifierProfil extends HttpServlet {
 		String ville;
 		String motDePasse;
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
-		int noUtilisateur = 21;
+		int noUtilisateur = (int) session.getAttribute("id");
 
 		pseudo = request.getParameter("pseudo");
 		nom = request.getParameter("nom");
@@ -68,10 +68,7 @@ public class ServletModifierProfil extends HttpServlet {
 			updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal,
 					ville, motDePasse, noUtilisateur);
 
-			session = request.getSession(true);
-			session.setAttribute("utilisateur", updatedUser);
-
-			RequestDispatcher rd = request.getRequestDispatcher("/MonProfil");
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
