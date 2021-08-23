@@ -51,40 +51,55 @@
 	<form action="<%=request.getContextPath()%>/Accueil">
 		<div>
 			<input type="radio" id="achats" name="filtreAchat" value="1"/>
+			<c:if test="${filtreAchat == \"1\"}">checked</c:if>
 			<label for="achats">Achats</label>
 				<ul>
 					<li>
-						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" name="enCours" value="1"/>Enchères ouvertes</label>
+						<input type="checkbox" id="encheresEnCours" name="enCours" value="1"/>
+							<c:if test="${radio == \"filtreVente\"}">disabled</c:if>
+							<c:if test="${enCours !=null}">checked</c:if>
+							<label for="enCours">Enchères ouvertes</label>
+					</li>
+					<li>						
+						<input type="checkbox" id="encheresEnCours" name="mesEnCours" value="2"/>
+							<c:if test="${radio == \"filtreVente\"}">disabled</c:if>
+							<c:if test="${mesEnCours !=null}">checked</c:if>
+							<label for="mesEnCours">Mes enchères en cours</label>
 					</li>
 					<li>
-						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" name="mesEnCours" value="2"/>Mes enchères en cours</label>
-					</li>
-					<li>
-						<label for="filtreCheckBox">
-							<input type="checkbox" id="encheresEnCours" name="remportes" value="3"/>Mes enchères remportées</label>
+						<input type="checkbox" id="encheresEnCours" name="remportes" value="3"/>
+						<c:if test="${radio == \"filtreVente\"}">disabled</c:if>
+						<c:if test="${remportes !=null}">checked</c:if>
+							<label for="remportes">Mes enchères remportées</label>
 					</li>
 				</ul>
 		</div>
 		
 		<div>
 			<input type="radio" id="ventes" name="filtreVente" value="2"/>
+			<c:if test="${filtreVente == \"2\"}">checked</c:if>
 			<label for="ventes">Mes ventes</label>
 			<ul>
 					<li>
-						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="ventesEnCours" name="venteEnCours" value="1"/>Mes ventes en cours</label>
+						<input type="checkbox" id="ventesEnCours" name="venteEnCours" value="1"/>
+							<c:if test="${radio == \"filtreAchat\"}">disabled</c:if>
+							<c:if test="${venteEnCours !=null}">checked</c:if>
+							<label class="txtCheckbox" for="filtreCheckbox">Mes ventes en cours</label>
 					</li>
 					
 					<li>
-						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="encheresEnCours" name="venteNonDebut" value="2"/>Enchères non débutées</label>
+						<input type="checkbox" id="encheresEnCours" name="venteNonDebut" value="2"/>
+							<c:if test="${radio == \"filtreAchat\"}">disabled</c:if>
+							<c:if test="${venteNonDebut !=null}">checked</c:if>
+							<label class="txtCheckbox" for="filtreCheckbox">Enchères non débutées</label>
+							
 					</li>
 					
 					<li>
-						<label class="txtCheckbox" for="filtreCheckbox">
-						<input type="checkbox" id="encheresEnCours" name="venteTerminee" value="3"/>Ventes terminées</label>
+						<input type="checkbox" id="encheresEnCours" name="venteTerminee" value="3"/>
+							<c:if test="${radio == \"filtreAchat\"}">disabled</c:if>
+							<c:if test="${venteTerminee !=null}">checked</c:if>
+							<label class="txtCheckbox" for="filtreCheckbox">Ventes terminées</label>
 					</li>
 				</ul>
 		</div>
