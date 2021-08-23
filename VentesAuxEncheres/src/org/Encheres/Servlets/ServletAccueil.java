@@ -43,7 +43,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		List<Article> listeAAfficher = new ArrayList<>();
 	
 		try {
-			noUtilisateur = (int) sessionScope.getAttribute("id");
+	//		noUtilisateur = (int) sessionScope.getAttribute("id");
 			listeAAfficher = am.selectAllArticle();
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block

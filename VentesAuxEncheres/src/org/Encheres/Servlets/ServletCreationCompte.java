@@ -59,6 +59,7 @@ public class ServletCreationCompte extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
+		RequestDispatcher rd;
 		HttpSession session = request.getSession();
 		try
 		{
@@ -80,15 +81,15 @@ public class ServletCreationCompte extends HttpServlet {
 			
 			if(mdp.equals(confirmationMdp)) {
 			utilisateur = utilisateurManager.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp);	
-			session = request.getSession(true);
-			session.setAttribute("utilisateur", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+			
+			session.setAttribute("id", utilisateur.getNoUtilisateur());
+			rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 			}else {
 // modifier en liste code erreur 
 //request.setAttribute("erreurMDP", erreur);
 			listeCodesErreur.add(30031);	
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
 			rd.forward(request, response);
 			}
 			

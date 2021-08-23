@@ -19,7 +19,7 @@
 		<c:if test="${!empty sessionScope.id}">
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/DetailVente">Enchères</a></li>
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
-		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfile">Mon profil</a></li>
+		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a></li>
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/Accueil">Déconnexion</a></li>
 		</c:if>
 	</header>
@@ -44,11 +44,9 @@
 				    <option value="sport_loisirs">Sports et Loisirs</option>
 				</select>
 		        <input type="submit" name="btnValider" value="Rechercher">
-			</form>	
-		</div>
-	</div>
-	
-	<form action="<%=request.getContextPath()%>/Accueil">
+
+	<c:if test="${!empty sessionScope.id}"> 
+
 		<div>
 			<input type="radio" id="achats" name="radioBtn" value="1"/>
 			<c:if test="${filtreAchat == \"1\"}">checked</c:if>
@@ -103,8 +101,11 @@
 					</li>
 				</ul>
 		</div>
+		
+	</c:if>
 	</form>
-	
+		</div>
+		</div>
 	<br/>
 	<section>
 	 <c:forEach var="article" items="${listeAAfficher}">
