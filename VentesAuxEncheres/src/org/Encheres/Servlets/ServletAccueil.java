@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.Encheres.BusinessException;
 import org.Encheres.bll.ArticleManager;
 import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Article;
@@ -35,7 +36,21 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArticleManager am = new ArticleManager();
+		UtilisateurManager um = new UtilisateurManager();
+		int noUtilisateur;
+		HttpSession sessionScope = request.getSession();
+		List<Article> listeAAfficher = new ArrayList<>();
+	
+		try {
+			noUtilisateur = (int) sessionScope.getAttribute("id");
+			listeAAfficher = am.selectAllArticle();
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		
+		request.setAttribute("listeAAfficher", listeAAfficher);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Accueil.jsp");
 		rd.forward(request, response);

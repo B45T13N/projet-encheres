@@ -111,8 +111,8 @@
 		<article>
 			<img alt="Descriptif de l'image pour mal voyant" src="../WebContent/images/#"> <!-- URL image à faire ainsi que les ALT -->
 			<div>
-				<h4>Nom de l'article en vente ${article.getNom()}</h4>
-				<p>Prix : ${article.getPrixVente()}</p>
+				<h4>Nom de l'article en vente ${article.getNomArticle()}</h4>
+				<p>Prix : ${article.getPrixVente()} points</p>
 				<p>Fin de l'enchère : ${article.getDateFinEncheres()}</p>
 				<p>Vendeur : ${article.getPseudoUser()}</p>
 			</div>
