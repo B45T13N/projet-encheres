@@ -57,12 +57,9 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		
 		HttpSession sessionScope = request.getSession(); //Init de sessionScope
 		
-		//Verification si utilisateur connecté et init noUtilisateur
-		if(request.getSession().getAttribute("utilisateur")!=null) {
-			Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute("utilisateur");
-			noUtilisateur = utilisateur.getNoUtilisateur();
-		} else {
-			noUtilisateur = 0;
+		//Verification si utilisateur connecté 
+		if(sessionScope.getAttribute("utilisateur")!=null) {
+			Utilisateur utilisateur = (Utilisateur) sessionScope.getAttribute("utilisateur");
 		}
 		
 		//Traitement choix catégories
