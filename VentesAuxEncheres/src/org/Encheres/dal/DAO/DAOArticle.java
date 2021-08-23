@@ -14,8 +14,8 @@ public interface DAOArticle extends DAO<Article> {
 
 	public void update(Article data) throws BusinessException;
 
-	public List<String> selectAll() throws BusinessException;
+	public List<Article> selectAll() throws BusinessException;
 
-	public List<String> selectByCategorie(int noCategorie) throws BusinessException;
+	public List<Article> selectByCategorie(int noCategorie) throws BusinessException;
 
 }

@@ -165,8 +165,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	}
 
 	@Override
-	public List<String> selectAll() throws BusinessException {
-		List<String> list = new ArrayList<String>();
+	public List<Article> selectAll() throws BusinessException {
+		List<Article> list = new ArrayList<Article>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
@@ -178,8 +178,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				while (rs.next()) {
 					art = new Article(rs.getInt("no_utilisateur"), rs.getString("nom_article"),
 							rs.getString("description"), rs.getString("libelle"),
-							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"));
-					list.add(art.toString() + rs.getString("pseudo"));
+							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"),
+							rs.getString("pseudo"));
+					list.add(art);
 				}
 				prstms.close();
 				cnx.close();
@@ -198,13 +199,13 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	}
 
 	@Override
-	public List<String> selectByCategorie(int noCategorie) throws BusinessException {
-		List<String> list = new ArrayList<String>();
+	public List<Article> selectByCategorie(int noCategorie) throws BusinessException {
+		List<Article> list = new ArrayList<Article>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
 				// Mise à jour article
-				PreparedStatement prstms = cnx.prepareStatement(SELECT_ALL);
+				PreparedStatement prstms = cnx.prepareStatement(SELECT_BY_CATEGORIE);
 				prstms.setInt(1, noCategorie);
 				ResultSet rs = prstms.executeQuery();
 
@@ -212,8 +213,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				while (rs.next()) {
 					art = new Article(rs.getInt("no_utilisateur"), rs.getString("nom_article"),
 							rs.getString("description"), rs.getString("libelle"),
-							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"));
-					list.add(art.toString() + rs.getString("pseudo"));
+							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"),
+							rs.getString("pseudo"));
+					list.add(art);
 				}
 				prstms.close();
 				cnx.close();

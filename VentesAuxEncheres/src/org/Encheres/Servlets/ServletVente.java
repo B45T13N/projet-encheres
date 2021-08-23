@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import org.Encheres.BusinessException;
 import org.Encheres.bll.ArticleManager;
 import org.Encheres.bo.Article;
-import org.Encheres.bo.Enchere;
 import org.Encheres.bo.Utilisateur;
 
 /**
@@ -50,7 +49,7 @@ public class ServletVente extends HttpServlet {
 		String description = "";
 		String libelle = "";
 		int miseAPrix = 0;
-		int noUser = 1;
+		int noUser = currentUser.getNoUtilisateur();
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		Article article = null;
@@ -93,8 +92,8 @@ public class ServletVente extends HttpServlet {
 			ArticleManager am = new ArticleManager();
 //			EnchereManager em = new EnchereManager();
 			article = new Article(description, nomArticle, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
-			article.setNoUtilisateur(1);
-			Enchere enchere = new Enchere();
+			article.setNoUtilisateur(noUser);
+//			Enchere enchere = new Enchere();
 
 			try {
 				am.addArticle(article, rue, ville, codePostal);

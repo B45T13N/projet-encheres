@@ -17,6 +17,7 @@ public class Article implements Serializable {
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
+	private String pseudoUser;
 	private int miseAPrix;
 	private int prixVente;
 	private String lieuRetrait;
@@ -108,18 +109,6 @@ public class Article implements Serializable {
 	}
 
 	public Article(int noArticle, String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
-			int prixVente) {
-		this.noArticle = noArticle;
-		this.nomArticle = nomArticle;
-		this.description = description;
-		this.libelle = libelle;
-		this.dateDebutEncheres = dateDebutEncheres;
-		this.miseAPrix = prixVente;
-		this.prixVente = prixVente;
-
-	}
-
-	public Article(int noArticle, String nomArticle, String description, String libelle, LocalDate dateDebutEncheres,
 			int miseAPrix, int prixVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -150,6 +139,17 @@ public class Article implements Serializable {
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
+	}
+
+	public Article(int noUser, String nomArticle, String description, String libelle, LocalDate dateFinEnchere,
+			int prixVente, String pseudoUser) {
+		this.noUtilisateur = noUser;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.libelle = libelle;
+		this.dateFinEncheres = dateFinEnchere;
+		this.prixVente = prixVente;
+		this.pseudoUser = pseudoUser;
 	}
 
 	public int getNoUtilisateur() {

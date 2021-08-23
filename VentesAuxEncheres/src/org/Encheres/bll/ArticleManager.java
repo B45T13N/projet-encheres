@@ -172,11 +172,11 @@ public class ArticleManager {
 		}
 	}
 
-	public List<String> selectAllArticle() throws BusinessException {
+	public List<Article> selectAllArticle() throws BusinessException {
 		return this.articleDAO.selectAll();
 	}
 
-	public List<String> selectArticleByCategorie(String libelle) throws BusinessException {
+	public List<Article> selectArticleByCategorie(String libelle) throws BusinessException {
 		int noCategorie = categorieDAO.selectByLibelle(libelle);
 
 		return this.articleDAO.selectByCategorie(noCategorie);
