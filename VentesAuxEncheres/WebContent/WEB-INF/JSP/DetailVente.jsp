@@ -12,36 +12,36 @@
 </head>
 <body>
 	<h1>ENI-Enchères</h1>
-	
-	<c:if test="${currentArticle.getDateFinEnchere() > LocalDate.now()}">
+	<c:choose>
+	<c:when test="${currentArticle.getDateFinEnchere() > LocalDate.now()}">
 		<h3>Détail vente</h3>
 		<div class="container">
 			
 	        <%@include file="AffichageDUnArticle.jsp" %>
-			<c:if test="${!empty sessionScope.utilisateur)}">
+			<c:if test="${empty session.utilisateur}">
 				<form>
 					<label for="prixEnchere">Ma proposition : </label>
 					<input type="number" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 					<input type="submit" value="Enchérir">
 				</form>	
 			</c:if>
-			<c:if test="${empty sessionScope.utilisateur}">
+			<c:if test="${empty session.utilisateur}">
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>
-	</c:if>
-	<c:if test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur() &&  }">
+	</c:when>
+	<c:when test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
 		<h3>Vous avez remporté la vente !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
 	        <p>Tel : ${seller.getTelelephone()}</p>
-			<c:if test="${!empty sessionScope.utilisateur}">
+			<c:if test="${!empty session.utilisateur}">
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>	
-	</c:if>
+	</c:when>
 	
-	<c:if test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
+	<c:when test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
 		<h3>Vente terminée !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>
@@ -49,7 +49,7 @@
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>	
-	</c:if>
-	
+	</c:when>
+	</c:choose>
 </body>
 </html>
