@@ -53,9 +53,9 @@ public class ServletVente extends HttpServlet {
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		Article article = null;
-		String rue = ""; // currentUser.getRue();
-		String codePostal = "";// currentUser.getCodePostal();
-		String ville = "";// currentUser.getVille();
+		String rue = currentUser.getRue();
+		String codePostal = currentUser.getCodePostal();
+		String ville = currentUser.getVille();
 
 		request.setCharacterEncoding("UTF-8");
 

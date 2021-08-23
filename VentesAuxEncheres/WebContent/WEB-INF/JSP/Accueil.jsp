@@ -13,14 +13,14 @@
 	<header>
 		<h2>ENI-Enchères</h2>
 		
-		<c:if test="${sessionScope.isConnecte == false }">
+		<c:if test="${empty sessionScope.utilisateur}">
 		<p><a href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
 		</c:if>
-		<c:if test="${sessionScope.isConnecte == true }">
-		<li><a href="${pageContext.request.contextPath()}/DetailVente">Enchères</a></li>
-		<li><a href="${pageContext.request.contextPath()}/NouvelleVente">Vendre un article</a></li>
-		<li><a href="${pageContext.request.contextPath()}/MonProfile">Mon profil</a></li>
-		<li><a href="${pageContext.request.contextPath()}/Accueil">Déconnexion</a></li>
+		<c:if test="${!empty sessionScope.utilisateur}">
+		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/DetailVente">Enchères</a></li>
+		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
+		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfile">Mon profil</a></li>
+		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/Accueil">Déconnexion</a></li>
 		</c:if>
 	</header>
 	<h1>Liste des enchères</h1>
