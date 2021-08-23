@@ -86,7 +86,8 @@ public class ServletCreationCompte extends HttpServlet {
 			rd.forward(request, response);
 			}else {
 // modifier en liste code erreur 
-			request.setAttribute("erreurMDP", erreur);
+//request.setAttribute("erreurMDP", erreur);
+			listeCodesErreur.add(30031);	
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
 			rd.forward(request, response);
 			}

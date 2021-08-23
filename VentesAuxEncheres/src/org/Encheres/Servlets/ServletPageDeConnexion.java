@@ -49,28 +49,28 @@ public class ServletPageDeConnexion extends HttpServlet {
 			throws ServletException, IOException {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		request.setCharacterEncoding("UTF-8");
-		HttpSession currentUser = request.getSession();
+		HttpSession session = request.getSession();
 		String identifiant;
 		String mdp;
 		UtilisateurManager utilisateurManager;
 		Utilisateur utilisateur;
 		RequestDispatcher rd;
+		
 		try {
+			
 			identifiant = request.getParameter("identifiant");
 			mdp = request.getParameter("mdp");
 			utilisateurManager = new UtilisateurManager();
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
-			currentUser.setAttribute("utilisateur", utilisateur);
+			int id = utilisateur.getNoUtilisateur();
+			session.setAttribute("id", id);
+			
 			if (utilisateur != null) {
 				response.sendRedirect(request.getContextPath() + "/Accueil");
-			} else {
-				rd = request.getRequestDispatcher("/PageDeConnexion");
-				rd.forward(request, response);
-				listeCodesErreur.add(30000);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			listeCodesErreur.add(30000);
 		}
 	}
 
