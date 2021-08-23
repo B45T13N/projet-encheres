@@ -75,11 +75,10 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 				am.selectAllArticle();				
 			}
 			
-		//Radio boutons et checkbox ACHAT
-			if(request.getParameter("filtreAchat")!=null) 
+		//Radio boutons et checkbox
+			if(request.getParameter("filtreAchat")!=null && request.getParameter("filtreAchat").equals("1")) 
 			{
-				if(request.getParameter("filtreAchat").equals("1")) 
-				{				
+								
 					if (request.getParameter("enCours")!=null)
 					{
 					//	am.setEnCours(true);   //methode sur ArticleManager
@@ -99,7 +98,6 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 					else {
 						
 					}
-				}
 			}
 			
 			
