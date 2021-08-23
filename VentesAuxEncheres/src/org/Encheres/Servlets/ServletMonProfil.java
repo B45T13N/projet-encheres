@@ -37,27 +37,27 @@ public class ServletMonProfil extends HttpServlet {
 			throws ServletException, IOException {
 
 		UtilisateurManager user = new UtilisateurManager();
-		Utilisateur utilisateur = new Utilisateur();
-		HttpSession session = request.getSession();
+		Utilisateur selectedUser = new Utilisateur();
+		HttpSession utilisateur = request.getSession();
 
 		/*
 		 * TODO faire sessions pour recup int de noUtilisateur courant
 		 */
 
-		int currentUser = 16;
+		int currentUser = 21;
 		try {
-			utilisateur = user.selectByNoUtilisateur(currentUser);
+			selectedUser = user.selectByNoUtilisateur(currentUser);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("pseudo", utilisateur.getPseudo());
-		request.setAttribute("nom", utilisateur.getNom());
-		request.setAttribute("prenom", utilisateur.getPrenom());
-		request.setAttribute("email", utilisateur.getEmail());
-		request.setAttribute("telephone", utilisateur.getTelephone());
-		request.setAttribute("rue", utilisateur.getRue());
-		request.setAttribute("code_postal", utilisateur.getCodePostal());
-		request.setAttribute("ville", utilisateur.getVille());
+		request.setAttribute("pseudo", selectedUser.getPseudo());
+		request.setAttribute("nom", selectedUser.getNom());
+		request.setAttribute("prenom", selectedUser.getPrenom());
+		request.setAttribute("email", selectedUser.getEmail());
+		request.setAttribute("telephone", selectedUser.getTelephone());
+		request.setAttribute("rue", selectedUser.getRue());
+		request.setAttribute("code_postal", selectedUser.getCodePostal());
+		request.setAttribute("ville", selectedUser.getVille());
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/MonProfil.jsp");
 		rd.forward(request, response);

@@ -60,26 +60,78 @@ public class UtilisateurManager {
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#update(org.Encheres.bo.Utilisateur)
 	 */
 	public Utilisateur updateUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse) throws BusinessException {
-		BusinessException exception = new BusinessException();
-		Utilisateur updateUser = new Utilisateur();
-		updateUser.getNoUtilisateur();
-		updateUser.setPseudo(pseudo);
-		updateUser.setNom(nom);
-		updateUser.setPrenom(prenom);
-		updateUser.setEmail(email);
-		updateUser.setTelephone(telephone);
-		updateUser.setRue(rue);
-		updateUser.setCodePostal(codePostal);
-		updateUser.setVille(ville);
-		updateUser.setMotDePasse(motDePasse);
+			String rue, String codePostal, String ville, String motDePasse, int utilisateur) throws BusinessException {
 
-		this.validerUtilisateur(updateUser, exception);
+		BusinessException exception = new BusinessException();
+		Utilisateur updateUtilisateur = new Utilisateur();
+		Utilisateur user = this.selectByNoUtilisateur(utilisateur);
+
+//		updateUtilisateur.setPseudo(pseudo);
+//		updateUtilisateur.setNom(nom);
+//		updateUtilisateur.setPrenom(prenom);
+//		updateUtilisateur.setEmail(email);
+//		updateUtilisateur.setTelephone(telephone);
+//		updateUtilisateur.setRue(rue);
+//		updateUtilisateur.setCodePostal(codePostal);
+//		updateUtilisateur.setVille(ville);
+//		updateUtilisateur.setMotDePasse(motDePasse);
+//		updateUtilisateur.setNoUtilisateur(utilisateur);
+
+		daoUtilisateur.update(updateUtilisateur);
+
+		if (pseudo.equals("")) {
+			updateUtilisateur.setPseudo(user.getPseudo());
+		} else {
+			updateUtilisateur.setPseudo(pseudo);
+		}
+		if (nom.equals("")) {
+			updateUtilisateur.setNom(user.getNom());
+		} else {
+			updateUtilisateur.setNom(nom);
+		}
+		if (prenom.equals("")) {
+			updateUtilisateur.setPrenom(user.getPrenom());
+		} else {
+			updateUtilisateur.setPrenom(prenom);
+		}
+		if (email.equals("")) {
+			updateUtilisateur.setEmail(user.getEmail());
+		} else {
+			updateUtilisateur.setEmail(email);
+		}
+		if (telephone.equals("")) {
+			updateUtilisateur.setTelephone(user.getTelephone());
+		} else {
+			updateUtilisateur.setTelephone(telephone);
+		}
+		if (rue.equals("")) {
+			updateUtilisateur.setRue(user.getRue());
+		} else {
+			updateUtilisateur.setRue(rue);
+		}
+		if (codePostal.equals("")) {
+			updateUtilisateur.setCodePostal(user.getCodePostal());
+		} else {
+			updateUtilisateur.setCodePostal(codePostal);
+		}
+		if (ville.equals("")) {
+			updateUtilisateur.setVille(user.getVille());
+		} else {
+			updateUtilisateur.setVille(ville);
+		}
+		if (motDePasse.equals("")) {
+			updateUtilisateur.setMotDePasse(user.getMotDePasse());
+		} else {
+			updateUtilisateur.setMotDePasse(motDePasse);
+		}
+		updateUtilisateur.setNoUtilisateur(utilisateur);
+
+		this.validerUtilisateur(updateUtilisateur, exception);
 		if (!exception.hasError()) {
-			daoUtilisateur.update(updateUser);
+			daoUtilisateur.update(updateUtilisateur);
 		}
 
-		return updateUser;
+		return updateUtilisateur;
 	}
 
 	/**

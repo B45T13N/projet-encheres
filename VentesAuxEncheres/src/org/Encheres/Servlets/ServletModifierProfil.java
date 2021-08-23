@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Utilisateur;
@@ -36,7 +37,7 @@ public class ServletModifierProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// HttpSession currentUser = request.getSession();
+		HttpSession session = request.getSession();
 
 		String pseudo;
 		String nom;
@@ -47,30 +48,34 @@ public class ServletModifierProfil extends HttpServlet {
 		String codePostal;
 		String ville;
 		String motDePasse;
-		// int noUtilisateur;
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		int noUtilisateur = 21;
+
+		pseudo = request.getParameter("pseudo");
+		nom = request.getParameter("nom");
+		prenom = request.getParameter("prenom");
+		email = request.getParameter("email");
+		telephone = request.getParameter("telephone");
+		rue = request.getParameter("rue");
+		codePostal = request.getParameter("codepostal");
+		ville = request.getParameter("ville");
+		motDePasse = request.getParameter("motDePasse");
 
 		try {
-			pseudo = request.getParameter("pseudo");
-			nom = request.getParameter("nom");
-			prenom = request.getParameter("prenom");
-			email = request.getParameter("email");
-			telephone = request.getParameter("telephone");
-			rue = request.getParameter("rue");
-			codePostal = request.getParameter("codepostal");
-			ville = request.getParameter("ville");
-			motDePasse = request.getParameter("motDePasse");
 
-			UtilisateurManager utilisateurManager = new UtilisateurManager();
-			Utilisateur utilisateur = new Utilisateur();
-			utilisateur = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal,
-					ville, motDePasse);
-			request.setAttribute("updated", utilisateur);
-			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+			Utilisateur updatedUser = new Utilisateur();
+
+			updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal,
+					ville, motDePasse, noUtilisateur);
+
+			session = request.getSession(true);
+			session.setAttribute("utilisateur", updatedUser);
+
+			RequestDispatcher rd = request.getRequestDispatcher("/MonProfil");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
-
 }
