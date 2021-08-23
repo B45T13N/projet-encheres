@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.ArticleManager;
 import org.Encheres.bll.UtilisateurManager;
+import org.Encheres.bo.Article;
 import org.Encheres.bo.Utilisateur;
 import org.apache.naming.factory.BeanFactory;
 
@@ -54,6 +55,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		UtilisateurManager um = new UtilisateurManager();
 		int noUtilisateur;
 		String articleRechercher ="";
+		List<Article> listeAAficher = new ArrayList<>();
 		
 		HttpSession sessionScope = request.getSession(); //Init de sessionScope
 		
@@ -68,11 +70,12 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 				categorie = request.getParameter("categorie");
 				am.selectArticleByCategorie(categorie);
 			}
-			else { //Afficher toutes les catégories dispo
-				
+			else {
+				categorie = request.getParameter("categorie");
+				am.selectAllArticle();				
 			}
 			
-		//Radio boutons et checkbox
+		//Radio boutons et checkbox ACHAT
 			if(request.getParameter("filtreAchat")!=null) 
 			{
 				if(request.getParameter("filtreAchat").equals("1")) 
@@ -85,6 +88,15 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 					//	am.setEnCours(false);  //methode sur ArticleManager
 					}
 					if (request.getParameter("mesEnCours")!=null) {
+						
+					}
+					else {
+						
+					}
+					if (request.getParameter("remportes")!=null) {
+						
+					}
+					else {
 						
 					}
 				}
