@@ -31,10 +31,14 @@ public class ServletPageDeConnexion extends HttpServlet {
 
 		if (request.getParameter("utilisateur") != null) {
 			response.sendRedirect("/Accueil");
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
-			rd.forward(request, response);
-		}
+		} 
+
+		
+	else {			
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+		rd.forward(request, response);
+	}
+		
 	}
 
 	/**
@@ -56,10 +60,9 @@ public class ServletPageDeConnexion extends HttpServlet {
 			mdp = request.getParameter("mdp");
 			utilisateurManager = new UtilisateurManager();
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
+			currentUser.setAttribute("utilisateur", utilisateur);
 			if (utilisateur != null) {
-				currentUser.setAttribute("utilisateur", utilisateur);
-				rd = request.getRequestDispatcher("/Accueil");
-				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/Accueil");
 			} else {
 				rd = request.getRequestDispatcher("/PageDeConnexion");
 				rd.forward(request, response);
