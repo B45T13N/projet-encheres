@@ -32,12 +32,12 @@
 	<input type="text" name="ville">
 	<br>
 	<b>Mot de passe actuel : </b>
-	<input type="text" name="motDePasse">
+	<input type="password" name="motDePasse">
 	<br>
 	<b>Nouveau mot de passe : </b>
-	<input type="text" name="newMotDePasse">
+	<input type="password" name="newMotDePasse">
 	<b>Confirmation : </b>
-	<input type="text" name="confirmMdp">
+	<input type="password" name="confirmMdp">
 	<br>
 	<br>
 	<input type="submit" value="Enregistrer" id="register">
