@@ -64,7 +64,7 @@ public class ServletDetailVente extends HttpServlet {
 
 		EnchereManager em = new EnchereManager();
 
-		prixEnchere = Integer.parseInt(request.getParameter("prixEnchere"));
+		prixEnchere = currentArticle.getPrixVente();
 
 		try {
 			em.updateEnchere(currentArticle, user, prixEnchere);

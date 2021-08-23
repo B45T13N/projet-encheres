@@ -2,18 +2,23 @@ package org.Encheres.Servlets;
 
 import java.io.IOException;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class FiltreAcceuil
  */
-//@WebFilter(urlPatterns = "/Accueil", dispatcherTypes = { DispatcherType.REQUEST, DispatcherType.FORWARD,
-//		DispatcherType.INCLUDE, DispatcherType.ERROR })
+@WebFilter(urlPatterns = { "/ModifierProfil", "/DetailVente", "/MonProfil", "/NouvelleVente" }, dispatcherTypes = {
+		DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE, DispatcherType.ERROR })
 public class FiltreAcceuil implements Filter {
 
 	/**
@@ -33,8 +38,16 @@ public class FiltreAcceuil implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		chain.doFilter(request, response);
+		HttpSession session = httpRequest.getSession();
+
+		if (session.getAttribute("id") != null) {
+			chain.doFilter(request, response);
+		} else {
+			httpResponse.sendRedirect("/VentesAuxEncheres/PageDeConnexion");
+		}
 	}
 
 	/**

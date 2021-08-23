@@ -53,18 +53,18 @@ public class ServletVente extends HttpServlet {
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		Article article = null;
-		String rue = currentUser.getRue();
-		String codePostal = currentUser.getCodePostal();
-		String ville = currentUser.getVille();
+		String rue = "";
+		String codePostal = "";
+		String ville = "";
 
 		request.setCharacterEncoding("UTF-8");
 
 		List<Integer> listeCodeErreur = new ArrayList<>();
 
 		// Complétion des champs du retrait avec des valeurs de bases
-		request.setAttribute("rue", rue);
-		request.setAttribute("cpo", codePostal);
-		request.setAttribute("ville", ville);
+//		request.setAttribute("rue", rue);
+//		request.setAttribute("cpo", codePostal);
+//		request.setAttribute("ville", ville);
 
 		// Enregistrement nom, description, libelle, mise à prix
 		nomArticle = request.getParameter("nomArticle");
@@ -102,6 +102,7 @@ public class ServletVente extends HttpServlet {
 //				enchere.setNoArticle(article.getNoArticle());
 //				enchere.setNoUtilisateur(article.getNoUtilisateur());
 //				em.addEnchere(enchere);
+				session.setAttribute("article", article);
 				RequestDispatcher rd = request.getRequestDispatcher("/DetailVente");
 				rd.forward(request, response);
 			} catch (BusinessException e) {
