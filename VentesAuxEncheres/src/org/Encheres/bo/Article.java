@@ -13,7 +13,7 @@ public class Article implements Serializable {
 	private int noUtilisateur;
 	private int noArticle;
 	private int noCategorie;
-	private String nomArticle;
+		private String nomArticle;
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
@@ -103,6 +103,15 @@ public class Article implements Serializable {
 		this.prixVente = prixVente;
 	}
 
+	
+	public String getPseudoUser() {
+		return pseudoUser;
+	}
+
+	
+	public void setPseudoUser(String pseudoUser) {
+		this.pseudoUser = pseudoUser;
+	}
 	// Constructeurs
 
 	public Article() {

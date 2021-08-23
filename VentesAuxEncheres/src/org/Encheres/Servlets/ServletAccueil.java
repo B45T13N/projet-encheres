@@ -52,7 +52,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		UtilisateurManager um = new UtilisateurManager();
 		int noUtilisateur;
 		String articleRechercher ="";
-		List<Article> listeAAficher = new ArrayList<>();
+		List<Article> listeAAfficher = new ArrayList<>();
 		
 		HttpSession sessionScope = request.getSession(); //Init de sessionScope
 		
@@ -63,13 +63,12 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		
 		//Traitement choix catégories
 		try {
-			if (request.getParameter("categorie")!=null) {
+			if (!request.getParameter("categorie").equals("")) {
 				categorie = request.getParameter("categorie");
-				am.selectArticleByCategorie(categorie);
+				listeAAfficher = am.selectArticleByCategorie(categorie);
 			}
 			else {
-				categorie = request.getParameter("categorie");
-				am.selectAllArticle();				
+				listeAAfficher = am.selectAllArticle();				
 			}
 			
 		//Radio boutons et checkbox
@@ -128,8 +127,8 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			e.printStackTrace();
 		}
 				
-		RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
-		rd.forward(request, response);
+//		RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
+//		rd.forward(request, response);
 	}
 
 }

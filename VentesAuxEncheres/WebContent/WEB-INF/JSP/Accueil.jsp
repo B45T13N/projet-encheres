@@ -107,24 +107,17 @@
 	
 	<br/>
 	<section>
+	 <c:forEach var="article" items="${listeAAfficher}">
 		<article>
 			<img alt="Descriptif de l'image pour mal voyant" src="../WebContent/images/#"> <!-- URL image à faire ainsi que les ALT -->
 			<div>
-				<h4>Nom de l'article en vente</h4>
-				<p>Prix : </p>
-				<p>Fin de l'enchère : </p>
-				<p>Vendeur : </p>
+				<h4>Nom de l'article en vente ${article.getNom()}</h4>
+				<p>Prix : ${article.getPrixVente()}</p>
+				<p>Fin de l'enchère : ${article.getDateFinEncheres()}</p>
+				<p>Vendeur : ${article.getPseudoUser()}</p>
 			</div>
 		</article>
-		<article>
-			<img alt="Descriptif de l'image pour mal voyant" src="../WebContent/images/#"> <!-- URL image à faire ainsi que les ALT -->
-			<div>
-				<h4>Nom de l'article en vente</h4>
-				<p>Prix : </p>
-				<p>Fin de l'enchère : </p>
-				<p>Vendeur : </p>
-			</div>
-		</article>
+	</c:forEach>
 	</section>
 	
 </body>
