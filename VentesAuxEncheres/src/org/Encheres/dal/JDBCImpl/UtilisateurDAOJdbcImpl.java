@@ -165,7 +165,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		Utilisateur user = new Utilisateur();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER);
+			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER_BY_PASSWORD);
 			prstms.setString(1, login);
 			prstms.setString(2, password);
 			ResultSet rs = prstms.executeQuery();
