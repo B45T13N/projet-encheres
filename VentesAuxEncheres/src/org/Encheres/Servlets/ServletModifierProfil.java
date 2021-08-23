@@ -72,9 +72,12 @@ public class ServletModifierProfil extends HttpServlet {
 			if (newPass.equals(confirmPass)) {
 				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
 						codePostal, ville, newPass, noUtilisateur);
-			} else {
+			} else if (newPass.equals("")) {
 				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
 						codePostal, ville, oldPass, noUtilisateur);
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("/ModifierProfil");
+				rd.forward(request, response);
 			}
 
 			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
