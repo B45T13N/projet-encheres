@@ -29,7 +29,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		if (request.getParameter("connecte") != null) {
+		if (request.getParameter("utilisateur") != null) {
 			response.sendRedirect("/Accueil");
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
@@ -57,7 +57,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 			utilisateurManager = new UtilisateurManager();
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
 			if (utilisateur != null) {
-				currentUser.setAttribute("connecte", utilisateur);
+				currentUser.setAttribute("utilisateur", utilisateur);
 				rd = request.getRequestDispatcher("/Accueil");
 				rd.forward(request, response);
 			} else {

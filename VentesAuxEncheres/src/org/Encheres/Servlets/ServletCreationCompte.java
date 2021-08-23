@@ -1,7 +1,8 @@
 package org.Encheres.Servlets;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,6 +56,7 @@ public class ServletCreationCompte extends HttpServlet {
 		String erreur = "Veuillez saisir un mot de passe identique";
 		String pseudoExistant;
 		String emailExistant;
+		List<Integer> listeCodesErreur = new ArrayList<>();
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		Utilisateur utilisateur = new Utilisateur();
 		HttpSession session = request.getSession();
@@ -72,18 +74,18 @@ public class ServletCreationCompte extends HttpServlet {
 			confirmationMdp = request.getParameter("confirmationmdp");
 			
 			
-// à faire : gestion d'erreur > pseudo ou email deja existant.
+// 			à faire : gestion d'erreur > pseudo ou email deja existant.
 //			|| pseudo != pseudoExistant || email != emailExistant
-			//
+
+			
 			if(mdp.equals(confirmationMdp)) {
-				
-			utilisateur = utilisateurManager.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp);
+			utilisateur = utilisateurManager.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, mdp);	
 			session = request.getSession(true);
-			request.setAttribute("connecte", utilisateur);
+			session.setAttribute("utilisateur", utilisateur);
 			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 			}else {
-				// modifier en liste code erreur 
+// modifier en liste code erreur 
 			request.setAttribute("erreurMDP", erreur);
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/CreationCompte.jsp");
 			rd.forward(request, response);
@@ -91,6 +93,7 @@ public class ServletCreationCompte extends HttpServlet {
 			
 		}catch(Exception e ) {
 			e.printStackTrace();
+			listeCodesErreur.add(30000);
 		}
 		
 		

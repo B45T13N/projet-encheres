@@ -23,7 +23,7 @@
 	<input type="text" name="prenom" required>
 	</p>
 	<label for="email">Email :</label>
-	<input type="text" name="email" required>
+	<input type="email" name="email" required>
 	<p>
 	<label for="telephone">Téléphone :</label>
 	<input type="text" name="telephone" required>
@@ -38,10 +38,10 @@
 	<input type="text" name="ville" required>
 	<p>
 	<label for="mdp">Mot de passe :</label>
-	<input type="text" name="mdp" required>
+	<input type="password" name="mdp" required>
 	</p>
 	<label for="confirmationmdp">Confirmation :</label>
-	<input type="text" name="confirmationmdp" required>
+	<input type="password" name="confirmationmdp" required>
 	<p>
 	<input type="submit" value="Créer">
  	</p>
@@ -51,12 +51,10 @@
 </form>
 
 
-<%
-	String erreurMDP = (String) request.getAttribute("erreurMDP");
-	if(erreurMDP != null) {
-	out.println(erreurMDP);
+	<% String erreurMDP = (String) request.getAttribute("erreurMDP");
+	if(erreurMDP != null) { 	out.println(erreurMDP);
 	}
-%>
+	%>
 
 
 </body>
