@@ -13,10 +13,10 @@
 	<header>
 		<h2>ENI-Enchères</h2>
 		
-		<c:if test="${empty sessionScope.utilisateur}">
+		<c:if test="${empty sessionScope.id}">
 		<p><a href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
 		</c:if>
-		<c:if test="${!empty sessionScope.utilisateur}">
+		<c:if test="${!empty sessionScope.id}">
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/DetailVente">Enchères</a></li>
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfile">Mon profil</a></li>
