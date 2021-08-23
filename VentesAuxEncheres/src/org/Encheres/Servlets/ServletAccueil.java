@@ -77,7 +77,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			
 		//Radio boutons et checkbox
 			//1ere checkbox Achat
-			if(request.getParameter("filtreAchat")!=null && request.getParameter("filtreAchat").equals("1")) 
+			if(request.getParameter("radioBtn")!=null && request.getParameter("radioBtn").equals("1")) 
 			{
 								
 					if (request.getParameter("enCours")!=null)
@@ -101,7 +101,8 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 					}
 			}
 			//check box filtreVente
-			if(request.getParameter("filtreVente")!=null && request.getParameter("filtreVente").equals("1")) 
+			if(request.getParameter("radioBtn")!=null && request.getParameter("radioBtn").equals("2")) 
+				
 			{
 								
 					if (request.getParameter("venteEnCours")!=null)
