@@ -71,7 +71,7 @@ public class ServletModifierProfil extends HttpServlet {
 			session = request.getSession(true);
 			session.setAttribute("utilisateur", updatedUser);
 
-			RequestDispatcher rd = request.getRequestDispatcher("/MonProfil");
+			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 			rd.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
