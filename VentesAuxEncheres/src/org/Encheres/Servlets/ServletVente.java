@@ -111,8 +111,7 @@ public class ServletVente extends HttpServlet {
 //				enchere.setNoArticle(article.getNoArticle());
 //				enchere.setNoUtilisateur(article.getNoUtilisateur());
 //				em.addEnchere(enchere);
-				session.setAttribute("article", article);
-				RequestDispatcher rd = request.getRequestDispatcher("/DetailVente");
+				RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
 				rd.forward(request, response);
 			} catch (BusinessException e1) {
 				e1.printStackTrace();

@@ -64,8 +64,13 @@ public class ServletPageDeConnexion extends HttpServlet {
 			id = utilisateur.getNoUtilisateur();
 			session.setAttribute("id", id);
 
-			rd = request.getRequestDispatcher("/Accueil");
-			rd.forward(request, response);
+			if (id > 0) {
+				rd = request.getRequestDispatcher("/Accueil");
+				rd.forward(request, response);
+			} else {
+				rd = request.getRequestDispatcher("/PageDeConnexion");
+				rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			listeCodesErreur.add(30000);

@@ -33,7 +33,7 @@ public class ServletDetailVente extends HttpServlet {
 			throws ServletException, IOException {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		HttpSession session = request.getSession();
-		Utilisateur user = (Utilisateur) session.getAttribute("utilisateur");
+		int idUser = (int) session.getAttribute("id");
 		Article currentArticle = (Article) session.getAttribute("article");
 		EnchereManager em = new EnchereManager();
 		UtilisateurManager um = new UtilisateurManager();
