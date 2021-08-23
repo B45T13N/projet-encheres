@@ -38,13 +38,9 @@ public class ServletMonProfil extends HttpServlet {
 
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur selectedUser = new Utilisateur();
-		HttpSession utilisateur = request.getSession();
+		HttpSession session = request.getSession();
 
-		/*
-		 * TODO faire sessions pour recup int de noUtilisateur courant
-		 */
-
-		int currentUser = 21;
+		int currentUser = (int) session.getAttribute("id");
 		try {
 			selectedUser = user.selectByNoUtilisateur(currentUser);
 		} catch (BusinessException e) {
