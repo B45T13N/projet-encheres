@@ -7,38 +7,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
+<!-- <link href="WEB-INF/template/css/bootstrap.css" rel='stylesheet' type='text/css' /> -->
 <title>Accueil</title>
 </head>
 <body>
-	<header>
-		<h2>ENI-Enchères</h2>
-		
-		
-		<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
-		
-		
-		<c:if test="${empty sessionScope.id}">
-		<p><a href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
-		</c:if>
-		<c:if test="${!empty sessionScope.id}">
-		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Enchères</a></li>
-		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
-		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a></li>
-		<form action = "${pageContext.request.contextPath}/Deconnecte" method="post">
-		<input type="submit" value="Déconnecte"/>
-		</form>
-		
-		</c:if>
+	<header id="entete">
+		<div class="logo">		
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
+		<div class="btnLeft">
+			<c:if test="${empty sessionScope.id}">
+			<p><a href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
+			</c:if>
+			<c:if test="${!empty sessionScope.id}">
+			<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Enchères</a></li>
+			<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
+			<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a></li>
+			<form action = "${pageContext.request.contextPath}/Deconnecte" method="post">
+			<input type="submit" value="Déconnecte"/>
+			</form>
+			</c:if>
+		</div>
 	</header>
-	<h1>Liste des enchères</h1>
+	<h1 class="titreH1">Liste des enchères</h1>
 	<br/>
 	
-	<div>	
-		<h4>Filtres :</h4>
+	<div class="filtre">	
+		<h3>Filtres :</h3>
 		<br/>
 		<div>
 			<form action="<%=request.getContextPath()%>/Accueil" method="POST"> <!-- Method="GET" ???? -->
-				<input type="search" placeholder="Le nom de l'article contient">
+				<input type="search" placeholder="Le nom de l'article contient" size="30">
 				<br/>
 				<br/>
 				<label for="categorie">Catégorie : </label>
@@ -114,15 +115,17 @@
 		</div>
 		</div>
 	<br/>
-	<section>
+	<section class="secArticle">
 	 <c:forEach var="article" items="${listeAAfficher}">
 	 
-		<article>
-		<a href="<%=request.getContextPath()%>/DetailVente?noArticle=${article.getNoArticle()}">
-			<img alt="Descriptif de l'image pour mal voyant" src="../WebContent/images/#"> <!-- URL image à faire ainsi que les ALT -->
-		</a>
-			<div>
-				<h4>Nom de l'article en vente ${article.getNomArticle()}</h4>
+		<article class="cardVente">
+			<div class="imageVente">
+				<a href="<%=request.getContextPath()%>/DetailVente?noArticle=${article.getNoArticle()}">
+					<img src="Images/chaussuredroite.jpg" alt="Descriptif de l'image pour mal voyant"> <!-- URL image à faire ainsi que les ALT -->
+				</a>
+			</div>
+			<div class="detailVente">
+				<h4>Nom de l'article en vente : ${article.getNomArticle()}</h4>
 				<p>Prix : ${article.getPrixVente()} points</p>
 				<p>Fin de l'enchère : ${article.getDateFinEncheres()}</p>
 				<p>Vendeur : ${article.getPseudoUser()}</p>

@@ -13,7 +13,47 @@ body {
 
 
 /*page d'accueil*/
-
+#entete{
+	display: flex;
+	justify-content: space-between;
+}
+.logo{
+	margin-left: 5%;
+}
+.btnLeft{
+	margin-right: 5%
+}
+.titreH1{
+	text-align: center;
+}
+.filtre{
+	margin-left: 5%
+}
+.cardVente{
+	display: flex;
+	justify-content: space-around; 
+	padding-left: 5px;
+	padding-top: 3px;
+	max-width: 100%;
+	border: solid 1px #333;
+	margin-left: 3%;
+	margin-top: 3%;
+	background-color: #666;
+	color: whitesmoke;
+}
+.imageVente{
+	margin-top: 1.5%;
+	margin-bottom: 1.5%;
+	
+}
+.detailVente{
+	margin-left: 3%;
+}
+.secArticle{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
 /*Affichage d'un article*/
 
 /*Création compte */
