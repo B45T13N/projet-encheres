@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+
+/*Tout le site*/
+
+body {
+	background-color: #9E9E9E;
+	font-size: 16px;
+}
+
+
+
+
+
+/*page d'accueil*/
+
+/*Affichage d'un article*/
+
+/*Création compte */
+
+/*detail vente */
+
+/*Modifier Profi*/
+
+/*Mon profil*/
+
+/*Nouvelle vente*/
+
+/*Page de connexion */
+
+.formulairePageConnexion {
+	flex-direction: column;
+	margin-top: 100px;
+	display: flex;
+	text-align: center;
+}
+.id {
+	font-weight: bold;
+	color: #303030;
+}
+.mdp{
+	color: #303030;
+	font-weight: bold;
+	margin-left : 10px;
+}
+.formPageConnexion1 {
+	width: 800px;
+	display: inline-block;
+}
+.formPageConnexion2 {
+	display: inline;
+}
+.case {
+	height: 25px;
+	border-radius: 30px;
+	text-align:center;
+}
+.titrePageConnexion {
+	font-size: 20px;
+}
+.titrePageConnexion h1 {
+	text-align: center;
+	color: #303030;
+}
+.piedPageConnexion {
+	text-align:center;
+	margin-top: 50px;
+}
+
+
