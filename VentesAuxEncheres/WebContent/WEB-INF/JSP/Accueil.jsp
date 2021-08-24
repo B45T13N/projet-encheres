@@ -127,7 +127,7 @@
 				<h4>${article.getNomArticle()}</h4>
 				<p>Prix : ${article.getPrixVente()} points</p>
 				<p>Fin de l'enchère : ${article.getDateFinEncheres()}</p>
-				<p>Vendeur : ${article.getPseudoUser()}</p>
+				<p>Vendeur : <a href="<%=request.getContextPath()%>/Profil?idVendeur=${article.getNoUtilisateur()}">${article.getPseudoUser()}</a></p>
 			</div>
 		
 		</article>

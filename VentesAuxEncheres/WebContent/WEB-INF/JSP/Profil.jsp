@@ -31,9 +31,6 @@
 			<a>Code Postal : </a>${code_postal}
 			<br>
 			<a>Ville : </a>${ville}</p>
-			<div>
-				<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Accueil"></a>
-			</div>
 		</div>
 	</div>
 	<footer class="piedPageConnexion">

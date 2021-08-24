@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.Encheres.BusinessException;
 import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Utilisateur;
 
@@ -30,7 +31,12 @@ public class ServletProfil extends HttpServlet {
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur selectedUser = new Utilisateur();
 		HttpSession session = request.getSession();
-		int idVendeur = (int) request.getAttribute("idVendeur");
+		int idVendeur = Integer.parseInt(request.getParameter("idVendeur"));
+		try {
+			selectedUser = user.selectByNoUtilisateur(idVendeur);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 
 		request.setAttribute("pseudo", selectedUser.getPseudo());
 		request.setAttribute("nom", selectedUser.getNom());
