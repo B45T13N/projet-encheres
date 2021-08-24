@@ -31,7 +31,6 @@
 			<a>Ville : </a>${ville}</p>
 			<div>
 				<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
-				<a href=""></a>
 			</div>
 		</div>
 	</div>
