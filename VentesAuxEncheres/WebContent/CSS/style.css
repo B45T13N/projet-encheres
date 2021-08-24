@@ -18,11 +18,19 @@ body {
 	justify-content: space-between;
 }
 .logo{
-	margin-left: 5%;
+	margin-left: 5em;
 }
+.btnGroupLeft{
+	margin-right: 5em;
+}
+
 .btnLeft{
-	margin-right: 5%
+	display: block;
+	text-align: center;
+	float: right;
+	padding: 10px;
 }
+
 .titreH1{
 	text-align: center;
 }
@@ -32,22 +40,20 @@ body {
 .cardVente{
 	display: flex;
 	justify-content: space-around; 
-	padding-left: 5px;
-	padding-top: 3px;
+	padding: 3em;
 	max-width: 100%;
 	border: solid 1px #333;
-	margin-left: 3%;
-	margin-top: 3%;
+	margin: 2em;
 	background-color: #666;
 	color: whitesmoke;
 }
 .imageVente{
-	margin-top: 1.5%;
-	margin-bottom: 1.5%;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
 	
 }
 .detailVente{
-	margin-left: 3%;
+	margin-left: 3em;
 }
 .secArticle{
 	display: flex;

@@ -116,6 +116,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 					user = new Utilisateur(rs.getString("pseudo"), rs.getString("nom"), rs.getString("prenom"),
 							rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 							rs.getString("code_postal"), rs.getString("ville"));
+					user.setNoUtilisateur(noUtilisateur);
 				}
 			}
 		} catch (SQLException e) {

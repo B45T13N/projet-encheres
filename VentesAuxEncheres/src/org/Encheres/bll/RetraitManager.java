@@ -25,6 +25,11 @@ public class RetraitManager {
 		return retrait;
 	}
 
+	public void deleteRetrait(int noArticle) throws BusinessException {
+		retraitDAO.delete(noArticle);
+
+	}
+
 	public void validerRetrait(Retrait retrait, BusinessException exception) {
 		if (retrait.getRue().trim().length() == 0 || retrait.getRue() == null) {
 			exception.ajouterErreur(CodesResultatBLL.ARTICLE_ERROR_DESCRIPTION);

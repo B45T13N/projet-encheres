@@ -10,12 +10,12 @@
 <title>Connexion</title>
 </head>
 <body>
-
-
-<div>
-<a href="<%=request.getContextPath()%>/Accueil"><img alt="Logo application" src="<%=request.getContextPath()%>/Images/logoENI.jpg"></a>
-</div>
-
+	<header>
+			<h2>ENI-Enchères</h2>
+			<div class="logo">		
+				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+			</div>
+	</header>
 <div class="titrePageConnexion">
 	<h1>Identification</h1>
 </div>

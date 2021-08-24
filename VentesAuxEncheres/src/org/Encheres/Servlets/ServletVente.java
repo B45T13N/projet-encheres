@@ -36,13 +36,28 @@ public class ServletVente extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int idUser = (int) session.getAttribute("id");
+		int idArticle = 0;
+		if (session.getAttribute("noArticle") != null) {
+			idArticle = (int) session.getAttribute("noArticle");
+		}
 		List<Integer> listException = new ArrayList<Integer>();
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur currentUser = new Utilisateur();
+		ArticleManager am = new ArticleManager();
+		Article currentArticle = new Article();
 		try {
-			currentUser = um.selectByNoUtilisateur(idUser);
-			currentUser.setNoUtilisateur(idUser);
-			request.setAttribute("currentUser", currentUser);
+			if (idArticle == 0) {
+				currentUser = um.selectByNoUtilisateur(idUser);
+				currentUser.setNoUtilisateur(idUser);
+				request.setAttribute("currentUser", currentUser);
+			} else {
+				currentUser = um.selectByNoUtilisateur(idUser);
+				currentUser.setNoUtilisateur(idUser);
+				request.setAttribute("currentUser", currentUser);
+				currentArticle = am.selectArticleByNoArticle(idArticle);
+				request.setAttribute("currentArticle", currentArticle);
+
+			}
 		} catch (BusinessException e1) {
 			e1.printStackTrace();
 			listException.add(30004);
@@ -59,6 +74,7 @@ public class ServletVente extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int idUser = (int) session.getAttribute("id");
+
 		List<Integer> listException = new ArrayList<Integer>();
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur currentUser = new Utilisateur();

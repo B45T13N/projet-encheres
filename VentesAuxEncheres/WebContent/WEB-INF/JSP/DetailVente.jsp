@@ -13,10 +13,8 @@
 <body>
 	<h1>ENI-Enchères</h1>	
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
-	<c:out value="${dateJour}"></c:out>
-	<c:out value="${currentArticle.getDateFinEncheres()}"></c:out>
 	<c:choose>
-	<c:when test="${currentArticle.getDateFinEncheres() > dateJour}">
+	<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
 		<h3>Détail vente</h3>
 		<div class="container">
 			
@@ -31,7 +29,7 @@
 			</c:if>
 		</div>
 	</c:when>
-	<c:when test="${currentArticle.getDateFinEncheres() <= dateJour && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
+	<c:when test="${currentArticle.getDateFinEncheres().isBefore(dateJour) && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
 		<h3>Vous avez remporté la vente !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
@@ -40,7 +38,7 @@
 		</div>	
 	</c:when>
 	
-	<c:when test="${currentArticle.getDateFinEncheres() <= dateJour && seller.getNoUtilisateur() == user.getNoUtilisateur() }">
+	<c:when test="${currentArticle.getDateFinEncheres().isBefore(dateJour) && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
 		<h3>${seller.getPseudo()} a remporté l'enchère !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>

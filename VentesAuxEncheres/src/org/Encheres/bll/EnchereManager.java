@@ -44,4 +44,8 @@ public class EnchereManager {
 
 	}
 
+	public void deleteEnchere(int noArticle) throws BusinessException {
+		enchereDAO.delete(noArticle);
+	}
+
 }

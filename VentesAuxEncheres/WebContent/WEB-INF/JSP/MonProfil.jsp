@@ -7,11 +7,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <title>Mon profil</title>
 </head>
 <body>
 	<header>
 		<h2>ENI-Enchères</h2>
+		<div class="logo">		
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
 	</header>
 	<div>
 		<p><a>Pseudo : </a>${pseudo}</p>
