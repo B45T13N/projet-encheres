@@ -46,7 +46,7 @@ public class ServletDeleteProfil extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect(request.getContextPath() + "/Deconnecte" + request.getContextPath() + "/Accueil");
+		response.sendRedirect(request.getContextPath() + "/Deconnecte");
 
 	}
 
