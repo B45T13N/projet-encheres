@@ -1,6 +1,7 @@
 package org.Encheres.Servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +36,23 @@ public class ServletDetailVente extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		HttpSession session = request.getSession();
 		int idUser = (int) session.getAttribute("id");
-		int noArticle = (int) session.getAttribute("noArticle");
+
+		request.setAttribute("session", session);
+		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		request.setAttribute("noArticle", noArticle);
 		Article currentArticle = new Article();
 		EnchereManager em = new EnchereManager();
 		ArticleManager am = new ArticleManager();
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur seller = new Utilisateur();
-
+		LocalDate date;
 		try {
 			currentArticle = am.selectArticleByNoArticle(noArticle);
-			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
-			em.selectAcheteur(idUser);
-			request.setAttribute("seller", seller);
-			request.setAttribute("session", session);
 			request.setAttribute("currentArticle", currentArticle);
+			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
+			request.setAttribute("seller", seller);
+			em.selectAcheteur(idUser);
+
 		} catch (BusinessException e1) {
 			e1.printStackTrace();
 			listeCodesErreur.add(30000);
@@ -67,19 +71,24 @@ public class ServletDetailVente extends HttpServlet {
 		int prixEnchere = 0;
 		HttpSession session = request.getSession();
 		int idCurrentUser = (int) session.getAttribute("id");
-		Article currentArticle = (Article) session.getAttribute("article");
+		request.setAttribute("session", session);
+		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		request.setAttribute("noArticle", noArticle);
+		Article currentArticle = new Article();
+		ArticleManager am = new ArticleManager();
 
 		EnchereManager em = new EnchereManager();
-		prixEnchere = currentArticle.getPrixVente();
-		request.setAttribute("prixEnchere", prixEnchere);
-
-		prixEnchere = (int) request.getAttribute("prixEnchere");
+		prixEnchere = Integer.parseInt(request.getParameter("prixEnchere"));
 		try {
-			em.updateEnchere(currentArticle, idCurrentUser, prixEnchere);
+			currentArticle = am.selectArticleByNoArticle(noArticle);
+			request.setAttribute("currentArticle", currentArticle);
+			am.updateVenteArticle(currentArticle, idCurrentUser, prixEnchere);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(30000);
 		}
+
+		response.sendRedirect(request.getContextPath() + "/Accueil");
 
 	}
 

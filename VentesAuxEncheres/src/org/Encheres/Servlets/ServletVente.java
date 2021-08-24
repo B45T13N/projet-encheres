@@ -109,7 +109,7 @@ public class ServletVente extends HttpServlet {
 		} else {
 			ArticleManager am = new ArticleManager();
 //			EnchereManager em = new EnchereManager();
-			article = new Article(description, nomArticle, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
+			article = new Article(nomArticle, description, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
 			article.setNoUtilisateur(idUser);
 //			Enchere enchere = new Enchere();
 

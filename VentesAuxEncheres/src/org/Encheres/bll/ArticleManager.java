@@ -132,30 +132,34 @@ public class ArticleManager {
 
 		this.validerArticle(updateArticle, exception);
 		if (!exception.hasError()) {
+			int noCategorie = 0;
+			noCategorie = categorieDAO.selectByLibelle(updateArticle.getlibelle());
+			updateArticle.setNoCategorie(noCategorie);
 			articleDAO.update(updateArticle);
 		} else {
 			throw exception;
 		}
-
 	}
 
 	public Article updateVenteArticle(Article article, int idutilisateur, int montantEnchere) throws BusinessException {
 		BusinessException businessException = new BusinessException();
-		Article articleAModif = article;
 
 		// Test des infos à enregistrer
-		this.validerArticle(articleAModif, businessException);
+		this.validerArticle(article, businessException);
 		this.validerDateHeure(LocalDate.now(), article.getDateFinEncheres(), businessException);
 		if (!businessException.hasError()) {
-			articleAModif.setPrixVente(montantEnchere);
-			articleDAO.update(articleAModif);
+			article.setPrixVente(montantEnchere);
+			int noCategorie = 0;
+			noCategorie = categorieDAO.selectByLibelle(article.getlibelle());
+			article.setNoCategorie(noCategorie);
 			enchereManager.updateEnchere(article, idutilisateur, montantEnchere);
+			articleDAO.update(article);
 
 		} else {
 			throw businessException;
 		}
 
-		return articleAModif;
+		return article;
 
 	}
 

@@ -18,9 +18,10 @@ public class EnchereManager {
 	public void updateEnchere(Article article, int idutilisateur, int montantEnchere) throws BusinessException {
 		BusinessException businessException = new BusinessException();
 
-		this.validerMontantEnchere(article.getPrixVente(), montantEnchere, businessException);
+//		this.validerMontantEnchere(article.getPrixVente(), montantEnchere, businessException);
 		if (!businessException.hasError()) {
 			enchereDAO.update(article.getNoArticle(), idutilisateur, montantEnchere, LocalDate.now());
+			article.setPrixVente(montantEnchere);
 		} else {
 			throw businessException;
 		}

@@ -3,7 +3,7 @@
 <%@page import="org.Encheres.bo.Utilisateur" %>
 <%@page import="org.Encheres.bo.Article" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,15 +11,18 @@
 <title>Détail de la vente</title>
 </head>
 <body>
-	<h1>ENI-Enchères</h1>
+	<h1>ENI-Enchères</h1>	
+	<c:set var="dateJour" value="${LocalDate.now()}"/>
+	<c:out value="${dateJour}"></c:out>
+	<c:out value="${currentArticle.getDateFinEncheres()}"></c:out>
 	<c:choose>
-	<c:when test="${currentArticle.getDateFinEnchere() > LocalDate.now()}">
+	<c:when test="${currentArticle.getDateFinEncheres() > dateJour}">
 		<h3>Détail vente</h3>
 		<div class="container">
 			
 	        <%@include file="AffichageDUnArticle.jsp" %>
 			<c:if test="${!empty session.id}">
-				<form>
+				<form action="<%=request.getContextPath()%>/DetailVente?noArticle=${noArticle}" method="post">
 					<label for="prixEnchere">Ma proposition : </label>
 					<input type="number" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 					<input type="submit" value="Enchérir">
@@ -28,7 +31,7 @@
 			</c:if>
 		</div>
 	</c:when>
-	<c:when test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
+	<c:when test="${currentArticle.getDateFinEncheres() <= dateJour && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
 		<h3>Vous avez remporté la vente !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
@@ -37,7 +40,7 @@
 		</div>	
 	</c:when>
 	
-	<c:when test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
+	<c:when test="${currentArticle.getDateFinEncheres() <= dateJour && seller.getNoUtilisateur() == user.getNoUtilisateur() }">
 		<h3>${seller.getPseudo()} a remporté l'enchère !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>

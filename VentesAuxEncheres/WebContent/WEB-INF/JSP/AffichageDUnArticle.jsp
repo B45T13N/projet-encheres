@@ -1,7 +1,7 @@
-	<h4>${currentArticle.getNom()}</h4>
+	<h4>${currentArticle.getNomArticle()}</h4>
 	<p>	
 		Description : 	
-		${currentArticle.getDescrption()}
+		${currentArticle.getDescription()}
 	</p>
 	<p>
 		Catégorie : ${currentArticle.getlibelle()}
