@@ -38,7 +38,7 @@
 		<br/>
 		<div>
 			<form action="<%=request.getContextPath()%>/Accueil" method="POST"> <!-- Method="GET" ???? -->
-				<input type="search" placeholder="Le nom de l'article contient" size="30">
+				<input type="search" placeholder=" Le nom de l'article contient" size="30" class="barreRch">
 				<br/>
 				<br/>
 				<label for="categorie">Catégorie : </label>
@@ -50,7 +50,7 @@
 				    <option value="vetement">Vêtement</option>
 				    <option value="sport_loisirs">Sports et Loisirs</option>
 				</select>
-		        <input type="submit" name="btnValider" value="Rechercher">
+		        <input type="submit" name="btnValider" value="Rechercher" id="btnRech">
 
 	<c:if test="${!empty sessionScope.id}"> 
 
