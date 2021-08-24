@@ -106,11 +106,8 @@ public class UtilisateurManager {
 		} else {
 			updateUtilisateur.setVille(ville);
 		}
-		if (motDePasse.equals("")) {
-			updateUtilisateur.setMotDePasse(user.getMotDePasse());
-		} else {
-			updateUtilisateur.setMotDePasse(motDePasse);
-		}
+
+		updateUtilisateur.setMotDePasse(motDePasse);
 		updateUtilisateur.setNoUtilisateur(utilisateur);
 
 		this.validerUtilisateur(updateUtilisateur, exception);

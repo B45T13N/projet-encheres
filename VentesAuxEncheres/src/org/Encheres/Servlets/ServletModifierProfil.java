@@ -71,11 +71,10 @@ public class ServletModifierProfil extends HttpServlet {
 		try {
 
 			Utilisateur updatedUser = new Utilisateur();
-
-			if (newPass.equals(confirmPass)) {
+			if (newPass.equals(confirmPass) && (!confirmPass.equals("") || !newPass.contentEquals(""))) {
 				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
 						codePostal, ville, newPass, noUtilisateur);
-			} else if (newPass.equals("")) {
+			} else if (newPass.equals("") || newPass == null) {
 				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
 						codePostal, ville, oldPass, noUtilisateur);
 			} else {
@@ -83,8 +82,7 @@ public class ServletModifierProfil extends HttpServlet {
 				rd.forward(request, response);
 			}
 
-			RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
-			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/Accueil");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

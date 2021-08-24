@@ -12,7 +12,7 @@
 	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
 	<br>
 	<label for="pseudo">Pseudo : </label>
-	<input type="text" name="Pseudo">
+	<input type="text" name="pseudo">
 	<label for="nom">Nom : </label>
 	<input type="text" name="nom">
 	<br>
@@ -32,7 +32,7 @@
 	<input type="text" name="ville">
 	<br>
 	<label for="motDePasse">Mot de passe actuel : </label>
-	<input type="password" name="motDePasse">
+	<input type="password" name="motDePasse" required>
 	<br>
 	<label for="newMotDePasse">Nouveau mot de passe : </label>
 	<input type="password" name="newMotDePasse">
