@@ -72,10 +72,10 @@ a:hover{
 .cardVente{
 	display: flex;
 	justify-content: space-around; 
-	padding: 3em;
+	padding: 1.5em;
 	max-width: 100%;
 	border: solid 1px #333;
-	margin: 2em;
+	margin: 1em;
 	background-color: #666;
 	color: whitesmoke;
 }
