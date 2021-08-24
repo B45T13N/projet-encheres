@@ -13,6 +13,14 @@ body {
 
 
 /*page d'accueil*/
+a{
+	color: white;
+	text-decoration: none;
+}
+a:hover{
+	color: #333;
+	text-shadow: #000;
+}
 #entete{
 	display: flex;
 	justify-content: space-between;
