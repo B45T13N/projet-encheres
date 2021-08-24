@@ -30,6 +30,7 @@ public class ServletProfil extends HttpServlet {
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur selectedUser = new Utilisateur();
 		HttpSession session = request.getSession();
+		int idVendeur = (int) request.getAttribute("idVendeur");
 
 		request.setAttribute("pseudo", selectedUser.getPseudo());
 		request.setAttribute("nom", selectedUser.getNom());
