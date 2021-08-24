@@ -39,7 +39,7 @@ public class ServletDetailVente extends HttpServlet {
 
 		request.setAttribute("session", session);
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
-		request.setAttribute("noArticle", noArticle);
+		session.setAttribute("noArticle", noArticle);
 		Article currentArticle = new Article();
 		EnchereManager em = new EnchereManager();
 		ArticleManager am = new ArticleManager();
@@ -57,8 +57,13 @@ public class ServletDetailVente extends HttpServlet {
 			e1.printStackTrace();
 			listeCodesErreur.add(30000);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/DetailVente.jsp");
-		rd.forward(request, response);
+		if (seller.getNoUtilisateur() == idUser && currentArticle.getDateDebutEncheres().isAfter(LocalDate.now())) {
+			response.sendRedirect(request.getContextPath() + "/NouvelleVente");
+
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/DetailVente.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**

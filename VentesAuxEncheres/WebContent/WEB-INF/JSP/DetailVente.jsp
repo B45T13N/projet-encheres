@@ -8,15 +8,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <title>Détail de la vente</title>
 </head>
 <body>
-	<h1>ENI-Enchères</h1>	
+	<header>
+		<h1>ENI-Enchères</h1>
+		<div class="logo">		
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
+	</header>	
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
-	<c:out value="${dateJour}"></c:out>
-	<c:out value="${currentArticle.getDateFinEncheres()}"></c:out>
 	<c:choose>
-	<c:when test="${currentArticle.getDateFinEncheres() > dateJour}">
+	<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
 		<h3>Détail vente</h3>
 		<div class="container">
 			
@@ -31,7 +36,7 @@
 			</c:if>
 		</div>
 	</c:when>
-	<c:when test="${currentArticle.getDateFinEncheres() <= dateJour && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
+	<c:when test="${currentArticle.getDateFinEncheres().isBefore(dateJour) && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
 		<h3>Vous avez remporté la vente !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
@@ -40,7 +45,7 @@
 		</div>	
 	</c:when>
 	
-	<c:when test="${currentArticle.getDateFinEncheres() <= dateJour && seller.getNoUtilisateur() == user.getNoUtilisateur() }">
+	<c:when test="${currentArticle.getDateFinEncheres().isBefore(dateJour) && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
 		<h3>${seller.getPseudo()} a remporté l'enchère !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>
@@ -48,5 +53,8 @@
 		</div>	
 	</c:when>
 	</c:choose>
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 </body>
 </html>

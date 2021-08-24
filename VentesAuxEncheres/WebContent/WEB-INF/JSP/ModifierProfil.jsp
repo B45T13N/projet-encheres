@@ -5,9 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <title>Modifier Profil</title>
 </head>
 <body>
+	<header>
+			<h2>ENI-Enchères</h2>
+			<div class="logo">		
+				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+			</div>
+	</header>
 	<h2>Modifier mon profil</h2>
 	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
 		<br>
@@ -45,7 +53,9 @@
 	<form action="<%=request.getContextPath()%>/DeleteProfil" method="post">
 		<input type="submit" value="Supprimer mon compte" id="delete">
 	</form>
-	
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 
 </body>
 </html>

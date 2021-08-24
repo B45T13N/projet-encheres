@@ -17,17 +17,16 @@
 		<div class="logo">		
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 		</div>
-		<div class="btnLeft">
+		<div class="btnGroupLeft">
 			<c:if test="${empty sessionScope.id}">
-			<p><a href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
+			<p><a class="btnLeft" href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
 			</c:if>
 			<c:if test="${!empty sessionScope.id}">
-			<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Enchères</a></li>
-			<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
-			<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a></li>
-			<form action = "${pageContext.request.contextPath}/Deconnecte" method="post">
-			<input type="submit" value="Déconnecte"/>
-			</form>
+			<a class="btnLeft" href="${pageContext.request.contextPath}/Deconnecte">Déconnexion</a>
+			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a>	
+			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a>
+			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Enchères</a>		
+
 			</c:if>
 		</div>
 	</header>
@@ -125,16 +124,19 @@
 				</a>
 			</div>
 			<div class="detailVente">
-				<h4>Nom de l'article en vente : ${article.getNomArticle()}</h4>
+				<h4>${article.getNomArticle()}</h4>
 				<p>Prix : ${article.getPrixVente()} points</p>
 				<p>Fin de l'enchère : ${article.getDateFinEncheres()}</p>
-				<p>Vendeur : ${article.getPseudoUser()}</p>
+				<c:if test="${!empty sessionScope.id}"><p>Vendeur : <a href="<%=request.getContextPath()%>/Profil?idVendeur=${article.getNoUtilisateur()}">${article.getPseudoUser()}</a></p></c:if>
+				<c:if test="${empty sessionScope.id}"><p>Vendeur : ${article.getPseudoUser()}</p></c:if>
 			</div>
 		
 		</article>
 	
 	 </c:forEach>
 	</section>
-	
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 </body>
 </html>

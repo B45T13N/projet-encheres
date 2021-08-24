@@ -163,14 +163,17 @@ public class ArticleManager {
 
 	}
 
-	public void deleteArticle(Article article) throws BusinessException {
+	public void deleteArticle(int noArticle) throws BusinessException {
 		BusinessException businessException = new BusinessException();
+		Article article = this.selectArticleByNoArticle(noArticle);
 
 		// test des infos à supprimer
 		this.validerArticle(article, businessException);
 
 		if (!businessException.hasError()) {
-			articleDAO.delete(article.getNoArticle());
+			retraitManager.deleteRetrait(noArticle);
+			enchereManager.deleteEnchere(noArticle);
+			articleDAO.delete(noArticle);
 		}
 	}
 

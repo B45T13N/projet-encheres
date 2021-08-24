@@ -135,9 +135,9 @@ public class UtilisateurManager {
 		articleManager.updateArticle(updateArticle);
 	}
 
-	public void deleteArticle(Article deleteArticle) throws BusinessException {
-		articleManager.deleteArticle(deleteArticle);
-	}
+//	public void deleteArticle(Article deleteArticle) throws BusinessException {
+//		articleManager.deleteArticle(deleteArticle);
+//	}
 
 	private void validerUtilisateur(Utilisateur utilisateur, BusinessException exception) {
 		BusinessException businessException = new BusinessException();
