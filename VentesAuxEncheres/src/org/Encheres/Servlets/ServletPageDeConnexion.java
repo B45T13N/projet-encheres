@@ -65,7 +65,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 			session.setAttribute("id", id);
 
 			if (id > 0) {
-				response.sendRedirect(request.getContextPath()+"/Accueil");
+				response.sendRedirect(request.getContextPath() + "/Accueil");
 			} else {
 				rd = request.getRequestDispatcher("/PageDeConnexion");
 				rd.forward(request, response);
