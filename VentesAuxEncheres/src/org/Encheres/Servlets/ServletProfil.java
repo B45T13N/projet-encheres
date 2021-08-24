@@ -37,7 +37,6 @@ public class ServletProfil extends HttpServlet {
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-
 		request.setAttribute("pseudo", selectedUser.getPseudo());
 		request.setAttribute("nom", selectedUser.getNom());
 		request.setAttribute("prenom", selectedUser.getPrenom());
@@ -47,7 +46,7 @@ public class ServletProfil extends HttpServlet {
 		request.setAttribute("code_postal", selectedUser.getCodePostal());
 		request.setAttribute("ville", selectedUser.getVille());
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/MonProfil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Profil.jsp");
 		rd.forward(request, response);
 	}
 
