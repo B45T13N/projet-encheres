@@ -13,6 +13,10 @@
 	<header>
 		<h2>ENI-Enchères</h2>
 		
+		
+		<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		
+		
 		<c:if test="${empty sessionScope.id}">
 		<p><a href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
 		</c:if>
