@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,17 +30,17 @@
 		<input required="required" type="number" name="prix">
 		<label for="dateDebut">Début de l'enchère</label>
 		<input required="required" type="date" name="dateDebut">
-		<label for="dateFin">Début de l'enchère</label>
+		<label for="dateFin">Fin de l'enchère</label>
 		<input required="required" type="date" name="dateFin">
 		
 		<div>
 		<h4>Retrait</h4>
 		<label for="rue">Rue :</label>
-		<input required="required" type="text" name="rue" value="${rue}">
+		<input required="required" type="text" name="rue" value="${currentUser.getRue()}">
 		<label for="cpo">Code Postal :</label>
-		<input required="required" type="text" name="cpo" value="${codePostal}">
+		<input required="required" type="text" name="cpo" value="${currentUser.getCodePostal()}">
 		<label for="ville">Ville :</label>
-		<input required="required" type="text" name="ville" value="${ville}">
+		<input required="required" type="text" name="ville" value="${currentUser.getVille()}">
 		</div>
 		
 		<input type="submit" value="Enregistrer">

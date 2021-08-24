@@ -18,4 +18,6 @@ public interface DAOArticle extends DAO<Article> {
 
 	public List<Article> selectByCategorie(int noCategorie) throws BusinessException;
 
+	public Article selectByNoArticle(int noArticle) throws BusinessException;
+
 }

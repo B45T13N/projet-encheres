@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.Encheres.BusinessException;
+import org.Encheres.bll.ArticleManager;
 import org.Encheres.bll.EnchereManager;
 import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Article;
@@ -34,14 +35,20 @@ public class ServletDetailVente extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		HttpSession session = request.getSession();
 		int idUser = (int) session.getAttribute("id");
-		Article currentArticle = (Article) session.getAttribute("article");
+		int noArticle = (int) session.getAttribute("noArticle");
+		Article currentArticle = new Article();
 		EnchereManager em = new EnchereManager();
+		ArticleManager am = new ArticleManager();
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur seller = new Utilisateur();
 
 		try {
-			seller = um.selectByNoUtilisateur(1);
-			em.selectAcheteur(9);
+			currentArticle = am.selectArticleByNoArticle(noArticle);
+			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
+			em.selectAcheteur(idUser);
+			request.setAttribute("seller", seller);
+			request.setAttribute("session", session);
+			request.setAttribute("currentArticle", currentArticle);
 		} catch (BusinessException e1) {
 			e1.printStackTrace();
 			listeCodesErreur.add(30000);
@@ -59,15 +66,16 @@ public class ServletDetailVente extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		int prixEnchere = 0;
 		HttpSession session = request.getSession();
-		int iduser = (int) session.getAttribute("id");
+		int idCurrentUser = (int) session.getAttribute("id");
 		Article currentArticle = (Article) session.getAttribute("article");
 
 		EnchereManager em = new EnchereManager();
-
 		prixEnchere = currentArticle.getPrixVente();
+		request.setAttribute("prixEnchere", prixEnchere);
 
+		prixEnchere = (int) request.getAttribute("prixEnchere");
 		try {
-			em.updateEnchere(currentArticle, iduser, prixEnchere);
+			em.updateEnchere(currentArticle, idCurrentUser, prixEnchere);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			listeCodesErreur.add(30000);

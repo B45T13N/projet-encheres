@@ -34,6 +34,19 @@ public class ServletVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		int idUser = (int) session.getAttribute("id");
+		List<Integer> listException = new ArrayList<Integer>();
+		UtilisateurManager um = new UtilisateurManager();
+		Utilisateur currentUser = new Utilisateur();
+		try {
+			currentUser = um.selectByNoUtilisateur(idUser);
+			currentUser.setNoUtilisateur(idUser);
+			request.setAttribute("currentUser", currentUser);
+		} catch (BusinessException e1) {
+			e1.printStackTrace();
+			listException.add(30004);
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/NouvelleVente.jsp");
 		rd.forward(request, response);
 	}
@@ -51,6 +64,7 @@ public class ServletVente extends HttpServlet {
 		Utilisateur currentUser = new Utilisateur();
 		try {
 			currentUser = um.selectByNoUtilisateur(idUser);
+			request.setAttribute("currentUser", currentUser);
 		} catch (BusinessException e1) {
 			e1.printStackTrace();
 			listException.add(30004);
@@ -62,18 +76,13 @@ public class ServletVente extends HttpServlet {
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
 		Article article = null;
-		String rue = currentUser.getRue();
-		String codePostal = currentUser.getCodePostal();
-		String ville = currentUser.getVille();
+		String rue = "";
+		String codePostal = "";
+		String ville = "";
 
 		request.setCharacterEncoding("UTF-8");
 
 		List<Integer> listeCodeErreur = new ArrayList<>();
-
-		// Complétion des champs du retrait avec des valeurs de bases
-//		request.setAttribute("rue", rue);
-//		request.setAttribute("cpo", codePostal);
-//		request.setAttribute("ville", ville);
 
 		// Enregistrement nom, description, libelle, mise à prix
 		nomArticle = request.getParameter("nomArticle");
@@ -106,12 +115,7 @@ public class ServletVente extends HttpServlet {
 
 			try {
 				am.addArticle(article, rue, ville, codePostal);
-//				enchere.setDateEnchere(article.getDateDebutEncheres());
-//				enchere.setMontantEnchere(article.getMiseAPrix());
-//				enchere.setNoArticle(article.getNoArticle());
-//				enchere.setNoUtilisateur(article.getNoUtilisateur());
-//				em.addEnchere(enchere);
-				response.sendRedirect(request.getContextPath()+"/Accueil");
+				response.sendRedirect(request.getContextPath() + "/Accueil");
 			} catch (BusinessException e1) {
 				e1.printStackTrace();
 				listException.add(30004);

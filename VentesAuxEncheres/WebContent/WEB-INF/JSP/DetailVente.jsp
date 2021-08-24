@@ -18,14 +18,12 @@
 		<div class="container">
 			
 	        <%@include file="AffichageDUnArticle.jsp" %>
-			<c:if test="${empty session.utilisateur}">
+			<c:if test="${!empty session.id}">
 				<form>
 					<label for="prixEnchere">Ma proposition : </label>
 					<input type="number" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 					<input type="submit" value="Enchérir">
 				</form>	
-			</c:if>
-			<c:if test="${empty session.utilisateur}">
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
 		</div>
@@ -35,19 +33,15 @@
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
 	        <p>Tel : ${seller.getTelelephone()}</p>
-			<c:if test="${!empty session.utilisateur}">
-				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
-			</c:if>
+			<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 		</div>	
 	</c:when>
 	
 	<c:when test="${currentArticle.getDateFinEnchere() <= LocalDate.now() && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
-		<h3>Vente terminée !</h3>
+		<h3>${seller.getPseudo()} a remporté l'enchère !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>
-			<c:if test="${!empty session.getAttribute(\"utilisateur\")}">
-				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
-			</c:if>
+			<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 		</div>	
 	</c:when>
 	</c:choose>

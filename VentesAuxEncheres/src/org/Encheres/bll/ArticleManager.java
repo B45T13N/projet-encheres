@@ -180,4 +180,8 @@ public class ArticleManager {
 		return this.articleDAO.selectByCategorie(noCategorie);
 	}
 
+	public Article selectArticleByNoArticle(int noArticle) throws BusinessException {
+		return this.articleDAO.selectByNoArticle(noArticle);
+	}
+
 }

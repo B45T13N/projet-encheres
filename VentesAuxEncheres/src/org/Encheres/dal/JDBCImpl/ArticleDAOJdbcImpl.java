@@ -27,6 +27,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie";
 	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, prix_initial, date_fin_encheres, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur WHERE no_categorie=?";
+	public static final String SELECT_BY_ARTICLE = "SELECT u.no_utilisateur, nom_article, prix_initial, date_fin_encheres, "
+			+ "pseudo, no_article FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur WHERE no_article=?";
 
 	@Override
 	public void insert(Article data) throws BusinessException {
@@ -231,6 +233,39 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 		}
 
 		return list;
+	}
+
+	@Override
+	public Article selectByNoArticle(int noArticle) throws BusinessException {
+		Article articleCourant = new Article();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				// Mise à jour article
+				PreparedStatement prstms = cnx.prepareStatement(SELECT_BY_ARTICLE);
+				prstms.setInt(1, noArticle);
+				ResultSet rs = prstms.executeQuery();
+
+				while (rs.next()) {
+					articleCourant = new Article(rs.getInt("no_utilisateur"), rs.getString("nom_article"),
+							rs.getString("description"), rs.getString("libelle"),
+							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"),
+							rs.getString("pseudo"));
+					articleCourant.setNoArticle(noArticle);
+				}
+				prstms.close();
+				cnx.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		} catch (Exception e) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_ARTICLE_FAIL);
+			throw businessException;
+		}
+
+		return articleCourant;
 	}
 
 }
