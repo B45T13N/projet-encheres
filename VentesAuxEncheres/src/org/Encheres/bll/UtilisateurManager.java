@@ -122,8 +122,8 @@ public class UtilisateurManager {
 	 * @throws BusinessException
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#delete(int)
 	 */
-	public void deleteUtilisateur(Utilisateur utilisateur) throws BusinessException {
-		daoUtilisateur.delete(utilisateur.getNoUtilisateur());
+	public void deleteUtilisateur(int utilisateur) throws BusinessException {
+		daoUtilisateur.delete(utilisateur);
 	}
 
 	public void addArticle(Article newArticle, String rue, String codePostal, String ville) throws BusinessException {
