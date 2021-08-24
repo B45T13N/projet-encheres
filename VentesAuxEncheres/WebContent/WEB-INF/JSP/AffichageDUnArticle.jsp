@@ -19,5 +19,5 @@
 		Retrait : ${currentArticle.getLieuRetrait()}
 	</p>
 	<p>
-		Vendeur : <a href="<%=request.getContextPath()%>/MonProfil">${seller.getNom()}</a>
+		Vendeur : <a href="<%=request.getContextPath()%>/Profil">${seller.getNom()}</a>
 	</p>
