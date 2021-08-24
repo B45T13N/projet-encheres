@@ -68,6 +68,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		int noUtilisateur;
 		String articleRechercher ="";
 		List<Article> listeAAfficher = new ArrayList<>();
+		List<Integer> listeCodesErreur = new ArrayList<>();
 		
 		HttpSession sessionScope = request.getSession(); //Init de sessionScope
 		
@@ -140,6 +141,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+			listeCodesErreur.add(30010);
 		}
 				
 //		RequestDispatcher rd = request.getRequestDispatcher("/Accueil");

@@ -118,7 +118,7 @@
 				<p>Vendeur : ${article.getPseudoUser()}</p>
 			</div>
 		</article>
-	</c:forEach>
+	 </c:forEach>
 	</section>
 	
 </body>
