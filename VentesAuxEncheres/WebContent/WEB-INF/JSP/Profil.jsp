@@ -36,5 +36,8 @@
 			</div>
 		</div>
 	</div>
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 </body>
 </html>

@@ -1,3 +1,2 @@
-<div>
-	<p>Copyright &copy; Groupe 5 - Année 2021</p>
-</div>
+<p>Copyright &copy; Groupe 5 - Année 2021</p>
+

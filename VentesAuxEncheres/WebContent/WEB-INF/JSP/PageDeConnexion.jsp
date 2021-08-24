@@ -40,9 +40,9 @@
 </div>
 </form>
 </div>
-<div class="piedPageConnexion">
+<footer class="piedPageConnexion">
 <%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
-</div>
+</footer>
 </body>
 </html>
 

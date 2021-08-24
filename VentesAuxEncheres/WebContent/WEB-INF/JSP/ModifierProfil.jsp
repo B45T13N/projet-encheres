@@ -53,7 +53,9 @@
 	<form action="<%=request.getContextPath()%>/DeleteProfil" method="post">
 		<input type="submit" value="Supprimer mon compte" id="delete">
 	</form>
-	
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 
 </body>
 </html>

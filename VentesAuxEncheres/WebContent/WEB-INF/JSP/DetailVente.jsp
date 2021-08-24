@@ -46,5 +46,8 @@
 		</div>	
 	</c:when>
 	</c:choose>
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 </body>
 </html>

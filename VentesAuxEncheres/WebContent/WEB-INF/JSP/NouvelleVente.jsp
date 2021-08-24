@@ -58,6 +58,8 @@
 			<input type="submit" value="Supprimer ma vente" id="delete">
 		</form>
 	</c:if>
-	
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 </body>
 </html>

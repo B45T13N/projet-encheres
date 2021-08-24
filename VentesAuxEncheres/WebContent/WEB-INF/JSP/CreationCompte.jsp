@@ -63,6 +63,9 @@
 	if(erreurMDP != null) { 	out.println(erreurMDP);
 	}
 	%>
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 
 
 </body>
