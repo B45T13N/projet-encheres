@@ -133,7 +133,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			listeCodesErreur.add(30010);
+			listeCodesErreur.add(3010);
 		}
 
 //		RequestDispatcher rd = request.getRequestDispatcher("/Accueil");
