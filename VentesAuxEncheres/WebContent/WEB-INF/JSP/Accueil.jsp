@@ -24,7 +24,10 @@
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/DetailVente">Enchères</a></li>
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a></li>
 		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a></li>
-		<li><a href="<c:out value="${pageContext.request.contextPath}"/>/Accueil">Déconnexion</a></li>
+		<form action = "${pageContext.request.contextPath}/Deconnecte" method="post">
+		<input type="submit" value="Déconnecte"/>
+		</form>
+		
 		</c:if>
 	</header>
 	<h1>Liste des enchères</h1>
