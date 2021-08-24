@@ -11,32 +11,32 @@
 	<h2>Modifier mon profil</h2>
 	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
 	<br>
-	<b>Pseudo : </b>
+	<label for="pseudo">Pseudo : </label>
 	<input type="text" name="Pseudo">
-	<b>Nom : </b>
+	<label for="nom">Nom : </label>
 	<input type="text" name="nom">
 	<br>
-	<b>Prenom : </b>
+	<label for="prenom">Prenom :</label>
 	<input type="text" name="prenom">
-	<b>Email : </b>
+	<label for="email">Email :</label>
 	<input type="text" name="email">
 	<br>
-	<b>Teléphone : </b>
+	<label for="telephone">Teléphone :</label>
 	<input type="text" name="telephone">
-	<b>Rue : </b>
+	<label for="rue">Rue :</label>
 	<input type="text" name="rue">
 	<br>
-	<b>Code Postal :</b>
-	<input type="text" name="codepostal">
-	<b>Ville : </b>
+	<label for="code_postal">Code Postal :</label>
+	<input type="text" name="code_postal">
+	<label for="ville">Ville :</label>
 	<input type="text" name="ville">
 	<br>
-	<b>Mot de passe actuel : </b>
+	<label for="motDePasse">Mot de passe actuel : </label>
 	<input type="password" name="motDePasse">
 	<br>
-	<b>Nouveau mot de passe : </b>
+	<label for="newMotDePasse">Nouveau mot de passe : </label>
 	<input type="password" name="newMotDePasse">
-	<b>Confirmation : </b>
+	<label for="confirmMotDePasse">Confirmation : </label>
 	<input type="password" name="confirmMotDePasse">
 	<br>
 	<br>

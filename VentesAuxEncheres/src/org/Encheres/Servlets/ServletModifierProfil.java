@@ -59,12 +59,15 @@ public class ServletModifierProfil extends HttpServlet {
 		email = request.getParameter("email");
 		telephone = request.getParameter("telephone");
 		rue = request.getParameter("rue");
-		codePostal = request.getParameter("codepostal");
+		codePostal = request.getParameter("code_postal");
 		ville = request.getParameter("ville");
 		oldPass = request.getParameter("motDePasse");
 		newPass = request.getParameter("newMotDePasse");
 		confirmPass = request.getParameter("confirmMotDePasse");
 
+		/*
+		 * if submit = register executeUpdate else if submit = delete executeDelete
+		 */
 		try {
 
 			Utilisateur updatedUser = new Utilisateur();
