@@ -188,8 +188,14 @@ a:hover{
 
 /*Nouvelle vente*/
 .logoNouvelleVente{
-	margin-left: 3em;
+/*	float: left;*/
+	margin-left: 5em;
 }
+.nouvelleVenteH2{
+	text-align: center;
+	
+}
+
 
 /*Page de connexion */
 

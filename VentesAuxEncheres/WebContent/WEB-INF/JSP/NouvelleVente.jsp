@@ -13,11 +13,11 @@
 <body>
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
 	<header>
-			<div class="logo">		
+			<div class="logoNouvelleVente">		
 				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 			</div>
 	</header>
-	<h2>Nouvelle vente</h2>
+	<h2 class="nouvelleVenteH2">Nouvelle vente</h2>
 	<form action="<%=request.getContextPath()%>/NouvelleVente" method="post">
 		<div>
 			<label for="nomArticle">Article :</label>
