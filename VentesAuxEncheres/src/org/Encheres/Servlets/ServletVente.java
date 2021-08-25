@@ -35,6 +35,7 @@ public class ServletVente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(300);
 		int idUser = (int) session.getAttribute("id");
 		int idArticle = 0;
 		if (session.getAttribute("noArticle") != null) {
@@ -73,6 +74,7 @@ public class ServletVente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(300);
 		int idUser = (int) session.getAttribute("id");
 
 		List<Integer> listException = new ArrayList<Integer>();

@@ -32,6 +32,7 @@ public class ServletProfil extends HttpServlet {
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur selectedUser = new Utilisateur();
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(300);
 		int idVendeur = Integer.parseInt(request.getParameter("idVendeur"));
 		try {
 			selectedUser = user.selectByNoUtilisateur(idVendeur);

@@ -40,6 +40,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		int noUtilisateur;
 		int noArticle;
 		HttpSession sessionScope = request.getSession();
+		sessionScope.setMaxInactiveInterval(300);
 		List<Article> listeAAfficher = new ArrayList<>();
 		request.setAttribute("sessionScope", sessionScope);
 		sessionScope.setAttribute("noArticle", request.getAttribute("noArticle"));

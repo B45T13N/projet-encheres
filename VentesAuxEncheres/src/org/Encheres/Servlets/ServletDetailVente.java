@@ -35,6 +35,7 @@ public class ServletDetailVente extends HttpServlet {
 			throws ServletException, IOException {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(300);
 		request.setCharacterEncoding("UTF-8");
 		int idUser = (int) session.getAttribute("id");
 
@@ -84,6 +85,7 @@ public class ServletDetailVente extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		int prixEnchere = 0;
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(300);
 		int idCurrentUser = (int) session.getAttribute("id");
 		request.setAttribute("session", session);
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));

@@ -38,7 +38,7 @@ public class ServletModifierProfil extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-
+		session.setMaxInactiveInterval(300);
 		request.setCharacterEncoding("UTF-8");
 		String pseudo;
 		String nom;
