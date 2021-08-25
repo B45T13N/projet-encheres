@@ -104,7 +104,10 @@ a:hover{
 }
 @media only screen and (max-width: 599px){
 	#entete{
-		display: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		text-align: center;
 	}
 	.enteteMobile{
 		display: flex;
@@ -113,20 +116,21 @@ a:hover{
 		text-align: center;
 	}
 	.btnGroupLeft{
-		display: none;
+		display: flex;
+		flex-direction: column;
 	}
 	.btnGroupLeftMobile{
 		display: flex;
 		flex-direction: column;
 	}
 	.logo{
-		display: none;
+		display: block;
 	}
 	.logoMobile{
 		display: block;
 	}
 	.btnLeft{
-		display: non;
+		display: block;
 	}
 	
 }
