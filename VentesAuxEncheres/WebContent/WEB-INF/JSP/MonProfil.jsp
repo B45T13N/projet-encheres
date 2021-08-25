@@ -19,21 +19,21 @@
 		</div>
 	</header>
 	<div>
-		<p><a>Pseudo : </a>${pseudo}</p>
+		<p>Pseudo : ${pseudo}</p>
 		<div>
-			<p><a>Nom : </a>${nom}
+			<p>Nom : ${nom}
 			<br>
-			<a>Prenom : </a>${prenom}
+			Prenom : ${prenom}
 			<br>
-			<a>Email : </a>${email}
+			Email : ${email}
 			<br>
-			<a>Teléphone : </a>${telephone}
+			Teléphone : ${telephone}
 			<br>
-			<a>Rue : </a>${rue}
+			Rue : ${rue}
 			<br>
-			<a>Code Postal : </a>${code_postal}
+			Code Postal : ${code_postal}
 			<br>
-			<a>Ville : </a>${ville}</p>
+			Ville : ${ville}</p>
 			<div>
 				<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
 			</div>

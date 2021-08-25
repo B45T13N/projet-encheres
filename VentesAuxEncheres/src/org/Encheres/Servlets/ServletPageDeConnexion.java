@@ -1,7 +1,6 @@
 package org.Encheres.Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +32,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 		if (request.getParameter("utilisateur") != null) {
 			response.sendRedirect("/Accueil");
 		} else {
+
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
 			rd.forward(request, response);
 		}
@@ -47,8 +47,10 @@ public class ServletPageDeConnexion extends HttpServlet {
 			throws ServletException, IOException {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		request.setCharacterEncoding("UTF-8");
+		request.setAttribute("errMdp", "Veuillez ressaisir votre mot de passe");
+
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(300);
+		session.setMaxInactiveInterval(10);
 		String identifiant;
 		String mdp;
 		UtilisateurManager utilisateurManager;
@@ -62,14 +64,13 @@ public class ServletPageDeConnexion extends HttpServlet {
 			mdp = request.getParameter("mdp");
 			utilisateurManager = new UtilisateurManager();
 			utilisateur = utilisateurManager.getUtilisateur(identifiant, mdp);
-			System.out.println(utilisateur.toString());
 			id = utilisateur.getNoUtilisateur();
-			session.setAttribute("id", id);
 
 			if (id > 0) {
 				response.sendRedirect(request.getContextPath() + "/Accueil");
+				session.setAttribute("id", id);
 			} else {
-				rd = request.getRequestDispatcher("/PageDeConnexion");
+				rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {

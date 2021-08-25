@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,12 +24,13 @@
 <div class="formulairePageConnexion">
 <form action="<%=request.getContextPath()%>/PageDeConnexion" method="post">
 	<div class ="formPageConnexion1">
-		<p>
+		<p>			
 			<label for="identifiant" class="id">Identifiant :</label>
 			<input type="text" name="identifiant" class="case"required>
 			<label for="mdp" class="mdp">Mot de passe :</label>
 			<input type="password" name="mdp" required class="case">
 		</p>
+		<p>${errMdp}</p>
 	</div>
 <div class ="formPageConnexion2">
 <p>

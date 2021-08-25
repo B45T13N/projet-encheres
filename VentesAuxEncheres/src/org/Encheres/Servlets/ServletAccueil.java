@@ -83,12 +83,12 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 
 		// Traitement choix catégories
 		try {
-			if (!request.getParameter("categorie").equals("")) {
-				categorie = request.getParameter("categorie");
-				listeAAfficher = am.selectArticleByCategorie(categorie);
-			} else {
-				listeAAfficher = am.selectAllArticle();
-			}
+//			if (!request.getParameter("categorie").equals("")) {
+//				categorie = request.getParameter("categorie");
+//				listeAAfficher = am.selectArticleByCategorie(categorie);
+//			} else {
+//				listeAAfficher = am.selectAllArticle();
+//			}
 
 			// Radio boutons et checkbox
 			// 1ere checkbox Achat
