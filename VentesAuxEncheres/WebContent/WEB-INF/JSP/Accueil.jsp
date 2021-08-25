@@ -11,6 +11,8 @@
    <link rel="icon" href="Images/IconeENI.jpg">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <!-- <link href="WEB-INF/template/css/bootstrap.css" rel='stylesheet' type='text/css' /> -->
+
+
 <title>Accueil</title>
 </head>
 <body>
@@ -88,23 +90,20 @@
 			<ul>
 					<li>
 						<input type="checkbox" id="ventesEnCours" name="venteEnCours" value="mesVentesEnCours"/>
-							<c:if test="${radio == \"radioBtn\"}">disabled</c:if>
-							<c:if test="${venteEnCours !=null}">checked</c:if>
+
 							<label class="txtCheckbox" for="filtreCheckbox">Mes ventes en cours</label>
 					</li>
 					
 					<li>
 						<input type="checkbox" id="encheresEnCours" name="venteNonDebut" value="encheresNonDebutees"/>
-							<c:if test="${radio == \"radioBtn\"}">disabled</c:if>
-							<c:if test="${venteNonDebut !=null}">checked</c:if>
+
 							<label class="txtCheckbox" for="filtreCheckbox">Enchères non débutées</label>
 							
 					</li>
 					
 					<li>
 						<input type="checkbox" id="encheresEnCours" name="venteTerminee" value="ventesTerminees"/>
-							<c:if test="${radio == \"radioBtn\"}">disabled</c:if>
-							<c:if test="${venteTerminee !=null}">checked</c:if>
+
 							<label class="txtCheckbox" for="filtreCheckbox">Ventes terminées</label>
 					</li>
 				</ul>
