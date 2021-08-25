@@ -35,30 +35,36 @@
 	</header>
 	
 	<h1 class="titreH1">Liste des enchères</h1>
-	<br/>
-	
-	<div class="filtre">	
-		<h3>Filtres :</h3>
-		<br/>
-		<div>
+<br/>
+		
+	<h3 class="titreH3">Filtres :</h3>
+<br/>
+		
 			<form action="<%=request.getContextPath()%>/Accueil" method="POST"> <!-- Method="GET" ???? -->
-				<input type="search" placeholder=" Le nom de l'article contient" size="30" class="barreRch">
+				<input type="search" placeholder=" Le nom de l'article contient" size="50" class="barreRch">
 				<br/>
 				<br/>
-				<label for="categorie">Catégorie : </label>
-				<select name="categorie" id="categorie" > <!-- multiple="multiple" pour selection plusieurs choix, voir si recu par getParameterValues(String) -->
-				
-				    <option value="">Toutes</option>
-				    <option value="informatique">Informatique</option>
-				    <option value="ameublement">Ameublement</option>
-				    <option value="vetement">Vêtement</option>
-				    <option value="sport_loisirs">Sports et Loisirs</option>
-				</select>
-		        <input type="submit" name="btnValider" value="Rechercher" id="btnRech">
+				<div class="containerAllCategorie">
+					
+						<span class="containerCategorie">
+							<label for="categorie" class="texteCategorie">Catégorie:</label>
+							
+							<select name="categorie" id="categorie" > 
+							    <option value="">Toutes</option>
+							    <option value="informatique">Informatique</option>
+							    <option value="ameublement">Ameublement</option>
+							    <option value="vetement">Vêtement</option>
+							    <option value="sport_loisirs">Sports et Loisirs</option>
+							</select>
+						</span>
+						<br class="hiddenBr"/>
+					        <input type="submit" name="btnValider" value="Rechercher" id="btnRech">
+					
+		        </div>
+	
+				<c:if test="${!empty sessionScope.id}"> 
 
-	<c:if test="${!empty sessionScope.id}"> 
-
-		<div>
+		
 			<input type="radio" id="achats" name="radioBtn" value="1"/>
 			<c:if test="${filtreAchat == \"1\"}">checked</c:if>
 			<label for="achats">Achats</label>
@@ -82,9 +88,9 @@
 							<label for="remportes">Mes enchères remportées</label>
 					</li>
 				</ul>
-		</div>
 		
-		<div>
+		
+		
 			<input type="radio" id="ventes" name="radioBtn" value="2"/>
 			<c:if test="${filtreVente == \"2\"}">checked</c:if>
 			<label for="ventes">Mes ventes</label>
@@ -108,12 +114,11 @@
 							<label class="txtCheckbox" for="filtreCheckbox">Ventes terminées</label>
 					</li>
 				</ul>
-		</div>
+		
 		
 	</c:if>
 	</form>
-		</div>
-		</div>
+		
 	<br/>
 	<section class="secArticle">
 	 <c:forEach var="article" items="${listeAAfficher}">

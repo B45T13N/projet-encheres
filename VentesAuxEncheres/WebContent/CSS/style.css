@@ -46,16 +46,19 @@ a:hover{
 } 
 .barreRch{
 	border-radius: 25px;
+	height: 2.5em;
+	margin-left: 5em;
 	
 }
 .titreH1{
 	text-align: center;
 }
-.filtre{
-	margin-left: 5%
+.titreH3{
+	margin-left: 4em;
 }
+
 #btnRech{
-	display: inline-block;
+/*	display: inline-block; */
 	background-color: #7b38d8;
 	border-radius: 10px;
 	border: 4px double #cccccc;
@@ -69,7 +72,7 @@ a:hover{
 	-o-transition: all 0.4s;
 	transition: all 0.4s;
 	cursor: pointer;
-	margin: 5px;
+/*	margin: 5px;*/
 }
 #btnRech:hover{
 	background-color: green;
@@ -98,6 +101,23 @@ a:hover{
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
+.containerAllCategorie{
+	
+	display: flex;
+	justify-content: space-between;
+	margin-left: 5em;
+	margin-right: 15em;
+}
+
+.containerCategorie{
+	display: flex;
+	margin-top: 1.5em;
+	
+}
+#categorie{
+	height: 2em;
+	width: 17em;
+}
 
 @media only screen and (max-width: 599px){
 	#entete{
@@ -116,6 +136,36 @@ a:hover{
 		display: block;
 		margin: 0px;
 	}
+	.titreH1{
+		display: none;
+	}
+	br{
+		display: none;
+	}
+	.hiddenBr{
+	display: block;
+	}
+	.containerAllCategorie{
+		display: flex;
+		flex-direction: column;
+	}
+	.containerCategorie{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+	#categorie{
+		height: 2em;
+		width: 10em;
+		margin-left: 5em;
+	}
+	.texteCategorie{
+		width: 100px;
+	}
+	#btnRech{
+		margin-left: 2em;
+	}
+	
 	
 } /* Fin partie responsive */
 
