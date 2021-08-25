@@ -9,11 +9,13 @@ body {
 	
 }
 
+label
+{
+	display: block;
+	width: 150px;
+	float: left;
+}
 
-
-
-
-/*page d'accueil*/
 a{
 	color: white;
 	text-decoration: none;
@@ -22,6 +24,10 @@ a:hover{
 	color: #333;
 	text-shadow: #000;
 }
+
+
+/*page d'accueil*/
+
 #entete{
 	display: flex;
 	justify-content: space-between;
@@ -93,7 +99,6 @@ a:hover{
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
-
 /*Affichage d'un article*/
 
 /*Création compte */
@@ -110,9 +115,8 @@ a:hover{
 
 .formulairePageConnexion {
 	flex-direction: column;
-	margin-top: 100px;
-	display: flex;
-	text-align: center;
+	margin-top: 3em;
+	width: 30em;
 }
 .id {
 	font-weight: bold;
@@ -121,14 +125,17 @@ a:hover{
 .mdp{
 	color: #303030;
 	font-weight: bold;
-	margin-left : 10px;
 }
-.formPageConnexion1 {
-	width: 800px;
-	display: inline-block;
+.champsSaisie {
+	display: block;
 }
-.formPageConnexion2 {
+.champsBouton {
+	padding: 1em;
 	display: inline;
+}
+.btn{
+	
+	padding: 1em;
 }
 .case {
 	height: 25px;

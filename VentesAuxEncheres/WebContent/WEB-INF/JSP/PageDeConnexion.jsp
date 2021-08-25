@@ -11,40 +11,43 @@
 <title>Connexion</title>
 </head>
 <body>
-	<header>
-			<h2>ENI-Enchères</h2>
+	<header id="entete">			
 			<div class="logo">		
 				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 			</div>
 	</header>
-<div class="titrePageConnexion">
-	<h1>Identification</h1>
-</div>
 
-<div class="formulairePageConnexion">
-<form action="<%=request.getContextPath()%>/PageDeConnexion" method="post">
-	<div class ="formPageConnexion1">
-		<p>			
+	<h1 class="titreH1">Identification</h1>
+
+
+	<form class="formulairePageConnexion" action="<%=request.getContextPath()%>/PageDeConnexion" method="post">
+
+		<div class="champsSaisie">			
 			<label for="identifiant" class="id">Identifiant :</label>
-			<input type="text" name="identifiant" class="case"required>
+			<input type="text" name="identifiant" autofocus="autofocus" class="case"required>
+		</div>
+		<div class="champsSaisie">
 			<label for="mdp" class="mdp">Mot de passe :</label>
 			<input type="password" name="mdp" required class="case">
-		</p>
+		</div>
 		<p>${errMdp}</p>
-	</div>
-<div class ="formPageConnexion2">
-<p>
-<input type="submit" value="connexion">
-<input type="checkbox" name="souvenir"> 
-<label for="souvenir">Se souvenir de moi</label>
-</p>
-<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" value="Créer un compte"> </a>
-</div>
-</form>
-</div>
-<footer class="piedPageConnexion">
-<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
-</footer>
+		<div>
+			<div>
+				<input class="btn" type="submit" value="connexion">
+			</div>
+			<div>
+				<label class="btn" for="save">Se souvenir de moi</label> 
+				<input  type="checkbox" name="save">
+			</div>			
+		</div>
+		<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" class="btn" value="Créer un compte"> </a>
+
+	</form>
+
+
+	<footer class="piedPageConnexion">
+		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
+	</footer>
 </body>
 </html>
 

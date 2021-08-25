@@ -57,7 +57,6 @@ public class ServletDetailVente extends HttpServlet {
 			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
 			request.setAttribute("seller", seller);
 			user = um.selectByNoUtilisateur(idUser);
-			System.out.println(user.getNoUtilisateur() + seller.getNoUtilisateur());
 			request.setAttribute("user", user);
 			idGagnant = em.selectAcheteur(noArticle);
 			gagnantVente = um.selectByNoUtilisateur(idGagnant);
