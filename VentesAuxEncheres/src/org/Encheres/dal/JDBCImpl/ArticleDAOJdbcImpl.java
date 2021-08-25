@@ -24,10 +24,10 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "date_fin_encheres = ?, no_categorie =?, prix_vente = ?  WHERE no_article = ?";
 	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, description, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
 			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
-			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie ORDER BY date_fin_encheres ASC";
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
 	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, description, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
-			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE c.no_categorie=? ORDER BY date_fin_encheres ASC";
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE c.no_categorie=? AND (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
 	public static final String SELECT_BY_ARTICLE = "SELECT u.no_utilisateur as noUser, description, nom_article, prix_initial, montant_enchere, date_debut_encheres, date_fin_encheres, c.libelle as libelle, "
 			+ "u.pseudo, a.no_article, r.rue as rue, r.code_postal as cpo, r.ville as ville "
 			+ "FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
@@ -35,11 +35,10 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie "
 			+ "INNER JOIN RETRAITS r ON r.no_article = a.no_article" + " WHERE a.no_article=?";
 	public static final String ADDON_SELECT_ENCHERES_EN_COURS = " date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE()";
-	public static final String ADDON_SELECT_VENTE_EN_COURS = " date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE()";
+	public static final String ADDON_SELECT_VENTE_EN_COURS = " (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
 	public static final String ADDON_SELECT_VENTE_NON_DEBUT = " date_debut_encheres > GETDATE() ";
 	public static final String ADDON_SELECT_ARTICLES_REMPORTES = " date_fin_encheres < GETDATE() ";
-	public static final String ADDON_ORDER_BY = "ORDER BY date_fin_encheres ASC";
-	public static final String ADDON_SELECT_MES_VENTES = " a.no_utilisateur = ? ";
+	public static final String ADDON_SELECT_MES_VENTES = " u.no_utilisateur = ? ";
 	public static final String ADDON_SELECT_MES_ENCHERES = " e.no_utilisateur = ? ";
 	public static final String ADDON_SELECT_ARTICLES = " a.no_article = ? ";
 
@@ -300,20 +299,19 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	@Override
 	public List<Article> selectArticleIfNotEnd(int noArticle, int noUser) throws BusinessException {
 		Article articleCourant = new Article();
-		List<Article> list = new ArrayList<Article>();
-		int idArticle = noArticle;
+		List<Article> list = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				// Mise à jour article
 				PreparedStatement prstms;
-				if (noUser == 0) {
+				if (noUser == -1) {
 					prstms = cnx.prepareStatement(SELECT_ENCHERES + " WHERE " + ADDON_SELECT_ENCHERES_EN_COURS + " AND "
 							+ ADDON_SELECT_ARTICLES);
-					prstms.setInt(1, idArticle);
+					prstms.setInt(1, noArticle);
 				} else {
 					prstms = cnx.prepareStatement(SELECT_ENCHERES + " WHERE (" + ADDON_SELECT_ENCHERES_EN_COURS
 							+ " AND " + ADDON_SELECT_ARTICLES + ") AND " + ADDON_SELECT_MES_ENCHERES);
-					prstms.setInt(1, idArticle);
+					prstms.setInt(1, noArticle);
 					prstms.setInt(2, noUser);
 				}
 				ResultSet rs = prstms.executeQuery();
@@ -327,7 +325,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
-					articleCourant.setNoArticle(idArticle);
+					articleCourant.setNoArticle(rs.getInt("noArticle"));
 					list.add(articleCourant);
 				}
 				prstms.close();
@@ -349,7 +347,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	@Override
 	public List<Article> selectByNoAcquereurIfEnd(int noArticle, int noUser) throws BusinessException {
 		Article articleCourant = new Article();
-		List<Article> list = new ArrayList<Article>();
+		List<Article> list = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				// Mise à jour article
@@ -364,7 +362,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getString("pseudo"));
 					articleCourant.setMiseAPrix(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("montant_enchere"));
-					articleCourant.setNoArticle(noArticle);
+					articleCourant.setNoArticle(rs.getInt("noArticle"));
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
@@ -389,15 +387,15 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	@Override
 	public List<Article> selectVenteIfNotEnd(int noArticle, int noUser) throws BusinessException {
 		Article articleCourant = new Article();
-		List<Article> list = new ArrayList<Article>();
+		List<Article> list = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				// Mise à jour article
 				PreparedStatement prstms;
-				prstms = cnx.prepareStatement(SELECT_ENCHERES + " WHERE " + ADDON_SELECT_VENTE_EN_COURS + " AND "
-						+ ADDON_SELECT_MES_VENTES + " AND " + ADDON_SELECT_ARTICLES);
+				prstms = cnx.prepareStatement(
+						SELECT_ENCHERES + " WHERE " + ADDON_SELECT_MES_VENTES + " AND " + ADDON_SELECT_VENTE_EN_COURS);
 				prstms.setInt(1, noUser);
-				prstms.setInt(2, noArticle);
+//				prstms.setInt(2, noArticle);
 				ResultSet rs = prstms.executeQuery();
 				while (rs.next()) {
 					articleCourant = new Article(rs.getInt("noUser"), rs.getString("nom_article"),
@@ -406,7 +404,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getString("pseudo"));
 					articleCourant.setMiseAPrix(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("montant_enchere"));
-					articleCourant.setNoArticle(noArticle);
+					articleCourant.setNoArticle(rs.getInt("noArticle"));
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
@@ -431,15 +429,15 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	@Override
 	public List<Article> selectVenteIfNotBegin(int noArticle, int noUser) throws BusinessException {
 		Article articleCourant = new Article();
-		List<Article> list = new ArrayList<Article>();
+		List<Article> list = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				// Mise à jour article
 				PreparedStatement prstms;
-				prstms = cnx.prepareStatement(SELECT_ENCHERES + " WHERE " + ADDON_SELECT_VENTE_NON_DEBUT + " AND "
-						+ ADDON_SELECT_MES_VENTES + " AND " + ADDON_SELECT_ARTICLES);
+				prstms = cnx.prepareStatement(
+						SELECT_ENCHERES + " WHERE " + ADDON_SELECT_VENTE_NON_DEBUT + " AND " + ADDON_SELECT_MES_VENTES);
 				prstms.setInt(1, noUser);
-				prstms.setInt(2, noArticle);
+//				prstms.setInt(2, noArticle);
 				ResultSet rs = prstms.executeQuery();
 				while (rs.next()) {
 					articleCourant = new Article(rs.getInt("noUser"), rs.getString("nom_article"),
@@ -448,7 +446,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getString("pseudo"));
 					articleCourant.setMiseAPrix(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("montant_enchere"));
-					articleCourant.setNoArticle(noArticle);
+					articleCourant.setNoArticle(rs.getInt("noArticle"));
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
@@ -473,7 +471,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	@Override
 	public List<Article> selectByNoVendeurIfEnd(int noArticle, int noUser) throws BusinessException {
 		Article articleCourant = new Article();
-		List<Article> list = new ArrayList<Article>();
+		List<Article> list = new ArrayList<>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				// Mise à jour article
@@ -488,7 +486,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getString("pseudo"));
 					articleCourant.setMiseAPrix(rs.getInt("prix_initial"));
 					articleCourant.setPrixVente(rs.getInt("montant_enchere"));
-					articleCourant.setNoArticle(noArticle);
+					articleCourant.setNoArticle(rs.getInt("noArticle"));
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());

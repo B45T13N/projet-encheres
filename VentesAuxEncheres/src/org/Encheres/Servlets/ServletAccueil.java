@@ -93,12 +93,11 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
 					if (request.getParameter("enCours") != null) {
 						for (Article art : listeAAfficher) {
-							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), 0);
+							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), -1);
 						}
 						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("mesEnCours") != null) {
-						System.out.println(noUtilisateur);
 						for (Article art : listeAAfficher) {
 							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur);
 						}
@@ -143,9 +142,8 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
 					if (request.getParameter("enCours") != null) {
 						for (Article art : listeAAfficher) {
-							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), 0);
+							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), -1);
 						}
-						System.out.println(listeTmp);
 						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("mesEnCours") != null) {
