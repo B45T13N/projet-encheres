@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.Encheres.bll.UtilisateurManager;
 import org.Encheres.bo.Utilisateur;
-
+//
 /**
  * Servlet implementation class ServletCreationCompte
  */

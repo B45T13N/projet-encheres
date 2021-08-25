@@ -99,9 +99,7 @@ a:hover{
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
-.enteteMobile{
-	display: none;
-}
+
 @media only screen and (max-width: 599px){
 	#entete{
 		display: flex;
@@ -109,31 +107,15 @@ a:hover{
 		justify-content: space-around;
 		text-align: center;
 	}
-	.enteteMobile{
-		display: flex;
-		flex-direction: column;
-		justify-content: space-around;
-		text-align: center;
-	}
+	
 	.btnGroupLeft{
 		display: flex;
 		flex-direction: column;
 	}
-	.btnGroupLeftMobile{
-		display: flex;
-		flex-direction: column;
-	}
-	.logo{
-		display: block;
-	}
-	.logoMobile{
-		display: block;
-	}
-	.btnLeft{
-		display: block;
-	}
 	
-}
+	
+	
+} /* Fin partie responsive */
 /*Affichage d'un article*/
 
 /*Création compte */
