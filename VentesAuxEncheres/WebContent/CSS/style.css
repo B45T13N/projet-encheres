@@ -118,7 +118,12 @@ a:hover{
 	height: 2em;
 	width: 17em;
 }
-
+.containerRadio{
+	display: flex;
+	margin-left: 5em;
+	
+}
+/*Partie responsive design */
 @media only screen and (max-width: 599px){
 	#entete{
 		display: flex;
@@ -165,7 +170,9 @@ a:hover{
 	#btnRech{
 		margin-left: 2em;
 	}
-	
+	.containerRadio{
+		display: block;
+	}
 	
 } /* Fin partie responsive */
 
