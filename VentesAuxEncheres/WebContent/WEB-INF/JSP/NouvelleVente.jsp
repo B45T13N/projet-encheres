@@ -22,12 +22,12 @@
 	<form action="<%=request.getContextPath()%>/NouvelleVente" method="post">
 		<div>
 			<label for="nomArticle">Article :</label>
-			<input type="text" required="required" name="nomArticle" value="${currentArticle.getNomArticle()}">
-		</div>
+			<input type="text" required="required" name="nomArticle" size="30" value="${currentArticle.getNomArticle()}">
+		</div><br/>
 		<div>
 			<label for="description">Description :</label>
-			<textarea rows="4" cols="3" required="required" name="description"></textarea>
-		</div>
+			<textarea rows="4" cols="28" required="required" name="description"></textarea>
+		</div><br/>
 		<div>
 			<label for="categorie">Catégorie</label>
 			<select required="required" name="libelle">			
@@ -36,35 +36,37 @@
 				<option value="vetement">Vêtement</option>
 				<option value="sport_loisirs">Sport et loisirs</option>		
 			</select>
-		</div>
+		</div><br/>
 		<div>
 			<label>Photo de l'article</label>
 			<input type="button" value="Uploader">
-		</div>
+		</div><br/>
 		<div>
 			<label for="prix">Mise à prix : </label>
 			<input required="required" type="number" name="prix" value="${currentArticle.getMiseAPrix()}">
-		</div>
+		</div><br/>
 		<div>
 			<label for="dateDebut">Début de l'enchère</label>
 			<input required="required" type="date" name="dateDebut" value="${currentArticle.getDateDebutEncheres()}">
-		</div>
+		</div><br/>
 		<div>
 			<label for="dateFin">Fin de l'enchère</label>
 			<input required="required" type="date" name="dateFin" value="${currentArticle.getDateFinEncheres()}">
-		</div>
+		</div><br/>
 		<div>
 			<h4>Retrait</h4>
-			<label for="rue">Rue :</label>
-			<input required="required" type="text" name="rue" value="${currentUser.getRue()}">
+			<div>
+				<label for="rue">Rue :</label>
+				<input required="required" type="text" name="rue" value="${currentUser.getRue()}">
+			</div><br/>
 			<div>
 				<label for="cpo">Code Postal :</label>
 				<input required="required" type="text" name="cpo" value="${currentUser.getCodePostal()}">
-			</div>
+			</div><br/>
 			<label for="ville">Ville :</label>
 			<input required="required" type="text" name="ville" value="${currentUser.getVille()}">
 		</div>
-		
+		<br/>
 		<input type="submit" value="Enregistrer">
 		<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler"></a>		
 	</form>
