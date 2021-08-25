@@ -35,23 +35,32 @@ public class ServletDetailVente extends HttpServlet {
 			throws ServletException, IOException {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		HttpSession session = request.getSession();
+		request.setCharacterEncoding("UTF-8");
 		int idUser = (int) session.getAttribute("id");
 
 		request.setAttribute("session", session);
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		int idGagnant = 0;
 		session.setAttribute("noArticle", noArticle);
 		Article currentArticle = new Article();
 		EnchereManager em = new EnchereManager();
 		ArticleManager am = new ArticleManager();
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur seller = new Utilisateur();
+		Utilisateur user = new Utilisateur();
+		Utilisateur gagnantVente = new Utilisateur();
 		LocalDate date;
 		try {
 			currentArticle = am.selectArticleByNoArticle(noArticle);
 			request.setAttribute("currentArticle", currentArticle);
 			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
 			request.setAttribute("seller", seller);
-			em.selectAcheteur(idUser);
+			user = um.selectByNoUtilisateur(idUser);
+			System.out.println(user.getNoUtilisateur() + seller.getNoUtilisateur());
+			request.setAttribute("user", user);
+			idGagnant = em.selectAcheteur(noArticle);
+			gagnantVente = um.selectByNoUtilisateur(idGagnant);
+			request.setAttribute("gagnantVente", gagnantVente);
 
 		} catch (BusinessException e1) {
 			e1.printStackTrace();

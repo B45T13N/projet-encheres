@@ -25,7 +25,18 @@ public class ServletDeleteVente extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		ArticleManager am = new ArticleManager();
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		int noArticle = (int) session.getAttribute("noArticle");
 
+		try {
+			am.deleteArticle(noArticle);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
+		response.sendRedirect(request.getContextPath() + "/Accueil");
 	}
 
 	/**

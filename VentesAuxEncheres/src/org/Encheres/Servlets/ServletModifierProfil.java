@@ -39,6 +39,7 @@ public class ServletModifierProfil extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
+		request.setCharacterEncoding("UTF-8");
 		String pseudo;
 		String nom;
 		String prenom;

@@ -35,6 +35,7 @@ public class ServletDeleteProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
 		UtilisateurManager deleteUser = new UtilisateurManager();
 		HttpSession session = request.getSession();
 		int userDelete = (int) session.getAttribute("id");

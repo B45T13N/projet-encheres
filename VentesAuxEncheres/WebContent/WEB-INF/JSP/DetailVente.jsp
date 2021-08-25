@@ -36,17 +36,27 @@
 			</c:if>
 		</div>
 	</c:when>
-	<c:when test="${currentArticle.getDateFinEncheres().isBefore(dateJour) && seller.getNoUtilisateur() != user.getNoUtilisateur()}">
+	<c:when test="${seller.getNoUtilisateur() != user.getNoUtilisateur() && user.getNoUtilisateur() == gagnantVente.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
 		<h3>Vous avez remporté la vente !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp" %>
-	        <p>Tel : ${seller.getTelelephone()}</p>
+	        <p>Tel : ${seller.getTelephone()}</p>
 			<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 		</div>	
 	</c:when>
 	
-	<c:when test="${currentArticle.getDateFinEncheres().isBefore(dateJour) && seller.getNoUtilisateur() != user.getNoUtilisateur() }">
-		<h3>${seller.getPseudo()} a remporté l'enchère !</h3>
+	<c:when test="${seller.getNoUtilisateur() == user.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
+		<h3>${gagnantVente.getPseudo()} a remporté l'enchère !</h3>
+		<div class="container">	
+	        <%@include file="AffichageDUnArticle.jsp"%>
+	        <a href="<%=request.getContextPath()%>/DeleteVente">Retrait effectué</a>
+	        <br/>
+			<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
+		</div>	
+	</c:when>
+	
+	<c:when test="${seller.getNoUtilisateur() != user.getNoUtilisateur() && user.getNoUtilisateur() != gagnantVente.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
+		<h3>${user.getPseudo()} dommage, vous êtes trop lent !</h3>
 		<div class="container">	
 	        <%@include file="AffichageDUnArticle.jsp"%>
 			<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
