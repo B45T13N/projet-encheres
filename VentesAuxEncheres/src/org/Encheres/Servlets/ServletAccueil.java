@@ -74,7 +74,7 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 
 		HttpSession sessionScope = request.getSession(); // Init de sessionScope
-
+		sessionScope.setMaxInactiveInterval(10);
 		// Verification si utilisateur connecté
 		if (sessionScope.getAttribute("id") != null) {
 			noUtilisateur = (int) sessionScope.getAttribute("id");

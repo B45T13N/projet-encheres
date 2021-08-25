@@ -1,6 +1,7 @@
 package org.Encheres.Servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(10);
 		String identifiant;
 		String mdp;
 		UtilisateurManager utilisateurManager;
