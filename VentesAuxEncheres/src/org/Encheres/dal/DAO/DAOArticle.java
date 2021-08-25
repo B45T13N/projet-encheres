@@ -28,4 +28,6 @@ public interface DAOArticle extends DAO<Article> {
 
 	public Article selectByNoArticle(int noArticle) throws BusinessException;
 
+	public List<Article> selectVenteIfNotBegin(int noArticle, int noUser) throws BusinessException;
+
 }

@@ -69,9 +69,10 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		String categorie;
 		ArticleManager am = new ArticleManager();
 		UtilisateurManager um = new UtilisateurManager();
-		int noUtilisateur;
+		int noUtilisateur = 0;
 		String articleRechercher = "";
 		List<Article> listeAAfficher = new ArrayList<>();
+		List<Article> listeTmp = new ArrayList<>();
 		List<Integer> listeCodesErreur = new ArrayList<>();
 
 		HttpSession sessionScope = request.getSession(); // Init de sessionScope
@@ -86,62 +87,104 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			if (!request.getParameter("categorie").equals("")) {
 				categorie = request.getParameter("categorie");
 				listeAAfficher = am.selectArticleByCategorie(categorie);
+
 				// Radio boutons et checkbox
 				// 1ere checkbox Achat
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
-
 					if (request.getParameter("enCours") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), 0);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("mesEnCours") != null) {
-
+						System.out.println(noUtilisateur);
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("remportes") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectByNoAcquereurIfEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
+					request.setAttribute("listeAAfficher", listeAAfficher);
 				}
 				// check box filtreVente
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
-
 					if (request.getParameter("venteEnCours") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectVenteIfNotEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("venteNonDebut") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectVenteIfNotBegin(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("venteTerminee") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectByNoVendeurIfEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
+					request.setAttribute("listeAAfficher", listeAAfficher);
 				}
+				request.setAttribute("listeAAfficher", listeAAfficher);
 			} else {
 				// Radio boutons et checkbox
 				// 1ere checkbox Achat
 				listeAAfficher = am.selectAllArticle();
+				request.setAttribute("listeAAfficher", listeAAfficher);
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
-
 					if (request.getParameter("enCours") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), 0);
+						}
+						System.out.println(listeTmp);
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("mesEnCours") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("remportes") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectByNoAcquereurIfEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
+					request.setAttribute("listeAAfficher", listeAAfficher);
 				}
 				// check box filtreVente
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
-
 					if (request.getParameter("venteEnCours") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectVenteIfNotEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("venteNonDebut") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectVenteIfNotBegin(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
 					if (request.getParameter("venteTerminee") != null) {
-
+						for (Article art : listeAAfficher) {
+							listeTmp = am.selectByNoVendeurIfEnd(art.getNoArticle(), noUtilisateur);
+						}
+						listeAAfficher = listeTmp;
 					}
+					request.setAttribute("listeAAfficher", listeAAfficher);
 				}
+				request.setAttribute("listeAAfficher", listeAAfficher);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

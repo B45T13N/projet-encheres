@@ -187,8 +187,28 @@ public class ArticleManager {
 		return this.articleDAO.selectByCategorie(noCategorie);
 	}
 
+	public List<Article> selectArticleIfNotEnd(int noArticle, int noUser) throws BusinessException {
+		return this.articleDAO.selectArticleIfNotEnd(noArticle, noUser);
+	}
+
+	public List<Article> selectByNoAcquereurIfEnd(int noArticle, int noUser) throws BusinessException {
+		return this.articleDAO.selectByNoAcquereurIfEnd(noArticle, noUser);
+	}
+
+	public List<Article> selectVenteIfNotEnd(int noArticle, int noUser) throws BusinessException {
+		return this.articleDAO.selectVenteIfNotEnd(noArticle, noUser);
+	}
+
+	public List<Article> selectByNoVendeurIfEnd(int noArticle, int noUser) throws BusinessException {
+		return this.articleDAO.selectByNoVendeurIfEnd(noArticle, noUser);
+	}
+
 	public Article selectArticleByNoArticle(int noArticle) throws BusinessException {
 		return this.articleDAO.selectByNoArticle(noArticle);
+	}
+
+	public List<Article> selectVenteIfNotBegin(int noArticle, int noUtilisateur) throws BusinessException {
+		return this.articleDAO.selectVenteIfNotBegin(noArticle, noUtilisateur);
 	}
 
 }
