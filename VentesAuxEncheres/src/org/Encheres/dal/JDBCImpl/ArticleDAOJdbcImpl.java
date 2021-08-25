@@ -26,14 +26,27 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie";
 	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, prix_initial, date_fin_encheres, a.no_article, pseudo, c.libelle as libelle"
-			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur WHERE no_categorie=?"
-			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie";
+			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE no_categorie=?";
 	public static final String SELECT_BY_ARTICLE = "SELECT u.no_utilisateur as noUser, description, nom_article, prix_initial, montant_enchere, date_debut_encheres, date_fin_encheres, c.libelle as libelle, "
 			+ "u.pseudo, a.no_article, r.rue as rue, r.code_postal as cpo, r.ville as ville "
 			+ "FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN ENCHERES e ON e.no_article = a.no_article "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie "
 			+ "INNER JOIN RETRAITS r ON r.no_article = a.no_article" + " WHERE a.no_article=?";
+
+	public static final String SELECT_ALL_ARTICLES = "SELECT u.no_utilisateur as noUser, description, nom_article, prix_initial, montant_enchere, date_debut_encheres, date_fin_encheres, c.libelle as libelle, "
+			+ "u.pseudo, a.no_article, r.rue as rue, r.code_postal as cpo, r.ville as ville FROM ARTICLES_VENDUS INNER JOIN UTILISATEUR INNER JOIN ENCHERES WHERE date_fin_encheres > GETDATE() ORDER BY date_fin_encheres DESC";
+
+	public static final String SELECT_ENCHERES_USER = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur =? AND date_fin_encheres > GETDATE() ORDER BY date_fin_encheres DESC";
+
+	public static final String SELECT_ENCHERES_USER_CLAIMED = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur =? AND date_fin_encheres < GETDATE() ORDER BY date_fin_encheres DESC";
+
+	public static final String SELECT_SALES_IN_PROGRESS = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur =? AND date_fin_encheres > GETDATE() ORDER BY date_fin_encheres DESC";
+
+	public static final String SELECT_SALES_NOT_STARTED = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur =? AND date_debut_encheres < GETDATE() ORDER BY date_debut_encheres DESC";
+
+	public static final String SELECT_SALES_SOLD = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur =? AND date_fin_encheres < GETDATE() ORDER BY date_fin_encheres DESC";
 
 	@Override
 	public void insert(Article data) throws BusinessException {
@@ -280,5 +293,4 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 
 		return articleCourant;
 	}
-
 }
