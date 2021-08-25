@@ -23,12 +23,12 @@
 	<form class="formulairePageConnexion" action="<%=request.getContextPath()%>/PageDeConnexion" method="post">
 
 		<div class="champsSaisie">			
-			<label for="identifiant" class="id">Identifiant :</label>
-			<input type="text" name="identifiant" autofocus="autofocus" class="case"required>
+			<label for="pseudo" class="id">Identifiant :</label>
+			<input type="text" name="pseudo" autofocus="autofocus" class="case"required value="<c:out value="${pseudo}"/>">
 		</div>
 		<div class="champsSaisie">
 			<label for="mdp" class="mdp">Mot de passe :</label>
-			<input type="password" name="mdp" required class="case">
+			<input type="password" name="mdp" required class="case" value="<c:out value="${mdp}"/>" >
 		</div>
 		<p>${errMdp}</p>
 		<div>
@@ -37,7 +37,7 @@
 			</div>
 			<div>
 				<label class="btn" for="save">Se souvenir de moi</label> 
-				<input  type="checkbox" name="save">
+				<input  type="checkbox" name="save"  value="active">
 			</div>			
 		</div>
 		<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" class="btn" value="Créer un compte"> </a>
