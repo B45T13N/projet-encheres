@@ -12,35 +12,39 @@
 </head>
 <body>
 	<header id="entete">			
-			<div class="logo">		
+			<div class="logo correctifPageCo">		
 				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 			</div>
 	</header>
 
-	<h1 class="titreH1">Identification</h1>
+	<h1 class="titrePageConnexion">Identification</h1>
 
 
 	<form class="formulairePageConnexion" action="<%=request.getContextPath()%>/PageDeConnexion" method="post">
 
-		<div class="champsSaisie">			
-			<label for="pseudo" class="id">Identifiant :</label>
-			<input type="text" name="pseudo" autofocus="autofocus" class="case"required value="<c:out value="${pseudo}"/>">
-		</div>
-		<div class="champsSaisie">
-			<label for="mdp" class="mdp">Mot de passe :</label>
-			<input type="password" name="mdp" required class="case" value="<c:out value="${mdp}"/>" >
-		</div>
-		<p>${errMdp}</p>
-		<div>
-			<div>
-				<input class="btn" type="submit" value="connexion">
+		<div class= "champsSaisie">
+			<div class="idPageCoParent">
+				<label for="pseudo" class="idPageCo">Identifiant :</label>
+				<input type="text" name="pseudo" size="30" autofocus="autofocus" class="case"required value="<c:out value="${pseudo}"/>">
 			</div>
-			<div>
-				<label class="btn" for="save">Se souvenir de moi</label> 
-				<input  type="checkbox" name="save"  value="active">
-			</div>			
+			<div class="mdpPageCoParent">
+				<label for="mdp" class="mdpPageCo">Mot de passe :</label>
+			</div>	<input type="password" name="mdp" size="30" required class="case" value="<c:out value="${mdp}"/>" >
 		</div>
-		<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" class="btn" value="Créer un compte"> </a>
+			<div class="erreurPageCo"><p>${errMdp}</p></div>
+		<div class="boutonConnexion">
+			<div class="connexionPageCo">
+				<input class="btnCo" type="submit" value="Connexion">
+			</div>
+			<div class="remember">
+				<label class="btnRemember" for="save">Se souvenir de moi</label> 
+				<input  type="checkbox" name="save" checked="checked" value="active">
+			</div>		
+			<div class="creaComptePageCo">
+				<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" class="btnCreaCompte" value="Créer un compte"> </a>	
+			</div>
+		</div>
+		
 
 	</form>
 

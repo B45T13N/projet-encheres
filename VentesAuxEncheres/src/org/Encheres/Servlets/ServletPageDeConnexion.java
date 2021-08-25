@@ -82,9 +82,12 @@ public class ServletPageDeConnexion extends HttpServlet {
 					response.addCookie(cookieMDP);
 				} else {
 					cookies[0].setMaxAge(0);
+					if(cookies.length >1) {
 					cookies[1].setMaxAge(0);
-					response.addCookie(cookies[0]);
 					response.addCookie(cookies[1]);
+					}
+					response.addCookie(cookies[0]);
+					
 				}
 
 			}

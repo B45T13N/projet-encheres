@@ -197,47 +197,111 @@ a:hover{
 }
 
 
-/*Page de connexion */
+/*PAGE DE CONNEXION*/
 
-.formulairePageConnexion {
-	flex-direction: column;
-	margin-top: 3em;
-	width: 30em;
+/*correctif logo page de connexion*/
+.correctifPageCo {
+	margin: 0 auto;
+	margin-bottom: 100px;
+	margin-top: 20px;
 }
-.id {
-	font-weight: bold;
+
+.titrePageConnexion {
+	font-size: 30px;
+	text-align: center;
 	color: #303030;
 }
-.mdp{
-	color: #303030;
-	font-weight: bold;
-}
+
 .champsSaisie {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	width: 250px;
+	margin: 0 auto;
 }
-.champsBouton {
-	padding: 1em;
-	display: inline;
+.idPageCoParent {
+	margin-bottom: 5px;
 }
-.btn{
-	
-	padding: 1em;
+.mdpPageCoParent {
+	margin-bottom: 5px;
+}
+.idPageCo {
+	color:white; 
+	margin-bottom:5px;
+}
+.mdpPageCo {
+	color:white;
+	margin-bottom:5px;
 }
 .case {
 	height: 25px;
 	border-radius: 30px;
 	text-align:center;
+	border: solid 1px #7b38d8;
 }
-.titrePageConnexion {
-	font-size: 20px;
+.case:hover {
+	background-color: green;
 }
-.titrePageConnexion h1 {
+.erreurPageCo {
+	color: red;
+	text-align:center;
+}
+.boutonConnexion {
+	display: flex;
+	flex-direction: column;
+}
+.connexionPageCo {
 	text-align: center;
-	color: #303030;
 }
+.remember {
+	margin: 0 auto;
+	margin-top: 10px;
+}
+.btnCo {
+	background-color: #7b38d8;
+	border-radius: 10px;
+	border: 4px double #cccccc;
+	color: #eeeeee;
+	text-align: center;
+	font-size: 20px;
+	padding: 15px;
+	width: 200px;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	cursor: pointer;
+}
+.btnCo:hover {
+	background-color: green;
+}
+.btnRemember {
+	width: 130px;
+	color:white;
+}
+
+.btnCreaCompte {
+	background-color: #7b38d8;
+	border-radius: 10px;
+	border: 4px double #cccccc;
+	color: #eeeeee;
+	text-align: center;
+	font-size: 16px;
+	width: 200px;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	cursor: pointer;
+}
+.btnCreaCompte:hover {
+	background-color: green;
+}
+.creaComptePageCo {
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
 .piedPageConnexion {
 	text-align:center;
 	margin-top: 50px;
 }
-
-
