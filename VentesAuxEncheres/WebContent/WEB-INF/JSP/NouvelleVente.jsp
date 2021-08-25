@@ -13,7 +13,6 @@
 <body>
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
 	<header>
-			
 			<div class="logo">		
 				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 			</div>
