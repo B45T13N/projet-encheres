@@ -63,7 +63,7 @@ public class ServletCreationCompte extends HttpServlet {
 		Utilisateur utilisateur = new Utilisateur();
 		RequestDispatcher rd;
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(10);
+		session.setMaxInactiveInterval(300);
 		try {
 			pseudo = request.getParameter("pseudo");
 			nom = request.getParameter("nom");

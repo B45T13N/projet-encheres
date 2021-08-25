@@ -48,7 +48,7 @@ public class ServletPageDeConnexion extends HttpServlet {
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(10);
+		session.setMaxInactiveInterval(300);
 		String identifiant;
 		String mdp;
 		UtilisateurManager utilisateurManager;
