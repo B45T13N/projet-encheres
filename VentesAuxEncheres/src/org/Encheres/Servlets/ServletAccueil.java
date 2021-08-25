@@ -86,38 +86,63 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 			if (!request.getParameter("categorie").equals("")) {
 				categorie = request.getParameter("categorie");
 				listeAAfficher = am.selectArticleByCategorie(categorie);
+				// Radio boutons et checkbox
+				// 1ere checkbox Achat
+				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
+
+					if (request.getParameter("enCours") != null) {
+
+					}
+					if (request.getParameter("mesEnCours") != null) {
+
+					}
+					if (request.getParameter("remportes") != null) {
+
+					}
+				}
+				// check box filtreVente
+				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
+
+					if (request.getParameter("venteEnCours") != null) {
+
+					}
+					if (request.getParameter("venteNonDebut") != null) {
+
+					}
+					if (request.getParameter("venteTerminee") != null) {
+
+					}
+				}
 			} else {
+				// Radio boutons et checkbox
+				// 1ere checkbox Achat
 				listeAAfficher = am.selectAllArticle();
-			}
+				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
 
-			// Radio boutons et checkbox
-			// 1ere checkbox Achat
-			if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
+					if (request.getParameter("enCours") != null) {
 
-				if (request.getParameter("enCours") != null) {
+					}
+					if (request.getParameter("mesEnCours") != null) {
 
+					}
+					if (request.getParameter("remportes") != null) {
+
+					}
 				}
-				if (request.getParameter("mesEnCours") != null) {
+				// check box filtreVente
+				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
 
-				}
-				if (request.getParameter("remportes") != null) {
+					if (request.getParameter("venteEnCours") != null) {
 
-				}
-			}
-			// check box filtreVente
-			if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
+					}
+					if (request.getParameter("venteNonDebut") != null) {
 
-				if (request.getParameter("venteEnCours") != null) {
+					}
+					if (request.getParameter("venteTerminee") != null) {
 
-				}
-				if (request.getParameter("venteNonDebut") != null) {
-
-				}
-				if (request.getParameter("venteTerminee") != null) {
-
+					}
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			listeCodesErreur.add(3010);
