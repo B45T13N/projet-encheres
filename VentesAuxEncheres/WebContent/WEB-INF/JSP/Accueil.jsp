@@ -33,7 +33,7 @@
 			</c:if>
 		</div>
 	</header>
-	//
+	
 	<h1 class="titreH1">Liste des enchères</h1>
 	<br/>
 	

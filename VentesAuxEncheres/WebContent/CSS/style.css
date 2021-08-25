@@ -40,11 +40,10 @@ a:hover{
 }
 
 .btnLeft{
-	display: block;
-	text-align: center;
-	float: right;
-	padding: 10px;
-}
+	display: inline-block;
+	padding-top: 10px;
+	margin-right: 1em;
+} 
 .barreRch{
 	border-radius: 25px;
 	
@@ -111,11 +110,15 @@ a:hover{
 	.btnGroupLeft{
 		display: flex;
 		flex-direction: column;
+		margin: 0px;
+	}
+	.logo{
+		display: block;
+		margin: 0px;
 	}
 	
-	
-	
 } /* Fin partie responsive */
+
 /*Affichage d'un article*/
 
 /*Création compte */
