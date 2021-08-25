@@ -33,6 +33,23 @@
 			</c:if>
 		</div>
 	</header>
+	<section class="enteteMobile">
+		<div class="logoMobile">		
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
+		<div class="btnGroupLeftMobile">
+			<c:if test="${empty sessionScope.id}">
+			<p><a class="btnLeftMobile" href="<%=request.getContextPath()%>/PageDeConnexion">S'inscrire - Se connecter</a></p>
+			</c:if>
+			<c:if test="${!empty sessionScope.id}">
+			<a class="btnLeftMobile" href="${pageContext.request.contextPath}/Deconnecte">Déconnexion</a>
+			<a class="btnLeftMobile" href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a>	
+			<a class="btnLeftMobile" href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a>
+			<a class="btnLeftMobile" href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Enchères</a>		
+
+			</c:if>
+		</div>
+	</section>
 	<h1 class="titreH1">Liste des enchères</h1>
 	<br/>
 	
