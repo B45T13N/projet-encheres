@@ -178,4 +178,15 @@ public class UtilisateurManager {
 		return this.daoUtilisateur.selectByNoUtilisateur(noUtilisateur);
 
 	}
+
+	public Utilisateur selectUtilisateurByEmail(String email) throws BusinessException {
+
+		return this.daoUtilisateur.selectUtilisateurByEmail(email);
+
+	}
+
+	public Utilisateur updatePasswordByEmail(String motDePasse, String email) throws BusinessException {
+
+		return this.daoUtilisateur.updatePasswordByEmail(motDePasse, email);
+	}
 }

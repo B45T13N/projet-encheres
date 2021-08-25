@@ -1,12 +1,16 @@
 package org.Encheres.dal;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.Encheres.BusinessException;
+import org.Encheres.dal.JDBCImpl.UtilisateurDAOJdbcImpl;
 
 /**
  * Servlet implementation class ServletTestConnexion
@@ -29,6 +33,17 @@ public class ServletTestConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		PrintWriter out = response.getWriter();
+		UtilisateurDAOJdbcImpl user = new UtilisateurDAOJdbcImpl();
+
+		try {
+			user.updatePasswordByEmail("pedroEni123", "modif@test.fr");
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 //
 //		PrintWriter out = response.getWriter();
 //		UtilisateurDAOJdbcImpl user = new UtilisateurDAOJdbcImpl();

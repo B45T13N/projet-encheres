@@ -16,4 +16,8 @@ public interface DAOUtilisateur extends DAO<Utilisateur> {
 
 	public Utilisateur selectUtilisateurCourant(String login, String password) throws BusinessException;
 
+	public Utilisateur selectUtilisateurByEmail(String email) throws BusinessException;
+
+	public Utilisateur updatePasswordByEmail(String motDePasse, String email) throws BusinessException;
+
 }

@@ -51,6 +51,10 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 	}
 
+	public Utilisateur(String email) {
+		this.email = email;
+	}
+
 	public Utilisateur() {
 
 	}
@@ -237,5 +241,4 @@ public class Utilisateur {
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + "]";
 	}
-
 }

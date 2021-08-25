@@ -23,6 +23,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String SELECT_USER_BY_PASSWORD = "SELECT * FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
 
+	public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ? ";
+
+	public static final String UPDATE_PASSWORD = "UPDATE UTILISATEURS SET mot_de_passe =? WHERE email =?";
+
 	@Override
 	public void insert(Utilisateur data) throws BusinessException {
 
@@ -189,6 +193,65 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(10004);
+			throw businessException;
+		}
+		return user;
+	}
+
+	@Override
+	public Utilisateur selectUtilisateurByEmail(String email) throws BusinessException {
+
+		Utilisateur user = new Utilisateur();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement prstms = cnx.prepareStatement(SELECT_USER_BY_EMAIL);
+			prstms.setString(1, email);
+			ResultSet rs = prstms.executeQuery();
+			while (rs.next()) {
+				if (rs.getString("email").equals(email)) {
+					user = new Utilisateur(rs.getString("email"));
+					user.setEmail(email);
+				} else {
+					user.setEmail("mauvaise saisie!");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10004);
+			throw businessException;
+		}
+		return user;
+	}
+
+	@Override
+	public Utilisateur updatePasswordByEmail(String motDePasse, String email) throws BusinessException {
+		Utilisateur user = new Utilisateur();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				cnx.setAutoCommit(false);
+				PreparedStatement prstms = cnx.prepareStatement(UPDATE_PASSWORD);
+				prstms.setString(1, motDePasse);
+				prstms.setString(2, email);
+
+//				user.setMotDePasse(motDePasse);
+
+				prstms.executeUpdate();
+				prstms.close();
+				cnx.commit();
+
+				cnx.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+			}
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10001);
 			throw businessException;
 		}
 		return user;
