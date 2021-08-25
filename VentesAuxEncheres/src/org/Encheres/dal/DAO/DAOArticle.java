@@ -18,6 +18,14 @@ public interface DAOArticle extends DAO<Article> {
 
 	public List<Article> selectByCategorie(int noCategorie) throws BusinessException;
 
+	public List<Article> selectArticleIfNotEnd(int noArticle, int noUser) throws BusinessException;
+
+	public List<Article> selectByNoAcquereurIfEnd(int noArticle, int noUser) throws BusinessException;
+
+	public List<Article> selectVenteIfNotEnd(int noArticle, int noUser) throws BusinessException;
+
+	public List<Article> selectByNoVendeurIfEnd(int noArticle, int noUser) throws BusinessException;
+
 	public Article selectByNoArticle(int noArticle) throws BusinessException;
 
 }
