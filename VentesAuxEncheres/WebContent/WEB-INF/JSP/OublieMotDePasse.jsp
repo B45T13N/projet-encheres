@@ -12,10 +12,8 @@
 <title>Mot de Passe Oublié</title>
 </head>
 <body>
-	<header>
-		<div class="logoOublie">		
+	<header id="entete">
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
-		</div>
 	</header>
 	<form action="<%=request.getContextPath()%>/OublieMotDePasse" method="post">
 		<div class="oubliePass">
@@ -37,7 +35,7 @@
 			</div>
 			
 			<div class="oublieRedirect">
-				<p>Un lien pour reinitialiser votre mot de passe a était envoyé a l'adresse ${email} .</p>
+				<p>Un lien pour reinitialiser votre mot de passe a était envoyé a l'adresse ${email}.</p>
 			</div>
 			<div style="align-item: center">
 				<a style="text-decoration: none;" href="<%=request.getContextPath()%>/ReinitialiserPassword"><input type="button" value="Modifier" class="oublieButton"></a>
