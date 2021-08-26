@@ -16,43 +16,68 @@
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 		</div>
 	</header>
-	<h2>Modifier mon profil</h2>
+	<h2 class="titreModif">Modifier mon profil</h2>
 	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
-		<br>
-		<label for="pseudo">Pseudo : </label>
-		<input type="text" name="pseudo">
-		<label for="nom">Nom : </label>
-		<input type="text" name="nom">
-		<br>
-		<label for="prenom">Prenom :</label>
-		<input type="text" name="prenom">
-		<label for="email">Email :</label>
-		<input type="text" name="email">
-		<br>
-		<label for="telephone">Teléphone :</label>
-		<input type="text" name="telephone">
-		<label for="rue">Rue :</label>
-		<input type="text" name="rue">
-		<br>
-		<label for="code_postal">Code Postal :</label>
-		<input type="text" name="code_postal">
-		<label for="ville">Ville :</label>
-		<input type="text" name="ville">
-		<br>
-		<label for="motDePasse">Mot de passe actuel : </label>
-		<input type="password" name="motDePasse" required>
-		<br>
-		<label for="newMotDePasse">Nouveau mot de passe : </label>
-		<input type="password" name="newMotDePasse">
-		<label for="confirmMotDePasse">Confirmation mot de passe : </label>
-		<input type="password" name="confirmMotDePasse">
-		<br>
-		<br>
-		<input type="submit" value="Enregistrer" id="register">
+	<div class="formulaireModifierProfil">
+		<div class="coteGaucheModifProfil">
+			<p>
+				<label for="pseudo">Pseudo : </label>
+				<input type="text" name="pseudo" class="caseFormModifProfil">
+			</p>
+			<p>
+				<label for="prenom">Prenom :</label>
+				<input type="text" name="prenom" class="caseFormModifProfil">
+			</p>
+			<p>
+				<label for="telephone">Téléphone :</label>
+				<input type="text" name="telephone" class="caseFormModifProfil">
+			</p>
+			<p>
+				<label for="code_postal">Code Postal :</label>
+				<input type="text" name="code_postal" class="caseFormModifProfil">
+			</p>
+			<p>
+				<label for="motDePasse">Mot de passe actuel : </label>
+				<input type="password" name="motDePasse" required class="caseFormModifProfil">
+			</p>
+			<p>
+				<label for="confirmMotDePasse">Confirmation mot de passe : </label>
+				<input type="password" name="confirmMotDePasse" class="caseFormModifProfil">
+			</p>
+		</div>
+		<div class="coteDroitModifProfil">
+			<p>
+				<label for="nom">Nom : </label>
+				<input type="text" name="nom" class="caseFormModifProfil" >
+			</p>
+			<p>
+				<label for="email">Email :</label>
+				<input type="text" name="email" class="caseFormModifProfil" >
+			</p>
+			<p>
+				<label for="rue">Rue :</label>
+				<input type="text" name="rue" class="caseFormModifProfil" >
+			</p>
+			<p>
+				<label for="ville">Ville :</label>
+				<input type="text" name="ville" class="caseFormModifProfil" >
+			</p>
+			<p>
+				<label for="newMotDePasse" style="width: 100px; margin-right:50px;">Nouveau mot de passe : </label>
+				<input type="password" name="newMotDePasse" class="caseFormModifProfil" >
+			</p>
+		</div>
+	</div>
+		<div class="btnParentEnregistrerProfil">
+		<input type="submit" value="Enregistrer" id="register" class="btnEnregistrerProfil">
+		</div>
 	</form>
 	<form action="<%=request.getContextPath()%>/DeleteProfil" method="post">
-		<input type="submit" value="Supprimer mon compte" id="delete">
+	<div class="btnParentSupprimerCompte">
+		<input type="submit" value="Supprimer mon compte" id="delete" class="btnSupprimerCompte">
+	</div>
 	</form>
+
 	<footer class="piedPageConnexion">
 		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
 	</footer>
