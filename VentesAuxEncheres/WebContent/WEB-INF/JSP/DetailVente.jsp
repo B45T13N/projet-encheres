@@ -37,7 +37,7 @@
 						<input type="number" id="champProposition" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 						<input type="submit" value="Enchérir" id="btnEnregistrer">
 					</form>	<br/>
-					<button><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
+					<button class="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 				</c:if>
 	</div>	
 		</c:when>
