@@ -83,6 +83,7 @@ public class ServletVente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(300);
 		String urlPhoto = "";
@@ -170,7 +171,7 @@ public class ServletVente extends HttpServlet {
 	}
 
 	public void init() throws ServletException {
-		uploadPath = "E:\\git\\projet-encheres\\VentesAuxEncheres\\WebContent" + IMAGES_FOLDER;
+		uploadPath = getServletContext().getRealPath(IMAGES_FOLDER);
 		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists())
 			uploadDir.mkdir();

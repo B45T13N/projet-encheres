@@ -42,7 +42,7 @@
 		<div>
 			<label>Photo de l'article</label>
 	            <input type="file" name="multiPartServlet" accept="image/*" multiple
-	                   onchange="readFilesAndDisplayPreview(this.files);" />
+	                   onchange="readFilesAndDisplayPreview(this.files);" required/>
 		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="prix">Mise à prix : </label>
