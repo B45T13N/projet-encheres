@@ -140,13 +140,13 @@ a:hover{
 		flex-direction: column;
 		justify-content: flex-end;
 	}
-	#btnEnregistrer{
+	#btnEnregistrer #btnAnnuler{
 	background-color: #000;
 	border-radius: 10px;
 	border: 4px double #cccccc;
 	color: white;
 	text-align: center;
-	font-size: 28px;
+	font-size: 20px;
 	padding: 20px;
 	width: 150px;
 	-webkit-transition: all 0.4s;
