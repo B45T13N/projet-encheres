@@ -92,7 +92,6 @@ public class ServletVente extends HttpServlet {
 			if (fileName != "Default.file") {
 				urlPhoto = fileName;
 			}
-			System.out.println(urlPhoto);
 			String fullPath = uploadPath + File.separator + fileName;
 			part.write(fullPath);
 		}

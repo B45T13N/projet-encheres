@@ -122,7 +122,7 @@
 		<article class="cardVente">
 			<div class="imageVente">
 				<a href="<%=request.getContextPath()%>/DetailVente?noArticle=${article.getNoArticle()}">
-					<img src="<%=request.getContextPath()%>/Images/${article.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"> <!-- URL image à faire ainsi que les ALT -->
+					<img src="<%=request.getContextPath()%>/Images/${article.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"  class="imgArticle"> <!-- URL image à faire ainsi que les ALT -->
 				</a>
 			</div>
 			<div class="detailVente">
