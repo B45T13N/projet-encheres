@@ -34,4 +34,6 @@ public interface DAOArticle extends DAO<Article> {
 
 	public void deleteArticleByNoUser(int noUser) throws BusinessException;
 
+	public List<Article> selectArticleWhere(String contient) throws BusinessException;
+
 }

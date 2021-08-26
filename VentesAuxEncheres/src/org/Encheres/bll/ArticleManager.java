@@ -235,4 +235,7 @@ public class ArticleManager {
 		return this.articleDAO.selectVenteIfNotBegin(noArticle, noUtilisateur);
 	}
 
+	public List<Article> selectArticleWhere(String contient) throws BusinessException {
+		return this.articleDAO.selectArticleWhere(contient);
+	}
 }

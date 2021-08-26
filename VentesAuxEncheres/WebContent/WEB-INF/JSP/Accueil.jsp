@@ -41,7 +41,7 @@
 <br/>
 		
 			<form action="<%=request.getContextPath()%>/Accueil" method="POST"> <!-- Method="GET" ???? -->
-				<input type="search" placeholder=" Le nom de l'article contient" size="50" class="barreRch">
+				<input type="search" placeholder=" Le nom de l'article contient" size="50" class="barreRch" name="contient">
 				<br/>
 				<br/>
 				<div class="containerAllCategorie">

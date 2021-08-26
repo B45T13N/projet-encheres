@@ -25,6 +25,9 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, description, url_photo, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
 			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
+	public static final String SELECT_ALL_WHERE = "SELECT u.no_utilisateur, nom_article, description, url_photo, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
+			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE()) AND nom_article LIKE ?";
 	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, description, url_photo , c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE c.no_categorie=? AND (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
@@ -67,7 +70,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 				PreparedStatement prstms = cnx.prepareStatement(INSERT_ARTICLE,
 						PreparedStatement.RETURN_GENERATED_KEYS);
 
-				prstms.setString(1, data.getNomArticle());
+				prstms.setString(1, data.getNomArticle().toLowerCase());
 				prstms.setString(2, data.getDescription());
 
 				prstms.setDate(3, Date.valueOf(data.getDateDebutEncheres()));
@@ -596,6 +599,43 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
 			throw businessException;
 		}
+	}
+
+	@Override
+	public List<Article> selectArticleWhere(String contient) throws BusinessException {
+		List<Article> list = new ArrayList<Article>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				cnx.setAutoCommit(false);
+				// Mise à jour article
+				PreparedStatement prstms = cnx.prepareStatement(SELECT_ALL_WHERE);
+				prstms.setString(1, "%" + contient.toLowerCase() + "%");
+				ResultSet rs = prstms.executeQuery();
+
+				Article art = null;
+				while (rs.next()) {
+					art = new Article(rs.getInt("no_utilisateur"), rs.getString("nom_article"),
+							rs.getString("description"), rs.getString("libelle"),
+							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"),
+							rs.getString("pseudo"));
+					art.setNoArticle(rs.getInt("noArticle"));
+					art.setUrlPhoto(rs.getString("url_photo"));
+					list.add(art);
+				}
+				prstms.close();
+				cnx.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		} catch (Exception e) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_ARTICLE_FAIL);
+			throw businessException;
+		}
+
+		return list;
 	}
 
 }
