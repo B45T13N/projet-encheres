@@ -17,21 +17,39 @@
 		</div>
 	</header>
 	<div>
-		<p>Pseudo : ${pseudo}</p>
-		<div>
-			<p>Nom : ${nom}
-			<br>
-			Prenom : ${prenom}
-			<br>
-			Email : ${email}
-			<br>
-			Teléphone : ${telephone}
-			<br>
-			Rue : ${rue}
-			<br>
-			Code Postal : ${code_postal}
-			<br>
-			Ville : ${ville}</p>
+		<div class ="blockProfil">
+			<h3 class="lineProfil">
+				<div>Pseudo :</div>
+				<div>${pseudo}</div>
+			</h3>
+			<h3 class="lineProfil">
+				<div>Nom : </div>
+				<div>${nom}</div>
+			</h3>
+			<h3 class="lineProfil">
+            	<div>Prenom : </div>
+				<div>${prenom}</div>
+			</h3>
+			<h3 class="lineProfil">
+				<div>Email : </div>
+				<div>${email}</div>
+			</h3>
+			<h3 class="lineProfil">
+				<div>Teléphone : </div>
+				<div>${telephone}</div>
+			</h3>
+			<h3 class="lineProfil">
+				<div>Rue : </div>
+				<div>${rue}</div>
+			</h3>
+			<h3 class="lineProfil">
+				<div>Code Postal : </div>
+				<div>${code_postal}</div>
+			</h3>
+			<h3 class="lineProfil">
+				<div>Ville : </div>
+				<div>${ville}</div>
+			</h3>
 			<c:if test="${noUtilisateur == idVendeur}">
 				<div>
 					<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
