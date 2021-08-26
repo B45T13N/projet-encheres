@@ -152,7 +152,14 @@ public class ServletVente extends HttpServlet {
 //			Enchere enchere = new Enchere();
 
 			try {
-				am.addArticle(article, rue, ville, codePostal);
+				int idArticle = 0;
+				if (session.getAttribute("noArticle") != null) {
+					idArticle = (int) session.getAttribute("noArticle");
+					article.setNoArticle(idArticle);
+					am.updateArticle(article);
+				} else {
+					am.addArticle(article, rue, ville, codePostal);
+				}
 				response.sendRedirect(request.getContextPath() + "/Accueil");
 			} catch (BusinessException e1) {
 				e1.printStackTrace();
