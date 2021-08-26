@@ -1,4 +1,6 @@
 <h4>${currentArticle.getNomArticle()}</h4>
+<img src="/VentesAuxEncheres/Images/${currentArticle.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"  class="imgArticle">
+
 	<p>	
 		Description : 	
 		${currentArticle.getDescription()}

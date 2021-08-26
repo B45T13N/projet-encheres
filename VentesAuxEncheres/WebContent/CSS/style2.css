@@ -78,7 +78,7 @@ a:hover{
 	text-align: center;
 }
 .containerDetailVente{
-	width: 600px;
+	width: 50%;
 	margin: auto;
 /*	padding-top: 3em;*/
 }
@@ -113,6 +113,9 @@ a:hover{
 }
 #btnRetour a{
 	color: white;
+}
+.titreH1DetailVente{
+	text-align: center;
 }
 /* Mon profil 
 .lineProfil {
@@ -164,20 +167,50 @@ a:hover{
 		flex-direction: column;
 		justify-content: flex-end;
 	}
-	#btnEnregistrer #btnAnnuler{
-	background-color: #000;
-	border-radius: 10px;
-	border: 4px double #cccccc;
-	color: white;
-	text-align: center;
-	font-size: 20px;
-	padding: 20px;
-	width: 100px;
-	-webkit-transition: all 0.4s;
-	-moz-transition: all 0.4s;
-	-o-transition: all 0.4s;
-	transition: all 0.4s;
-	cursor: pointer;
+	#btnAnnuler{
+		background-color: #000;
+		border-radius: 10px;
+		border: 4px double #cccccc;
+		color: white;
+		text-align: center;
+		font-size: 20px;
+		padding: 20px;
+		width: 100px;
+		-webkit-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		transition: all 0.4s;
+		cursor: pointer;
+	}
+	#btnEnregistrer{
+		background-color: #000;
+		border-radius: 10px;
+		border: 4px double #cccccc;
+		color: white;
+		text-align: center;
+		font-size: 20px;
+		padding: 20px;
+		width: 150px;
+		-webkit-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		transition: all 0.4s;
+		cursor: pointer;
+	}
+	#btnRetour{
+		background-color: #000;
+		border-radius: 10px;
+		border: 4px double #cccccc;
+		color: white;
+		text-align: center;
+		font-size: 20px;
+		padding: 20px;
+		width: 150px;
+		-webkit-transition: all 0.4s;
+		-moz-transition: all 0.4s;
+		-o-transition: all 0.4s;
+		transition: all 0.4s;
+		cursor: pointer;
 	}
 	#champProposition{
 		width: 50px;

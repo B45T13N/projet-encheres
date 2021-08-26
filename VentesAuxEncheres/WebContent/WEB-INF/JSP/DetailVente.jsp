@@ -27,7 +27,7 @@
 	<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
 	
 	<div class="containerDetailVente">	
-			<h1>Détail vente</h1>
+			<h1 class="titreH1DetailVente">Détail vente</h1>
 			
 				
 		        <%@include file="AffichageDUnArticle.jsp" %>
