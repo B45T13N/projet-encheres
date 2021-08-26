@@ -51,19 +51,25 @@ public class ServletReinitialiserPassword extends HttpServlet {
 		Utilisateur verifiedEmail = new Utilisateur();
 
 		String newPassword = request.getParameter("newPassword");
+		request.setAttribute("newPassword", newPassword);
 		String confirmPassword = request.getParameter("confirmPassword");
+		request.setAttribute("confirmPassword", confirmPassword);
 		String email = request.getParameter("email");
+		request.setAttribute("email", email);
 
 		try {
 
 			verifiedEmail = utilisateurManager.selectUtilisateurByEmail(email);
+			verifiedEmail.getEmail();
 
-			if (verifiedEmail == null && newPassword != confirmPassword) {
+			if (verifiedEmail.getEmail() == null && newPassword != confirmPassword) {
+				request.setAttribute("erreurEmail", "Email");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/ReinitialiserPassword.jsp");
 				rd.forward(request, response);
 			} else if (verifiedEmail.equals(email) && newPassword.equals(confirmPassword)) {
 				updatePassword = utilisateurManager.updatePasswordByEmail(newPassword, email);
-				response.sendRedirect(request.getContextPath() + "/PageDeConnexion");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/ReinitialiserPassword.jsp");
+				rd.forward(request, response);
 			}
 
 		} catch (BusinessException e) {
