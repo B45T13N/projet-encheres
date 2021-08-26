@@ -257,7 +257,7 @@ a:hover{
 	height: 25px;
 	border-radius: 30px;
 	text-align:center;
-	border: solid 1px #7b38d8;
+	border: solid 1px #000;
 }
 .case:hover {
 	background-color: green;
@@ -278,7 +278,7 @@ a:hover{
 	margin-top: 10px;
 }
 .btnCo {
-	background-color: #7b38d8;
+	background-color: #000;
 	border-radius: 10px;
 	border: 4px double #cccccc;
 	color: #eeeeee;
@@ -293,15 +293,23 @@ a:hover{
 	cursor: pointer;
 }
 .btnCo:hover {
-	background-color: green;
+	background-color: #154A80;
 }
 .btnRemember {
 	width: 130px;
 	color:white;
 }
 
+.lienMDPOubliie {
+	margin: 0 auto;
+}
+.lienMDPOublie,a {
+	color : blue;
+	text-decoration : underline;
+	
+}
 .btnCreaCompte {
-	background-color: #7b38d8;
+	background-color: #000;
 	border-radius: 10px;
 	border: 4px double #cccccc;
 	color: #eeeeee;
@@ -315,7 +323,7 @@ a:hover{
 	cursor: pointer;
 }
 .btnCreaCompte:hover {
-	background-color: green;
+	background-color: #154A80;
 }
 .creaComptePageCo {
 	margin: 0 auto;

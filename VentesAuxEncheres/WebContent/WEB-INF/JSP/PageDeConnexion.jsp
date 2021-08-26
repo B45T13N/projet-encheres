@@ -42,6 +42,9 @@
 				<label class="btnRemember" for="save">Se souvenir de moi</label> 
 				<input  type="checkbox" name="save" checked="checked" value="active">
 			</div>		
+			<div class="lienMDPOubliie"> 
+				<a href="<%=request.getContextPath()%>/OublieMotDePasse"> Mot de passe oublié</a>
+			</div>	
 			<div class="creaComptePageCo">
 				<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" class="btnCreaCompte" value="Créer un compte"> </a>	
 			</div>
