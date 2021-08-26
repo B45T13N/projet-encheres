@@ -15,7 +15,7 @@
 <title>Détail de la vente</title>
 </head>
 <body>
-	<header >
+	<header id="enteteDetail">
 	<!-- 	<h1>ENI-Enchères</h1>  -->
 		<div class="logo">		
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
@@ -33,11 +33,11 @@
 		        <%@include file="AffichageDUnArticle.jsp" %>
 				<c:if test="${!empty session.id}">
 					<form action="<%=request.getContextPath()%>/DetailVente?noArticle=${noArticle}" method="post">
-						<label for="prixEnchere">Ma proposition : </label>
-						<input type="number" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
-						<input type="submit" value="Enchérir" id="btnRech">
+						<label for="prixEnchere" class="txtProposition">Ma proposition : </label>
+						<input type="number" id="champProposition" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
+						<input type="submit" value="Enchérir" id="btnEnregistrer">
 					</form>	<br/>
-					<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
+					<button><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 				</c:if>
 	</div>	
 		</c:when>
