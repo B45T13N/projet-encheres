@@ -21,50 +21,50 @@
 	<div class="formulaireModifierProfil">
 		<div class="coteGaucheModifProfil">
 			<p>
-				<label for="pseudo">Pseudo : </label>
+				<label for="pseudo" class="labelModfierProfil">Pseudo : </label>
 				<input type="text" name="pseudo" class="caseFormModifProfil">
 			</p>
 			<p>
-				<label for="prenom">Prenom :</label>
+				<label for="prenom" class="labelModfierProfil">Prenom :</label>
 				<input type="text" name="prenom" class="caseFormModifProfil">
 			</p>
 			<p>
-				<label for="telephone">Téléphone :</label>
+				<label for="telephone" class="labelModfierProfil">Téléphone :</label>
 				<input type="text" name="telephone" class="caseFormModifProfil">
 			</p>
 			<p>
-				<label for="code_postal">Code Postal :</label>
+				<label for="code_postal" class="labelModfierProfil">Code Postal :</label>
 				<input type="text" name="code_postal" class="caseFormModifProfil">
 			</p>
 			<p>
-				<label for="motDePasse">Mot de passe actuel : </label>
+				<label for="motDePasse" class="labelModfierProfil">Mot de passe actuel : </label>
 				<input type="password" name="motDePasse" required class="caseFormModifProfil">
 			</p>
 			<p>
-				<label for="confirmMotDePasse">Confirmation mot de passe : </label>
+				<label for="confirmMotDePasse" class="labelModfierProfil">Confirmation mot de passe : </label>
 				<input type="password" name="confirmMotDePasse" class="caseFormModifProfil">
 			</p>
 		</div>
 		<div class="coteDroitModifProfil">
 			<p>
-				<label for="nom">Nom : </label>
+				<label for="nom" class="labelModfierProfil">Nom : </label>
 				<input type="text" name="nom" class="caseFormModifProfil" >
 			</p>
 			<p>
-				<label for="email">Email :</label>
+				<label for="email" class="labelModfierProfil">Email :</label>
 				<input type="text" name="email" class="caseFormModifProfil" >
 			</p>
 			<p>
-				<label for="rue">Rue :</label>
+				<label for="rue" class="labelModfierProfil">Rue :</label>
 				<input type="text" name="rue" class="caseFormModifProfil" >
 			</p>
 			<p>
-				<label for="ville">Ville :</label>
+				<label for="ville" class="labelModfierProfil">Ville :</label>
 				<input type="text" name="ville" class="caseFormModifProfil" >
 			</p>
 			<p>
-				<label for="newMotDePasse" style="width: 100px; margin-right:50px;">Nouveau mot de passe : </label>
-				<input type="password" name="newMotDePasse" class="caseFormModifProfil" >
+				<label for="newMotDePasse"class="labelModfierProfil">Nouveau mot de passe : </label>
+				<input type="password" name="newMotDePasse" id="correcitfMdp" class="caseFormModifProfil" >
 			</p>
 		</div>
 	</div>

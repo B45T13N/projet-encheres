@@ -195,6 +195,26 @@ a:hover{
 	width: 30%;
 	}
 	
+	
+	/* Modifier Compte   */
+.formulaireModifierProfil {
+	flex-direction: column;
+	justify-content: center;
+}
+.coteGaucheModifProfil{
+	text-align: center;
+	width: 100%;
+}
+.coteDroitModifProfil {
+	text-align: center;
+	width: 100%;
+}
+.labelModfierProfil{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+	
 } /* Fin partie responsive */
 
 /*Affichage d'un article*/
@@ -374,14 +394,11 @@ a:hover{
 }
 .coteGaucheModifProfil{
 	flex-direction: column;	
-	margin-left: 50px;
-	margin-right: 50px;
+	
 	color: #303030;
 }
 .coteDroitModifProfil {
 	flex-direction: column;	
-	margin-left: 50px;
-	margin-right: 50px;
 	color: #303030;
 }
 .caseFormModifProfil {
@@ -390,10 +407,14 @@ a:hover{
 	border-radius: 30px;
 	border : solid 1px #154A80;
 	text-align: center;
-	margin-left: 30px;
+	
 }
 .caseFormModifProfil:hover {
 	background-color: #154A80;
+}
+#correctifMdp {
+	width: 100px;
+	margin-left: 30px;
 }
 .btnEnregistrerProfil {
 	background-color: #000;
