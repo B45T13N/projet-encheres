@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="Images/IconeENI.jpg">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style2.css">
 <title>Nouvelle vente</title>
 </head>
 <body>
@@ -54,7 +55,7 @@
 			<label for="dateFin">Fin de l'enchère</label>
 			<input required="required" type="date" name="dateFin" value="${currentArticle.getDateFinEncheres()}">
 		</div><br/><br class="hiddenBr"/>
-		<div>
+		<div class="retraitNouvelleVente">
 			<h4>Retrait</h4>
 			<div>
 				<label for="rue">Rue :</label>

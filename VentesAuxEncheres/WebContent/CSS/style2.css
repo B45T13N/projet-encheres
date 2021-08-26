@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/*Nouvelle vente*/
+.logoNouvelleVente{
+	margin-left: 5em;
+	
+}
+.nouvelleVenteH2{
+	text-align: center;
+}
+.formNouvelleVente{
+	width: 30em;
+	margin: auto;
+}
+.blocBtnNouvelleVente{
+	display: inline-block;
+}
+
+
+@media only screen and (max-width: 599px){
+	.logoNouvelleVente{
+		display: block;
+		margin: 0px;
+	}
+	.blocBtnNouvelleVente{
+		display: flex;
+		flex-direction: column;
+				
+	}
+	.formNouvelleVente{
+	display: flex;
+	flex-direction: column;
+	
+	}
+}
