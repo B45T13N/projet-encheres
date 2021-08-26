@@ -34,44 +34,49 @@ public class ServletDetailVente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Integer> listeCodesErreur = new ArrayList<>();
+		RequestDispatcher rd;
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(300);
 		request.setCharacterEncoding("UTF-8");
 		int idUser = (int) session.getAttribute("id");
-
-		request.setAttribute("session", session);
-		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
-		int idGagnant = 0;
-		session.setAttribute("noArticle", noArticle);
-		Article currentArticle = new Article();
-		EnchereManager em = new EnchereManager();
-		ArticleManager am = new ArticleManager();
-		UtilisateurManager um = new UtilisateurManager();
-		Utilisateur seller = new Utilisateur();
-		Utilisateur user = new Utilisateur();
-		Utilisateur gagnantVente = new Utilisateur();
-		LocalDate date;
-		try {
-			currentArticle = am.selectArticleByNoArticle(noArticle);
-			request.setAttribute("currentArticle", currentArticle);
-			seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
-			request.setAttribute("seller", seller);
-			user = um.selectByNoUtilisateur(idUser);
-			request.setAttribute("user", user);
-			idGagnant = em.selectAcheteur(noArticle);
-			gagnantVente = um.selectByNoUtilisateur(idGagnant);
-			request.setAttribute("gagnantVente", gagnantVente);
-
-		} catch (BusinessException e1) {
-			e1.printStackTrace();
-			listeCodesErreur.add(30000);
-		}
-		if (seller.getNoUtilisateur() == idUser && currentArticle.getDateDebutEncheres().isAfter(LocalDate.now())) {
-			response.sendRedirect(request.getContextPath() + "/NouvelleVente");
-
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/DetailVente.jsp");
+		if (session.getAttribute("id") == null) {
+			rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
 			rd.forward(request, response);
+		} else {
+			request.setAttribute("session", session);
+			int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+			int idGagnant = 0;
+			session.setAttribute("noArticle", noArticle);
+			Article currentArticle = new Article();
+			EnchereManager em = new EnchereManager();
+			ArticleManager am = new ArticleManager();
+			UtilisateurManager um = new UtilisateurManager();
+			Utilisateur seller = new Utilisateur();
+			Utilisateur user = new Utilisateur();
+			Utilisateur gagnantVente = new Utilisateur();
+			LocalDate date;
+			try {
+				currentArticle = am.selectArticleByNoArticle(noArticle);
+				request.setAttribute("currentArticle", currentArticle);
+				seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
+				request.setAttribute("seller", seller);
+				user = um.selectByNoUtilisateur(idUser);
+				request.setAttribute("user", user);
+				idGagnant = em.selectAcheteur(noArticle);
+				gagnantVente = um.selectByNoUtilisateur(idGagnant);
+				request.setAttribute("gagnantVente", gagnantVente);
+
+			} catch (BusinessException e1) {
+				e1.printStackTrace();
+				listeCodesErreur.add(30000);
+			}
+			if (seller.getNoUtilisateur() == idUser && currentArticle.getDateDebutEncheres().isAfter(LocalDate.now())) {
+				response.sendRedirect(request.getContextPath() + "/NouvelleVente");
+
+			} else {
+				rd = request.getRequestDispatcher("/WEB-INF/JSP/DetailVente.jsp");
+				rd.forward(request, response);
+			}
 		}
 	}
 

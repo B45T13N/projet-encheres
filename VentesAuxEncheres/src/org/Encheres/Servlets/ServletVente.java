@@ -43,38 +43,43 @@ public class ServletVente extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		RequestDispatcher rd;
 		session.setMaxInactiveInterval(300);
 		int idUser = (int) session.getAttribute("id");
 		int idArticle = 0;
 		if (session.getAttribute("noArticle") != null) {
 			idArticle = (int) session.getAttribute("noArticle");
 		}
+		if (session.getAttribute("id") == null) {
+			rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+			rd.forward(request, response);
+		} else {
 
-		List<Integer> listException = new ArrayList<Integer>();
-		UtilisateurManager um = new UtilisateurManager();
-		Utilisateur currentUser = new Utilisateur();
-		ArticleManager am = new ArticleManager();
-		Article currentArticle = new Article();
-		try {
-			if (idArticle == 0) {
-				currentUser = um.selectByNoUtilisateur(idUser);
-				currentUser.setNoUtilisateur(idUser);
-				request.setAttribute("currentUser", currentUser);
-			} else {
-				currentUser = um.selectByNoUtilisateur(idUser);
-				currentUser.setNoUtilisateur(idUser);
-				request.setAttribute("currentUser", currentUser);
-				currentArticle = am.selectArticleByNoArticle(idArticle);
-				request.setAttribute("currentArticle", currentArticle);
+			List<Integer> listException = new ArrayList<Integer>();
+			UtilisateurManager um = new UtilisateurManager();
+			Utilisateur currentUser = new Utilisateur();
+			ArticleManager am = new ArticleManager();
+			Article currentArticle = new Article();
+			try {
+				if (idArticle == 0) {
+					currentUser = um.selectByNoUtilisateur(idUser);
+					currentUser.setNoUtilisateur(idUser);
+					request.setAttribute("currentUser", currentUser);
+				} else {
+					currentUser = um.selectByNoUtilisateur(idUser);
+					currentUser.setNoUtilisateur(idUser);
+					request.setAttribute("currentUser", currentUser);
+					currentArticle = am.selectArticleByNoArticle(idArticle);
+					request.setAttribute("currentArticle", currentArticle);
 
+				}
+			} catch (BusinessException e1) {
+				e1.printStackTrace();
+				listException.add(30004);
 			}
-		} catch (BusinessException e1) {
-			e1.printStackTrace();
-			listException.add(30004);
+			rd = request.getRequestDispatcher("/WEB-INF/JSP/NouvelleVente.jsp");
+			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/NouvelleVente.jsp");
-		rd.forward(request, response);
-
 	}
 
 	/**

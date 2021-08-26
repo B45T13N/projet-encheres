@@ -26,8 +26,16 @@ public class ServletModifierProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/ModifierProfil.jsp");
-		rd.forward(request, response);
+		HttpSession session = request.getSession();
+		RequestDispatcher rd;
+		session.setMaxInactiveInterval(300);
+		if (session.getAttribute("id") == null) {
+			rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+			rd.forward(request, response);
+		} else {
+			rd = request.getRequestDispatcher("/WEB-INF/JSP/ModifierProfil.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**

@@ -46,7 +46,7 @@ public class FiltreAcceuil implements Filter {
 		if (session.getAttribute("id") != null) {
 			chain.doFilter(request, response);
 		} else {
-			httpResponse.sendRedirect("/WEB-INF/JSP/PageDeConnexion.jsp");
+			httpResponse.sendRedirect("/VentesAuxEncheres/PageDeConnexion");
 		}
 	}
 

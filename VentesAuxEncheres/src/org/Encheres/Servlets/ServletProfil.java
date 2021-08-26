@@ -32,6 +32,7 @@ public class ServletProfil extends HttpServlet {
 		UtilisateurManager user = new UtilisateurManager();
 		Utilisateur selectedUser = new Utilisateur();
 		HttpSession session = request.getSession();
+		RequestDispatcher rd;
 		session.setMaxInactiveInterval(300);
 		int idVendeur = 0;
 		int idAdmin = 0;
@@ -42,8 +43,13 @@ public class ServletProfil extends HttpServlet {
 			idVendeur = Integer.parseInt(request.getParameter("idVendeur"));
 			noUtilisateur = (int) session.getAttribute("id");
 		} else {
-			noUtilisateur = (int) session.getAttribute("id");
-			idVendeur = noUtilisateur;
+			if (session.getAttribute("id") == null) {
+				rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+				rd.forward(request, response);
+			} else {
+				noUtilisateur = (int) session.getAttribute("id");
+				idVendeur = noUtilisateur;
+			}
 		}
 		int userDelete = 0;
 		if (session.getAttribute("admin") != null && request.getParameter("idVendeur") != null) {
@@ -72,8 +78,9 @@ public class ServletProfil extends HttpServlet {
 		request.setAttribute("code_postal", selectedUser.getCodePostal());
 		request.setAttribute("ville", selectedUser.getVille());
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/Profil.jsp");
+		rd = request.getRequestDispatcher("/WEB-INF/JSP/Profil.jsp");
 		rd.forward(request, response);
+
 	}
 
 	/**
