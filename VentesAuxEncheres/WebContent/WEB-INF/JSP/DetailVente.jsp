@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="icon" href="Images/IconeENI.jpg">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <title>Détail de la vente</title>
 </head>
