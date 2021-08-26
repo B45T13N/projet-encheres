@@ -195,24 +195,21 @@ a:hover{
 	width: 30%;
 	}
 	
-	
-	/* Modifier Compte   */
+
+/* Modifier Compte   */
+
 .formulaireModifierProfil {
 	flex-direction: column;
-	justify-content: center;
+	width: 400px;
+	
 }
-.coteGaucheModifProfil{
-	text-align: center;
-	width: 100%;
+.formulaireH3ModifProfil {
+	margin: 0 auto;
+	margin-bottom: 7px;
+	margin-right: 170px;
 }
-.coteDroitModifProfil {
-	text-align: center;
-	width: 100%;
-}
-.labelModfierProfil{
-	display: flex;
-	justify-content: center;
-	width: 100%;
+.correctifTexte {
+
 }
 	
 } /* Fin partie responsive */
@@ -405,29 +402,35 @@ a:hover{
 	color: #303030;
 	text-align: center;
 	font-size: 30px;
+	margin-bottom: 100px;
+	justify-content: center;
+	
 }
 .formulaireModifierProfil {
 	display: flex;
-	justify-content: center;
+	justify-content:space-between;
 	color: #303030;
-	margin: 30px;
-}
-.coteGaucheModifProfil{
-	flex-direction: column;	
+	margin-left: 20%;
+	margin-right: 20%;
+	font-weight: bold;
 	
-	color: #303030;
 }
-.coteDroitModifProfil {
-	flex-direction: column;	
-	color: #303030;
+.correctifSolo{
+	margin-top: 15px;
+	margin-right: 54%;
 }
+
+.formulaireH3ModifProfil {
+	margin-top: 6px;
+	width: 130px;
+}
+
 .caseFormModifProfil {
 	width: 250px;
 	height: 25px;
 	border-radius: 30px;
 	border : solid 1px #154A80;
 	text-align: center;
-	
 }
 .caseFormModifProfil:hover {
 	background-color: #154A80;
@@ -485,6 +488,7 @@ a:hover{
 	display: flex;
 	justify-content: center;
 }
+
 
 
 /*Mon profil*/
