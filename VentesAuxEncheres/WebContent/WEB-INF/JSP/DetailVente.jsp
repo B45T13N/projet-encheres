@@ -27,7 +27,7 @@
 	<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
 	
 	<div class="containerDetailVente">	
-			<h3>Détail vente</h3>
+			<h1>Détail vente</h1>
 			
 				
 		        <%@include file="AffichageDUnArticle.jsp" %>
@@ -37,7 +37,7 @@
 						<input type="number" id="champProposition" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 						<input type="submit" value="Enchérir" id="btnEnregistrer">
 					</form>	<br/>
-					<button class="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
+					<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 				</c:if>
 	</div>	
 		</c:when>
@@ -46,7 +46,7 @@
 			<div class="container">	
 		        <%@include file="AffichageDUnArticle.jsp" %>
 		        <p>Tel : ${seller.getTelephone()}</p>
-				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
+				<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 			</div>	
 		</c:when>
 		
@@ -56,7 +56,7 @@
 		        <%@include file="AffichageDUnArticle.jsp"%>
 		        <a href="<%=request.getContextPath()%>/DeleteVente">Retrait effectué</a>
 		        <br/>
-				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
+				<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 			</div>	
 		</c:when>
 		
@@ -64,7 +64,7 @@
 			<h3>${user.getPseudo()} dommage, vous êtes trop lent !</h3>
 			<div class="container">	
 		        <%@include file="AffichageDUnArticle.jsp"%>
-				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
+				<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 			</div>	
 		</c:when>
 		</c:choose>

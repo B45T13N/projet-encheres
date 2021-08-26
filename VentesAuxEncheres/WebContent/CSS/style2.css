@@ -2,11 +2,9 @@
 body {
 	background-color: #9E9E9E;
 	font-size: 16px;
-	
 }
 
-label
-{
+label{
 	display: block;
 	width: 150px;
 	float: left;
@@ -24,7 +22,6 @@ a:hover{
 /*Nouvelle vente*/
 .logoNouvelleVente{
 	margin-left: 5em;
-	
 }
 .nouvelleVenteH2{
 	text-align: center;
@@ -53,7 +50,6 @@ a:hover{
 }
 #btnEnregistrer:hover{
 	background-color: #154A80;
-	
 }
 #btnAnnuler:hover {
 	background-color: #154A80;
@@ -62,18 +58,39 @@ a:hover{
 .containerDetailVente{
 	width: 40em;
 	margin: auto;
-	padding-top: 3em;
+/*	padding-top: 3em;*/
 }
 #enteteDetail{
 	display: flex;
 	justify-content: space-between;
-	float: left;
+	
 }
 #champProposition{
 		width: 50px;
 }
 .txtProposition{
 	padding-top: 2em;
+}
+#btnRetour{
+	background-color: #000;
+	border-radius: 10px;
+	border: 4px double #cccccc;
+	color: white;
+	text-align: center;
+	font-size: 28px;
+	padding: 20px;
+	width: 150px;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	cursor: pointer;
+}
+#btnRetour:hover{
+	background-color: #154A80;
+}
+#btnRetour a{
+	color: white;
 }
 @media only screen and (max-width: 599px){
 	.logoNouvelleVente{
@@ -82,8 +99,7 @@ a:hover{
 	}
 	.blocBtnNouvelleVente{
 		display: flex;
-		flex-direction: row;
-				
+		flex-direction: row;			
 	}
 	.formNouvelleVente{
 	display: flex;
@@ -99,6 +115,11 @@ a:hover{
 	}
 	.containerDetailVente{
 		padding-top: 1em;
+		position: ;
+		width: 80%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
 	}
 	#btnEnregistrer{
 	background-color: #000;

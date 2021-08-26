@@ -13,7 +13,7 @@
 <!-- <link href="WEB-INF/template/css/bootstrap.css" rel='stylesheet' type='text/css' /> -->
 
 
-<title>Accueil</title>
+<title>ENI Enchères Accueil</title>
 </head>
 <body>
 	<header id="entete">
