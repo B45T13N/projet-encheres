@@ -379,6 +379,26 @@ a:hover{
 
 /*detail vente */
 
+.titreDetail{
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.colonne1, .colonne2{
+	font-weight: bold;
+	display: inline-block;
+	display: grid;
+  	grid-template-columns: 250px 100px 100px;
+ 	align-items: end;
+  	align-content: end;
+}
+.imgArticle{
+	width: 150px;
+	margin: auto;
+
+}
+
+
 /*Modifier Profi*/
 
 .titreModif{

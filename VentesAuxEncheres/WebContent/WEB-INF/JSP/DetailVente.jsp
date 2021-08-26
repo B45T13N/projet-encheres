@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="org.Encheres.bo.Utilisateur" %>
@@ -21,51 +23,51 @@
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 		</div>
 	</header>
-		
+		<h1 class="titreH1DetailVente">Détail vente</h1>
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
 	<c:choose>
-	<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
-	
-	<div class="containerDetailVente">	
-			<h1 class="titreH1DetailVente">Détail vente</h1>
-			
-				
+		<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">		
+			<div class="containerDetailVente">			
 		        <%@include file="AffichageDUnArticle.jsp" %>
 				<c:if test="${!empty session.id}">
 					<form action="<%=request.getContextPath()%>/DetailVente?noArticle=${noArticle}" method="post">
-						<label for="prixEnchere" class="txtProposition">Ma proposition : </label>
+						<label for="prixEnchere" class="bold">Ma proposition : </label>
 						<input type="number" id="champProposition" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
 						<input type="submit" value="Enchérir" id="btnEnregistrer">
 					</form>	<br/>
 					<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 				</c:if>
-	</div>	
+			</div>	
 		</c:when>
 		<c:when test="${seller.getNoUtilisateur() != user.getNoUtilisateur() && user.getNoUtilisateur() == gagnantVente.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
-			<h3>Vous avez remporté la vente !</h3>
-			<div class="container">	
-		        <%@include file="AffichageDUnArticle.jsp" %>
-		        <p>Tel : ${seller.getTelephone()}</p>
-				<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
+			<div class="containerDetailVente">
+				<h3>Vous avez remporté la vente !</h3>
+				<div class="container">	
+			        <%@include file="AffichageDUnArticle.jsp" %>
+			        <p>Tel : ${seller.getTelephone()}</p>
+					<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
+				</div>
 			</div>	
-		</c:when>
-		
+		</c:when>		
 		<c:when test="${seller.getNoUtilisateur() == user.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
-			<h3>${gagnantVente.getPseudo()} a remporté l'enchère !</h3>
-			<div class="container">	
-		        <%@include file="AffichageDUnArticle.jsp"%>
-		        <a href="<%=request.getContextPath()%>/DeleteVente">Retrait effectué</a>
-		        <br/>
-				<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
-			</div>	
-		</c:when>
-		
+			<div class="containerDetailVente">
+				<h3>${gagnantVente.getPseudo()} a remporté l'enchère !</h3>
+				<div class="container">	
+			        <%@include file="AffichageDUnArticle.jsp"%>
+			        <a href="<%=request.getContextPath()%>/DeleteVente">Retrait effectué</a>
+			        <br/>
+					<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
+				</div>	
+			</div>
+		</c:when>		
 		<c:when test="${seller.getNoUtilisateur() != user.getNoUtilisateur() && user.getNoUtilisateur() != gagnantVente.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
-			<h3>${user.getPseudo()} dommage, vous êtes trop lent !</h3>
-			<div class="container">	
-		        <%@include file="AffichageDUnArticle.jsp"%>
-				<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
-			</div>	
+			<div class="containerDetailVente">
+				<h3>${user.getPseudo()} dommage, vous êtes trop lent !</h3>
+				<div class="container">	
+			        <%@include file="AffichageDUnArticle.jsp"%>
+					<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
+				</div>
+			</div>
 		</c:when>
 		</c:choose>
 	
