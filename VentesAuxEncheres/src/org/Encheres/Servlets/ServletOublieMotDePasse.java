@@ -52,21 +52,19 @@ public class ServletOublieMotDePasse extends HttpServlet {
 		try {
 			getEmail = user.selectUtilisateurByEmail(email);
 			getEmail.getEmail();
-			System.out.println(getEmail);
 
-			if (getEmail.getEmail().equals(email)) {
-				System.out.println("Bingo !");
+			if (getEmail.getEmail() == null) {
+				request.setAttribute("erreurEmail", "Email invalide !");
+				System.out.println("Email Invalide");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/OublieMotDePasse.jsp");
 				rd.forward(request, response);
-			} else if (getEmail.getEmail().equals(null)) {
+			} else if (getEmail.getEmail().equals(email)) {
+				System.out.println("Email Valide!");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/OublieMotDePasse.jsp");
 				rd.forward(request, response);
 			}
-
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }

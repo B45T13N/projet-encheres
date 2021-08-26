@@ -28,12 +28,17 @@
 		<input type="submit">
 		</div>
 	</form>
-		<c:if test="${!empty email }">
+		<c:if test="${!empty email && empty erreurEmail }">
 			<h2>Un email de réinitialisation de mot de passe a était envoyé !</h2>
 			<div>
 				<p>Un lien pour reinitialiser votre mot de passe a était envoyé a l'adresse ${email} .</p>
 				
 				<a href="<%=request.getContextPath()%>/ReinitialiserPassword"><input type="button" value="Modifier mon mot de passe"></a>
+			</div>
+		</c:if>
+		<c:if test="${!empty erreurEmail }">
+			<div>
+				<p>${erreurEmail } Veuillez reessayer.</p>
 			</div>
 		</c:if>
 		
