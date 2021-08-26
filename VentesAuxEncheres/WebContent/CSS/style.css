@@ -543,3 +543,16 @@ a:hover{
 }
 
 /* Fin CSS Page ReinitialiserPassword */
+
+/* CSS Page Profil */
+
+.lineProfil {
+	display: grid;
+    grid-template-columns: 175px 150px;
+    margin : 1em;
+}
+.blockProfil {
+	padding-left: 0 auto;
+}
+
+/* Fin CSS Page Profil */
