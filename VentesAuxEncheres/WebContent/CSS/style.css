@@ -173,6 +173,18 @@ a:hover{
 	.containerRadio{
 		display: block;
 	}
+	.logoNouvelleVente{
+		display: block;
+		margin: 0px;
+	}
+	.blocBtnNouvelleVente{
+		display: flex;
+		justify-content: flex-start;
+	}
+	.formNouvelleVente{
+	display: flex;
+	flex-direction: column;
+}
 	
 } /* Fin partie responsive */
 
@@ -188,7 +200,7 @@ a:hover{
 
 /*Nouvelle vente*/
 .logoNouvelleVente{
-	float: left;
+	margin-left: 5em;
 	
 }
 .nouvelleVenteH2{

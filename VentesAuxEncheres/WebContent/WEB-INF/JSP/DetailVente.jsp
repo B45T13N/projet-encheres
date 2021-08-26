@@ -15,7 +15,7 @@
 </head>
 <body>
 	<header>
-		<h1>ENI-Enchères</h1>
+	<!-- 	<h1>ENI-Enchères</h1>  -->
 		<div class="logo">		
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 		</div>
@@ -23,19 +23,20 @@
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
 	<c:choose>
 	<c:when test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
+	<div>	
 		<h3>Détail vente</h3>
-		<div class="container">
+		
 			
 	        <%@include file="AffichageDUnArticle.jsp" %>
 			<c:if test="${!empty session.id}">
 				<form action="<%=request.getContextPath()%>/DetailVente?noArticle=${noArticle}" method="post">
 					<label for="prixEnchere">Ma proposition : </label>
 					<input type="number" name="prixEnchere" min="${currentArticle.getPrixVente()}" value="${currentArticle.getPrixVente()}">
-					<input type="submit" value="Enchérir">
+					<input type="submit" value="Enchérir" id="btnRech">
 				</form>	
 				<a href="<%=request.getContextPath()%>/Accueil">Retour</a>
 			</c:if>
-		</div>
+	
 	</c:when>
 	<c:when test="${seller.getNoUtilisateur() != user.getNoUtilisateur() && user.getNoUtilisateur() == gagnantVente.getNoUtilisateur() && (currentArticle.getDateFinEncheres().isBefore(dateJour) || currentArticle.getDateFinEncheres().isEqual(dateJour))}">
 		<h3>Vous avez remporté la vente !</h3>

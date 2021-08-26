@@ -13,7 +13,7 @@
 </head>
 <body>
 	<c:set var="dateJour" value="${LocalDate.now()}"/>
-	<header>
+	<header id="entete">
 			<div class="logoNouvelleVente">		
 				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 			</div>
@@ -24,11 +24,11 @@
 		<div>
 			<label for="nomArticle">Article :</label>
 			<input type="text" required="required" name="nomArticle" size="30" value="${currentArticle.getNomArticle()}">
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="description">Description :</label>
 			<textarea rows="4" cols="28" required="required" name="description"></textarea>
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="categorie">Catégorie</label>
 			<select required="required" name="libelle">			
@@ -37,37 +37,37 @@
 				<option value="vetement">Vêtement</option>
 				<option value="sport_loisirs">Sport et loisirs</option>		
 			</select>
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label>Photo de l'article</label>
 			<input type="button" value="Uploader">
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="prix">Mise à prix : </label>
 			<input required="required" type="number" name="prix" value="${currentArticle.getMiseAPrix()}">
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="dateDebut">Début de l'enchère</label>
 			<input required="required" type="date" name="dateDebut" value="${currentArticle.getDateDebutEncheres()}">
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="dateFin">Fin de l'enchère</label>
 			<input required="required" type="date" name="dateFin" value="${currentArticle.getDateFinEncheres()}">
-		</div><br/>
+		</div><br/><br class="hiddenBr"/>
 		<div>
 			<h4>Retrait</h4>
 			<div>
 				<label for="rue">Rue :</label>
 				<input required="required" type="text" name="rue" value="${currentUser.getRue()}">
-			</div><br/>
+			</div><br/><br class="hiddenBr"/>
 			<div>
 				<label for="cpo">Code Postal :</label>
 				<input required="required" type="text" name="cpo" value="${currentUser.getCodePostal()}">
-			</div><br/>
+			</div><br/><br class="hiddenBr"/>
 			<label for="ville">Ville :</label>
 			<input required="required" type="text" name="ville" value="${currentUser.getVille()}">
 		</div>
-		<br/>
+		<br/><br class="hiddenBr"/>
 		<span class="blocBtnNouvelleVente">
 			<input type="submit" value="Enregistrer" id="btnRech">
 			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler" id="btnRech"></a>	
