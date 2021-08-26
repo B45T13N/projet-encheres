@@ -49,6 +49,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "INNER JOIN ENCHERES e ON e.no_article = a.no_article "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie "
 			+ "INNER JOIN RETRAITS r ON r.no_article = a.no_article ";
+	public static final String DELETE_ARTICLE_BY_NO_USER = "DELETE FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
+	public static final String SELECT_ALL_BY_NO_USER = "SELECT * FROM ARTICLES_VENDUS WHERE no_utilisateur = ?";
 
 	@Override
 	public void insert(Article data) throws BusinessException {
@@ -506,6 +508,83 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 		}
 
 		return list;
+	}
+
+	@Override
+	public List<Article> selectArticleByNoUser(int noUser) throws BusinessException {
+		List<Article> list = new ArrayList<Article>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				cnx.setAutoCommit(false);
+				// Mise à jour article
+				PreparedStatement prstms = cnx.prepareStatement(SELECT_ALL_BY_NO_USER);
+				prstms.setInt(1, noUser);
+				ResultSet rs = prstms.executeQuery();
+
+				Article art = null;
+				while (rs.next()) {
+					art = new Article();
+					art.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					art.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+					art.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					art.setDescription(rs.getString("description"));
+					art.setNomArticle(rs.getString("nom_article"));
+					art.setPrixVente(rs.getInt("prix_vente"));
+					art.setNoCategorie(rs.getInt("no_categorie"));
+					art.setNoArticle(rs.getInt("no_article"));
+					list.add(art);
+				}
+				prstms.close();
+				cnx.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+		} catch (Exception e) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_ARTICLE_FAIL);
+			throw businessException;
+		}
+
+		return list;
+	}
+
+	@Override
+	public void deleteArticleByNoUser(int noUser) throws BusinessException {
+		if (noUser < 0) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(10000);
+			throw businessException;
+		}
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			try {
+				cnx.setAutoCommit(false);
+				// Ajout d'un article
+				PreparedStatement prstms = cnx.prepareStatement(DELETE_ARTICLE_BY_NO_USER);
+				prstms.setInt(1, noUser);
+				prstms.executeUpdate();
+
+				prstms.close();
+				cnx.commit();
+
+				cnx.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnx.rollback();
+				BusinessException businessException = new BusinessException();
+				businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
+				throw businessException;
+			}
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.DELETE_FAIL);
+			throw businessException;
+		}
 	}
 
 }

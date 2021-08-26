@@ -26,7 +26,7 @@
 			</c:if>
 			<c:if test="${!empty sessionScope.id}">
 			<a class="btnLeft" href="${pageContext.request.contextPath}/Deconnecte">Déconnexion</a>
-			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/MonProfil">Mon profil</a>	
+			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/Profil">Mon profil</a>	
 			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Vendre un article</a>
 			<a class="btnLeft" href="<c:out value="${pageContext.request.contextPath}"/>/NouvelleVente">Enchères</a>		
 

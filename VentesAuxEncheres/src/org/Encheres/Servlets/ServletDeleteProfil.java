@@ -25,7 +25,23 @@ public class ServletDeleteProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		UtilisateurManager deleteUser = new UtilisateurManager();
+		HttpSession session = request.getSession();
+		int userDelete = 0;
+		if (session.getAttribute("admin") == null) {
+			userDelete = (int) session.getAttribute("id");
+		} else {
+			userDelete = (int) (session.getAttribute("idVendeur"));
+		}
 
+		try {
+			deleteUser.deleteUtilisateur(userDelete);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
+		response.sendRedirect(request.getContextPath() + "/Accueil");
 	}
 
 	/**
@@ -47,7 +63,7 @@ public class ServletDeleteProfil extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		response.sendRedirect(request.getContextPath() + "/Deconnecte");
+		response.sendRedirect(request.getContextPath() + "/Accueil");
 
 	}
 

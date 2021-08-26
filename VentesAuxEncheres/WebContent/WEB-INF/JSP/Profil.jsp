@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,27 +12,38 @@
 </head>
 <body>
 	<header>
-			<h2>ENI-Enchères</h2>
-			<div class="logo">		
-				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
-			</div>
+		<h2>ENI-Enchères</h2>
+		<div class="logo">		
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
 	</header>
 	<div>
-		<p><a>Pseudo : </a>${pseudo}</p>
+		<p>Pseudo : ${pseudo}</p>
 		<div>
-			<p><a>Nom : </a>${nom}
+			<p>Nom : ${nom}
 			<br>
-			<a>Prenom : </a>${prenom}
+			Prenom : ${prenom}
 			<br>
-			<a>Email : </a>${email}
+			Email : ${email}
 			<br>
-			<a>Teléphone : </a>${telephone}
+			Teléphone : ${telephone}
 			<br>
-			<a>Rue : </a>${rue}
+			Rue : ${rue}
 			<br>
-			<a>Code Postal : </a>${code_postal}
+			Code Postal : ${code_postal}
 			<br>
-			<a>Ville : </a>${ville}</p>
+			Ville : ${ville}</p>
+			<c:if test="${noUtilisateur == idVendeur}">
+				<div>
+					<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
+				</div>
+			</c:if>
+			<c:if test="${admin != false}">
+				<div>
+					<a href="<%=request.getContextPath()%>/DeleteProfil"><input type="button" value="Supprimer utilisateur"></a>
+					<a href="<%=request.getContextPath()%>/DeleteProfil"><input type="button" value="Désactiver utilisateur"></a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 	<footer class="piedPageConnexion">

@@ -1,6 +1,7 @@
 package org.Encheres.bll;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.Encheres.BusinessException;
@@ -175,6 +176,28 @@ public class ArticleManager {
 			enchereManager.deleteEnchere(noArticle);
 			articleDAO.delete(noArticle);
 		}
+	}
+
+	public void deleteArticleByNoUser(int noUser) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		List<Article> list = new ArrayList<>();
+		list = this.selectArticleByNoUser(noUser);
+
+		// test des infos à supprimer
+		for (Article art : list) {
+			this.validerArticle(art, businessException);
+
+			if (!businessException.hasError()) {
+				retraitManager.deleteRetrait(art.getNoArticle());
+				enchereManager.deleteEnchere(art.getNoArticle());
+			}
+		}
+		articleDAO.deleteArticleByNoUser(noUser);
+
+	}
+
+	public List<Article> selectArticleByNoUser(int noUser) throws BusinessException {
+		return this.articleDAO.selectArticleByNoUser(noUser);
 	}
 
 	public List<Article> selectAllArticle() throws BusinessException {

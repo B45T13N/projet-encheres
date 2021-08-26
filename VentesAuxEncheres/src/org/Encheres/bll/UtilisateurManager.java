@@ -123,6 +123,7 @@ public class UtilisateurManager {
 	 * @see org.Encheres.dal.DAO.DAOUtilisateur#delete(int)
 	 */
 	public void deleteUtilisateur(int utilisateur) throws BusinessException {
+		articleManager.deleteArticleByNoUser(utilisateur);
 		daoUtilisateur.delete(utilisateur);
 	}
 

@@ -33,12 +33,36 @@ public class ServletProfil extends HttpServlet {
 		Utilisateur selectedUser = new Utilisateur();
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(300);
-		int idVendeur = Integer.parseInt(request.getParameter("idVendeur"));
+		int idVendeur = 0;
+		int idAdmin = 0;
+		Boolean admin = false;
+		admin = (Boolean) session.getAttribute("admin");
+		int noUtilisateur = 0;
+		if (request.getParameter("idVendeur") != null) {
+			idVendeur = Integer.parseInt(request.getParameter("idVendeur"));
+			noUtilisateur = (int) session.getAttribute("id");
+		} else {
+			noUtilisateur = (int) session.getAttribute("id");
+			idVendeur = noUtilisateur;
+		}
+		int userDelete = 0;
+		if (session.getAttribute("admin") != null && request.getParameter("idVendeur") != null) {
+			userDelete = Integer.parseInt(request.getParameter("idVendeur"));
+			session.setAttribute("idVendeur", userDelete);
+		}
+
+		request.setAttribute("noUtilisateur", noUtilisateur);
+		request.setAttribute("idVendeur", idVendeur);
 		try {
-			selectedUser = user.selectByNoUtilisateur(idVendeur);
+			if (idVendeur != noUtilisateur) {
+				selectedUser = user.selectByNoUtilisateur(idVendeur);
+			} else {
+				selectedUser = user.selectByNoUtilisateur(noUtilisateur);
+			}
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
+		request.setAttribute("selectedUser", selectedUser);
 		request.setAttribute("pseudo", selectedUser.getPseudo());
 		request.setAttribute("nom", selectedUser.getNom());
 		request.setAttribute("prenom", selectedUser.getPrenom());
@@ -58,7 +82,56 @@ public class ServletProfil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(300);
+		request.setCharacterEncoding("UTF-8");
+		String pseudo;
+		String nom;
+		String prenom;
+		String email;
+		String telephone;
+		String rue;
+		String codePostal;
+		String ville;
+		String oldPass;
+		String newPass;
+		String confirmPass;
+		UtilisateurManager utilisateurManager = new UtilisateurManager();
+		int noUtilisateur = (int) session.getAttribute("id");
+
+		pseudo = request.getParameter("pseudo");
+		nom = request.getParameter("nom");
+		prenom = request.getParameter("prenom");
+		email = request.getParameter("email");
+		telephone = request.getParameter("telephone");
+		rue = request.getParameter("rue");
+		codePostal = request.getParameter("code_postal");
+		ville = request.getParameter("ville");
+		oldPass = request.getParameter("motDePasse");
+		newPass = request.getParameter("newMotDePasse");
+		confirmPass = request.getParameter("confirmMotDePasse");
+
+		/*
+		 * if submit = register executeUpdate else if submit = delete executeDelete
+		 */
+		try {
+
+			Utilisateur updatedUser = new Utilisateur();
+			if (newPass.equals(confirmPass) && (!confirmPass.equals("") || !newPass.contentEquals(""))) {
+				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
+						codePostal, ville, newPass, noUtilisateur);
+			} else if (newPass.equals("") || newPass == null) {
+				updatedUser = utilisateurManager.updateUtilisateur(pseudo, nom, prenom, email, telephone, rue,
+						codePostal, ville, oldPass, noUtilisateur);
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("/ModifierProfil");
+				rd.forward(request, response);
+			}
+
+			response.sendRedirect(request.getContextPath() + "/Accueil");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
