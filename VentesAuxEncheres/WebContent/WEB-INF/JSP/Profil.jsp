@@ -17,7 +17,7 @@
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 		
 	</header>
-	<div>
+	<section class="containerSection">
 			<span class="containerProfil">
 				<h3 class="lineProfil">Pseudo : </h3>
 				<h3 class="txtProfilDroite">${pseudo}</h3>
@@ -56,11 +56,11 @@
 			<span class="containerProfil">
 				<h3 class="lineProfil">Ville : </h3>
 				<h3 class="txtProfilDroite">${ville}</h3>
-			
 			</span>
+			
 			<c:if test="${noUtilisateur == idVendeur}">
-				<div>
-					<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
+				<div class="containerBtnProfil">
+					<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier" id="btnRech"></a>
 				</div>
 			</c:if>
 			<c:if test="${admin != false}">
@@ -69,7 +69,7 @@
 					<a href="<%=request.getContextPath()%>/DeleteProfil"><input type="button" value="Désactiver utilisateur"></a>
 				</div>
 			</c:if>
-		</div>
+		</section>
 	
 	<footer class="piedPageConnexion">
 		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>

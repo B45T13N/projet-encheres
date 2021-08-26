@@ -120,6 +120,17 @@ a:hover{
 .blockProfil {
 	padding-left: 0 auto;
 } */
+.containerBtnProfil{
+	display: flex;
+	justify-content: center;
+	}
+.containerSection{
+	width: 100%;
+	margin: auto;
+}
+
+
+
 
 @media only screen and (max-width: 599px){
 	.logoNouvelleVente{
@@ -167,4 +178,15 @@ a:hover{
 	#champProposition{
 		width: 50px;
 	}
-}
+	.containerProfil{
+		width:90%; 
+		margin-left: 20%;
+	}
+	.containerBtnProfil{
+	display: block;
+	justify-content: space-around;
+	margin-left: 15%;
+	}
+	
+	
+} /*FIN PARTIE RESPONSIVE */
