@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="Images/IconeENI.jpg">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
-<title>Email Confirmer</title>
+<title>Réinitialisation du mot de passe</title>
 </head>
 <body>
 	<header id="entete">

@@ -12,10 +12,9 @@
 </head>
 <body>
 	<header>
-			<h2>ENI-Enchères</h2>
-			<div class="logo">		
-				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
-			</div>
+		<div id="entete">		
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
 	</header>
 	<h2>Modifier mon profil</h2>
 	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
@@ -45,7 +44,7 @@
 		<br>
 		<label for="newMotDePasse">Nouveau mot de passe : </label>
 		<input type="password" name="newMotDePasse">
-		<label for="confirmMotDePasse">Confirmation : </label>
+		<label for="confirmMotDePasse">Confirmation mot de passe : </label>
 		<input type="password" name="confirmMotDePasse">
 		<br>
 		<br>
