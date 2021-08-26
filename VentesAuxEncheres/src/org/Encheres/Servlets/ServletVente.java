@@ -1,5 +1,6 @@
 package org.Encheres.Servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -9,11 +10,13 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.Encheres.BusinessException;
 import org.Encheres.bll.ArticleManager;
@@ -25,8 +28,13 @@ import org.Encheres.bo.Utilisateur;
  * Servlet implementation class ServletVente
  */
 @WebServlet("/NouvelleVente")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class ServletVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	public static final String IMAGES_FOLDER = "/Images";
+
+	public String uploadPath;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -41,6 +49,7 @@ public class ServletVente extends HttpServlet {
 		if (session.getAttribute("noArticle") != null) {
 			idArticle = (int) session.getAttribute("noArticle");
 		}
+
 		List<Integer> listException = new ArrayList<Integer>();
 		UtilisateurManager um = new UtilisateurManager();
 		Utilisateur currentUser = new Utilisateur();
@@ -65,6 +74,7 @@ public class ServletVente extends HttpServlet {
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/NouvelleVente.jsp");
 		rd.forward(request, response);
+
 	}
 
 	/**
@@ -76,6 +86,11 @@ public class ServletVente extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(300);
 		int idUser = (int) session.getAttribute("id");
+		for (Part part : request.getParts()) {
+			String fileName = getFileName(part);
+			String fullPath = uploadPath + File.separator + fileName;
+			part.write(fullPath);
+		}
 
 		List<Integer> listException = new ArrayList<Integer>();
 		UtilisateurManager um = new UtilisateurManager();
@@ -142,4 +157,18 @@ public class ServletVente extends HttpServlet {
 
 	}
 
+	public void init() throws ServletException {
+		uploadPath = getServletContext().getRealPath(IMAGES_FOLDER);
+		File uploadDir = new File(uploadPath);
+		if (!uploadDir.exists())
+			uploadDir.mkdir();
+	}
+
+	private String getFileName(Part part) {
+		for (String content : part.getHeader("content-disposition").split(";")) {
+			if (content.trim().startsWith("filename"))
+				return content.substring(content.indexOf("=") + 2, content.length() - 1);
+		}
+		return "Default.file";
+	}
 }
