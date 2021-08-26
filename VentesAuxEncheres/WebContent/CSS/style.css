@@ -59,10 +59,10 @@ a:hover{
 
 #btnRech{
 /*	display: inline-block; */
-	background-color: #7b38d8;
+	background-color: #000;
 	border-radius: 10px;
 	border: 4px double #cccccc;
-	color: #eeeeee;
+	color: white;
 	text-align: center;
 	font-size: 28px;
 	padding: 20px;
@@ -75,7 +75,7 @@ a:hover{
 /*	margin: 5px;*/
 }
 #btnRech:hover{
-	background-color: green;
+	background-color: #154A80;
 	
 }
 .cardVente{
@@ -168,22 +168,26 @@ a:hover{
 		width: 100px;
 	}
 	#btnRech{
-		margin-left: 2em;
+		margin-left: 2em; 
 	}
 	.containerRadio{
 		display: block;
 	}
+	/*Nouvelle vente responsive*/
 	.logoNouvelleVente{
 		display: block;
 		margin: 0px;
 	}
 	.blocBtnNouvelleVente{
 		display: flex;
-		justify-content: flex-start;
+		flex-direction: 
+		
+		
 	}
 	.formNouvelleVente{
 	display: flex;
 	flex-direction: column;
+	
 }
 	
 } /* Fin partie responsive */
@@ -211,8 +215,7 @@ a:hover{
 	margin: auto;
 }
 .blocBtnNouvelleVente{
-	display: flex;
-	justify-content: space-between;
+	display: inline-block;
 }
 
 /*PAGE DE CONNEXION*/

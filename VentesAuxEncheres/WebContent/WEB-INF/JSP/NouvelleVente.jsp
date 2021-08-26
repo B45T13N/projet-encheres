@@ -68,10 +68,12 @@
 			<input required="required" type="text" name="ville" value="${currentUser.getVille()}">
 		</div>
 		<br/><br class="hiddenBr"/>
+		
 		<span class="blocBtnNouvelleVente">
 			<input type="submit" value="Enregistrer" id="btnRech">
 			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler" id="btnRech"></a>	
 		</span>	
+		
 	</form>
 	<c:if test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
 		<form action="<%=request.getContextPath()%>/DeleteVente" method="post">
