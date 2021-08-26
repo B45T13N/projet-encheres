@@ -13,7 +13,7 @@ public class Article implements Serializable {
 	private int noUtilisateur;
 	private int noArticle;
 	private int noCategorie;
-		private String nomArticle;
+	private String nomArticle;
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
@@ -22,6 +22,15 @@ public class Article implements Serializable {
 	private int prixVente;
 	private String lieuRetrait;
 	private String libelle;
+	private String urlPhoto;
+
+	public String getUrlPhoto() {
+		return urlPhoto;
+	}
+
+	public void setUrlPhoto(String urlPhoto) {
+		this.urlPhoto = urlPhoto;
+	}
 
 	public String getlibelle() {
 		return libelle;
@@ -103,12 +112,10 @@ public class Article implements Serializable {
 		this.prixVente = prixVente;
 	}
 
-	
 	public String getPseudoUser() {
 		return pseudoUser;
 	}
 
-	
 	public void setPseudoUser(String pseudoUser) {
 		this.pseudoUser = pseudoUser;
 	}

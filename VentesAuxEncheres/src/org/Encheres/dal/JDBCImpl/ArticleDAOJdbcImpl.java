@@ -17,19 +17,19 @@ import org.Encheres.dal.JDBCTools.ConnectionProvider;
 public class ArticleDAOJdbcImpl implements DAOArticle {
 
 	public static final String INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article, description, "
-			+ "date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie)"
-			+ " VALUES(?,?,?,?,?,?,?,?)";
+			+ "date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie, url_photo)"
+			+ " VALUES(?,?,?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 	public static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, "
-			+ "date_fin_encheres = ?, no_categorie =?, prix_vente = ?  WHERE no_article = ?";
-	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, description, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
+			+ "date_fin_encheres = ?, no_categorie =?, prix_vente = ? url_photo = ?  WHERE no_article = ?";
+	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, description, url_photo, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
 			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
-	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, description, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle, "
+	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, description, url_photo , c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE c.no_categorie=? AND (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
 	public static final String SELECT_BY_ARTICLE = "SELECT u.no_utilisateur as noUser, description, nom_article, prix_initial, montant_enchere, date_debut_encheres, date_fin_encheres, c.libelle as libelle, "
-			+ "u.pseudo, a.no_article, r.rue as rue, r.code_postal as cpo, r.ville as ville "
+			+ "u.pseudo, a.no_article, r.rue as rue, r.code_postal as cpo, r.ville as ville, url_photo "
 			+ "FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN ENCHERES e ON e.no_article = a.no_article "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie "
@@ -42,7 +42,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 	public static final String ADDON_SELECT_MES_ENCHERES = " e.no_utilisateur = ? ";
 	public static final String ADDON_SELECT_ARTICLES = " a.no_article = ? ";
 
-	public static final String SELECT_ENCHERES = "SELECT u.no_utilisateur as noUser, nom_article, description, c.libelle as libelle, prix_vente, prix_initial, "
+	public static final String SELECT_ENCHERES = "SELECT u.no_utilisateur as noUser, nom_article, url_photo, description, c.libelle as libelle, prix_vente, prix_initial, "
 			+ "montant_enchere, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle,"
 			+ " a.no_article, r.rue as rue, r.code_postal as cpo, r.ville as ville, date_debut_encheres "
 			+ " FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
@@ -82,6 +82,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 //				String libelle = data.getlibelle().toLowerCase();
 //				int noCategorie = categorie.selectByLibelle(libelle);
 				prstms.setInt(8, data.getNoCategorie());
+				prstms.setString(9, data.getUrlPhoto());
 				prstms.executeUpdate();
 				ResultSet rs = prstms.getGeneratedKeys();
 				if (rs.next()) {
@@ -168,7 +169,8 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 //					int noCategorie = categorie.selectByLibelle(libelle);
 					prstms.setInt(6, data.getNoCategorie());
 					prstms.setInt(7, data.getPrixVente());
-					prstms.setInt(8, data.getNoArticle());
+					prstms.setString(8, data.getUrlPhoto());
+					prstms.setInt(9, data.getNoArticle());
 
 				}
 				prstms.executeUpdate();
@@ -206,6 +208,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"),
 							rs.getString("pseudo"));
 					art.setNoArticle(rs.getInt("noArticle"));
+					art.setUrlPhoto(rs.getString("url_photo"));
 					list.add(art);
 				}
 				prstms.close();
@@ -242,6 +245,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_vente"),
 							rs.getString("pseudo"));
 					art.setNoArticle(rs.getInt("noArticle"));
+					art.setUrlPhoto(rs.getString("url_photo"));
 					list.add(art);
 				}
 				prstms.close();
@@ -281,6 +285,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					articleCourant.setUrlPhoto(rs.getString("url_photo"));
 				}
 				prstms.close();
 				cnx.close();
@@ -328,6 +333,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
 					articleCourant.setNoArticle(rs.getInt("noArticle"));
+					articleCourant.setUrlPhoto(rs.getString("url_photo"));
 					list.add(articleCourant);
 				}
 				prstms.close();
@@ -368,6 +374,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					articleCourant.setUrlPhoto(rs.getString("url_photo"));
 					list.add(articleCourant);
 				}
 				prstms.close();
@@ -410,6 +417,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					articleCourant.setUrlPhoto(rs.getString("url_photo"));
 					list.add(articleCourant);
 				}
 				prstms.close();
@@ -452,6 +460,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					articleCourant.setUrlPhoto(rs.getString("url_photo"));
 					list.add(articleCourant);
 				}
 				prstms.close();
@@ -492,6 +501,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					articleCourant.setLieuRetrait(
 							rs.getString("rue") + " " + rs.getString("ville") + " " + rs.getString("cpo"));
 					articleCourant.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+					articleCourant.setUrlPhoto(rs.getString("url_photo"));
 					list.add(articleCourant);
 				}
 				prstms.close();
@@ -532,6 +542,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 					art.setPrixVente(rs.getInt("prix_vente"));
 					art.setNoCategorie(rs.getInt("no_categorie"));
 					art.setNoArticle(rs.getInt("no_article"));
+					art.setUrlPhoto(rs.getString("url_photo"));
 					list.add(art);
 				}
 				prstms.close();

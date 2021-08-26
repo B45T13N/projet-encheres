@@ -85,9 +85,14 @@ public class ServletVente extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(300);
+		String urlPhoto = "";
 		int idUser = (int) session.getAttribute("id");
 		for (Part part : request.getParts()) {
 			String fileName = getFileName(part);
+			if (fileName != "Default.file") {
+				urlPhoto = fileName;
+			}
+			System.out.println(urlPhoto);
 			String fullPath = uploadPath + File.separator + fileName;
 			part.write(fullPath);
 		}
@@ -144,6 +149,7 @@ public class ServletVente extends HttpServlet {
 //			EnchereManager em = new EnchereManager();
 			article = new Article(nomArticle, description, libelle, dateDebutEnchere, dateFinEnchere, miseAPrix);
 			article.setNoUtilisateur(idUser);
+			article.setUrlPhoto(urlPhoto);
 //			Enchere enchere = new Enchere();
 
 			try {
@@ -158,7 +164,7 @@ public class ServletVente extends HttpServlet {
 	}
 
 	public void init() throws ServletException {
-		uploadPath = getServletContext().getRealPath(IMAGES_FOLDER);
+		uploadPath = "E:\\git\\projet-encheres\\VentesAuxEncheres\\WebContent" + IMAGES_FOLDER;
 		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists())
 			uploadDir.mkdir();
