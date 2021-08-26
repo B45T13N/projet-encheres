@@ -12,8 +12,7 @@
 </head>
 <body>
 	<header>
-		<h2>ENI-Enchères</h2>
-		<div class="logo">		
+		<div id="entete">		
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 		</div>
 	</header>

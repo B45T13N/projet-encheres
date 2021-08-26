@@ -49,8 +49,6 @@
 				<a href="<%=request.getContextPath()%>/CreationCompte"> <input type="button" class="btnCreaCompte" value="Créer un compte"> </a>	
 			</div>
 		</div>
-		
-
 	</form>
 
 

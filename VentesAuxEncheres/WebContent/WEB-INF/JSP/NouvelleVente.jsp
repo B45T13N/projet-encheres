@@ -20,7 +20,7 @@
 			</div>
 	</header>
 	
-	<form action="<%=request.getContextPath()%>/NouvelleVente" method="post" class="formNouvelleVente">
+	<form action="<%=request.getContextPath()%>/NouvelleVente" method="post" class="formNouvelleVente" enctype="multipart/form-data">
 		<h2 class="nouvelleVenteH2">Nouvelle vente</h2>
 		<div>
 			<label for="nomArticle">Article :</label>
@@ -41,7 +41,8 @@
 		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label>Photo de l'article</label>
-			<input type="button" value="Uploader">
+	            <input type="file" name="multiPartServlet" accept="image/*" multiple
+	                   onchange="readFilesAndDisplayPreview(this.files);" />
 		</div><br/><br class="hiddenBr"/>
 		<div>
 			<label for="prix">Mise à prix : </label>
@@ -77,9 +78,9 @@
 		
 	</form>
 	<c:if test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
-		<form action="<%=request.getContextPath()%>/DeleteVente" method="post">
-			<input type="submit" value="Supprimer ma vente" id="delete">
-		</form>
+		<a href="<%=request.getContextPath()%>/DeleteVente" type="button" id="btnSupp">
+			Supprimer ma vente
+		</a>
 	</c:if>
 	<footer class="piedPageConnexion">
 		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>

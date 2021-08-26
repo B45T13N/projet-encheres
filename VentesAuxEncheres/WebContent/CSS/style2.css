@@ -48,12 +48,31 @@ a:hover{
 	transition: all 0.4s;
 	cursor: pointer;
 }
+#btnSupp{
+	background-color: #000;
+	border-radius: 10px;
+	border: 4px double #cccccc;
+	color: white;
+	text-align: center;
+	font-size: 28px;
+	padding: 20px;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	cursor: pointer;
+}
 #btnEnregistrer:hover{
+	background-color: #154A80;
+}
+#btnSupp:hover{
+	
 	background-color: #154A80;
 }
 #btnAnnuler:hover {
 	background-color: #154A80;
 }
+
 /* detail vente */
 .containerDetailVente{
 	width: 40em;

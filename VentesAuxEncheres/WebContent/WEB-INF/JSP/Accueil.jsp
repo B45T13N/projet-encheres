@@ -131,8 +131,7 @@
 				<p>Fin de l'enchère : ${article.getDateFinEncheres()}</p>
 				<c:if test="${!empty sessionScope.id}"><p>Vendeur : <a href="<%=request.getContextPath()%>/Profil?idVendeur=${article.getNoUtilisateur()}">${article.getPseudoUser()}</a></p></c:if>
 				<c:if test="${empty sessionScope.id}"><p>Vendeur : ${article.getPseudoUser()}</p></c:if>
-			</div>
-		
+			</div>		
 		</article>
 	
 	 </c:forEach>
