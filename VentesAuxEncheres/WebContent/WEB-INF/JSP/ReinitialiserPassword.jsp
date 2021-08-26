@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="org.Encheres.bo.Article" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,15 @@
 		<input type="text" name="newPassword" required>
 		Confirmer le nouveau mot de passe : 
 		<input type="text" name="confirmPassword" required>
-		<a href="<%=request.getContextPath()%>/PageDeConnexion"><input type="submit" value="Confirmer"></a>
+		<input type="submit">
 	</form>
+	<c:if test="${!empty email && empty erreurEmail }">
+		<a href="<%=request.getContextPath()%>/PageDeConnexion"><input type="submit" value="Confirmer"></a>
+	</c:if>
+	<c:if test="${!empty erreurEmail }">
+		<div>
+			<p>${erreurEmail } ou confirmer mot de passe invalides. Veuillez reessayer.</p>
+		</div>
+	</c:if>
 </body>
 </html>
