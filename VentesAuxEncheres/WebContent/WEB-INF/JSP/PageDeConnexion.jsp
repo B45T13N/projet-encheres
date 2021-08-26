@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="Images/IconeENI.jpg">
 <link href="WEB-INF/template/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <title>Connexion</title>
 </head>
 <body>
