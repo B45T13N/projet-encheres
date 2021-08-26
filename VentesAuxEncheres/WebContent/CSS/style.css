@@ -190,8 +190,10 @@ a:hover{
 	.formNouvelleVente{
 	display: flex;
 	flex-direction: column;
-	
-}
+	}
+	.blockProfil {
+	width: 30%;
+	}
 	
 } /* Fin partie responsive */
 
@@ -712,12 +714,23 @@ a:hover{
 /* CSS Page Profil */
 
 .lineProfil {
-	display: grid;
+/*	display: grid;
     grid-template-columns: 175px 150px;
-    margin : 1em;
-}
-.blockProfil {
-	padding-left: 0 auto;
+    margin : 1em; */
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
 }
 
+.txtProfilDroite{
+	padding-right: 5em;
+	text-align: left;
+	justify-content: flex-start;
+	width: 100%;
+	}
+.containerProfil{
+	display: flex;
+	width: 30em;
+	margin: auto;
+	}
 /* Fin CSS Page Profil */

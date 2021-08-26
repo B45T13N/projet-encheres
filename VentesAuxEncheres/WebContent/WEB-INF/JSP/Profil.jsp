@@ -7,49 +7,57 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="Images/IconeENI.jpg">
- <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style2.css">
 <title>Profil user</title>
 </head>
 <body>
-	<header>
-		<div id="entete">		
+	<header id="entete">
+				
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
-		</div>
+		
 	</header>
 	<div>
-		<div class ="blockProfil">
-			<h3 class="lineProfil">
-				<div>Pseudo :</div>
-				<div>${pseudo}</div>
-			</h3>
-			<h3 class="lineProfil">
-				<div>Nom : </div>
-				<div>${nom}</div>
-			</h3>
-			<h3 class="lineProfil">
-            	<div>Prenom : </div>
-				<div>${prenom}</div>
-			</h3>
-			<h3 class="lineProfil">
-				<div>Email : </div>
-				<div>${email}</div>
-			</h3>
-			<h3 class="lineProfil">
-				<div>Teléphone : </div>
-				<div>${telephone}</div>
-			</h3>
-			<h3 class="lineProfil">
-				<div>Rue : </div>
-				<div>${rue}</div>
-			</h3>
-			<h3 class="lineProfil">
-				<div>Code Postal : </div>
-				<div>${code_postal}</div>
-			</h3>
-			<h3 class="lineProfil">
-				<div>Ville : </div>
-				<div>${ville}</div>
-			</h3>
+			<span class="containerProfil">
+				<h3 class="lineProfil">Pseudo : </h3>
+				<h3 class="txtProfilDroite">${pseudo}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Nom : </h3>
+				<h3 class="txtProfilDroite">${nom}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Prenom : </h3>
+				<h3 class="txtProfilDroite">${prenom}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Email : </h3>
+				<h3 class="txtProfilDroite">${email}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Teléphone : </h3>
+				<h3 class="txtProfilDroite">${telephone}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Rue : </h3>
+				<h3 class="txtProfilDroite">${rue}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Code Postal : </h3>
+				<h3 class="txtProfilDroite">${code_postal}</h3>
+			</span>
+			
+			<span class="containerProfil">
+				<h3 class="lineProfil">Ville : </h3>
+				<h3 class="txtProfilDroite">${ville}</h3>
+			
+			</span>
 			<c:if test="${noUtilisateur == idVendeur}">
 				<div>
 					<a href="<%=request.getContextPath()%>/ModifierProfil"><input type="button" value="Modifier"></a>
@@ -62,7 +70,7 @@
 				</div>
 			</c:if>
 		</div>
-	</div>
+	
 	<footer class="piedPageConnexion">
 		<%@ include file="/WEB-INF/JSP/PiedDePage.jsp" %>
 	</footer>
