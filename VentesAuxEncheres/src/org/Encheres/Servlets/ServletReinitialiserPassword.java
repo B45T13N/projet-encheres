@@ -62,12 +62,14 @@ public class ServletReinitialiserPassword extends HttpServlet {
 			verifiedEmail = utilisateurManager.selectUtilisateurByEmail(email);
 			verifiedEmail.getEmail();
 
-			if (verifiedEmail.getEmail() == null && newPassword != confirmPassword) {
+			if (verifiedEmail.getEmail() == null || newPassword.compareTo(confirmPassword) != 0) {
 				request.setAttribute("erreurEmail", "Email");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/ReinitialiserPassword.jsp");
 				rd.forward(request, response);
-			} else if (verifiedEmail.equals(email) && newPassword.equals(confirmPassword)) {
+				System.out.println("Email ou mot de passe invalide");
+			} else if (verifiedEmail.getEmail().equals(email) || newPassword.equals(confirmPassword)) {
 				updatePassword = utilisateurManager.updatePasswordByEmail(newPassword, email);
+				System.out.println("Mot de passe changé");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/ReinitialiserPassword.jsp");
 				rd.forward(request, response);
 			}

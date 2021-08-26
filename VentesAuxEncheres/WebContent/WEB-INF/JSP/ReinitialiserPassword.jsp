@@ -12,21 +12,32 @@
 <title>Email Confirmer</title>
 </head>
 <body>
+	<header>
+		<div class="reinitPass">			
+			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
+		</div>
+	</header>
 	<form action="<%=request.getContextPath()%>/ReinitialiserPassword" method="post">
-		Email : 
-		<input type="text" name="email" required>
-		Nouveau mot de passe : 
-		<input type="text" name="newPassword" required>
-		Confirmer le nouveau mot de passe : 
-		<input type="text" name="confirmPassword" required>
-		<input type="submit">
+		<div class="reinitPass">
+			<h3>Email :</h3> 
+			<input type="text" name="email" required>
+			<h3>Nouveau mot de passe : </h3>
+			<input type="text" name="newPassword" required>
+			<h3>Confirmer nouveau mot de passe : </h3>
+			<input type="text" name="confirmPassword" required>
+			<br>
+			<p><input type="submit" class="redirectButton"></p>
+		</div>
 	</form>
 	<c:if test="${!empty email && empty erreurEmail }">
-		<a href="<%=request.getContextPath()%>/PageDeConnexion"><input type="submit" value="Confirmer"></a>
+		<div class="reinitRedirect">
+			<p>Redirection vers la page de connexion</p>
+			<a style="text-decoration: none;" href="<%=request.getContextPath()%>/PageDeConnexion"><input type="submit" value="Redirection" class="redirectButton"></a>
+		</div>
 	</c:if>
 	<c:if test="${!empty erreurEmail }">
-		<div>
-			<p>${erreurEmail } ou confirmer mot de passe invalides. Veuillez reessayer.</p>
+		<div class="reinitFail">
+			<p>${erreurEmail } ou mots de passes invalides. Veuillez reessayer.</p>
 		</div>
 	</c:if>
 </body>
