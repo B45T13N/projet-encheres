@@ -23,7 +23,7 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 
 	public static final String SELECT_USER_BY_PASSWORD = "SELECT * FROM UTILISATEURS WHERE pseudo = ? AND mot_de_passe = ?";
 
-	public static final String SELECT_USER_BY_EMAIL = "SELECT * FROM UTILISATEURS WHERE email = ? ";
+	public static final String SELECT_USER_BY_EMAIL = "SELECT email FROM UTILISATEURS WHERE email = ? ";
 
 	public static final String UPDATE_PASSWORD = "UPDATE UTILISATEURS SET mot_de_passe =? WHERE email =?";
 
@@ -208,12 +208,10 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 			prstms.setString(1, email);
 			ResultSet rs = prstms.executeQuery();
 			while (rs.next()) {
-				if (rs.getString("email").equals(email)) {
-					user = new Utilisateur(rs.getString("email"));
-					user.setEmail(email);
-				} else {
-					user.setEmail("mauvaise saisie!");
+				if (user.equals(null)) {
+					user.setEmail("email@invalide.fr");
 				}
+				user.setEmail(email);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -231,11 +229,18 @@ public class UtilisateurDAOJdbcImpl implements DAOUtilisateur {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			try {
 				cnx.setAutoCommit(false);
+				PreparedStatement prstm = cnx.prepareStatement(SELECT_USER_BY_EMAIL);
+				prstm.setString(1, email);
+				ResultSet rs = prstm.executeQuery();
+				while (rs.next()) {
+					if (user.equals(null)) {
+						user.setEmail("email@invalide.fr");
+					}
+					user.setEmail(email);
+				}
 				PreparedStatement prstms = cnx.prepareStatement(UPDATE_PASSWORD);
 				prstms.setString(1, motDePasse);
 				prstms.setString(2, email);
-
-//				user.setMotDePasse(motDePasse);
 
 				prstms.executeUpdate();
 				prstms.close();
