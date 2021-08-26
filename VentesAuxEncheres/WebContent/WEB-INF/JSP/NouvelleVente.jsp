@@ -71,8 +71,8 @@
 		<br/><br class="hiddenBr"/>
 		
 		<span class="blocBtnNouvelleVente">
-			<input type="submit" value="Enregistrer" id="btnRech">
-			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler" id="btnRech"></a>	
+			<input type="submit" value="Enregistrer" id="btnEnregistrer">
+			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler" id="btnAnnuler"></a>	
 		</span>	
 		
 	</form>

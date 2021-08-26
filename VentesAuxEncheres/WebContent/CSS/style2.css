@@ -15,7 +15,28 @@
 .blocBtnNouvelleVente{
 	display: inline-block;
 }
-
+#btnEnregistrer, #btnAnnuler{
+	background-color: #000;
+	border-radius: 10px;
+	border: 4px double #cccccc;
+	color: white;
+	text-align: center;
+	font-size: 28px;
+	padding: 20px;
+	width: 200px;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	cursor: pointer;
+}
+#btnEnregistrer:hover{
+	background-color: #154A80;
+	
+}
+#btnAnnuler:hover {
+	background-color: #154A80;
+}
 
 @media only screen and (max-width: 599px){
 	.logoNouvelleVente{
@@ -24,7 +45,7 @@
 	}
 	.blocBtnNouvelleVente{
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 				
 	}
 	.formNouvelleVente{
