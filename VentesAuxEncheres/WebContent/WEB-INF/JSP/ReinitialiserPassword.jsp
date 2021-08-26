@@ -12,10 +12,8 @@
 <title>Email Confirmer</title>
 </head>
 <body>
-	<header>
-		<div class="reinitPass">			
+	<header id="entete">
 			<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
-		</div>
 	</header>
 	<form action="<%=request.getContextPath()%>/ReinitialiserPassword" method="post">
 		<div class="reinitPass">
