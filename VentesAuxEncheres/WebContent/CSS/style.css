@@ -211,6 +211,17 @@ a:hover{
 .correctifTexte {
 
 }
+
+.divZoneCrea {
+	flex-direction: column;
+	width: 400px;
+}
+
+.classCrea{
+	margin: 0 auto;
+	margin-bottom: 7px;
+	margin-right: 170px;
+}
 	
 } /* Fin partie responsive */
 
@@ -309,23 +320,29 @@ a:hover{
 	color: #303030;
 	margin-bottom: 50px;
 }
-	.formCreaCompte{
-	 display: flex;
-	 justify-content: center;	
+
+.divZoneCrea {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 26%;
+	margin-right: 26%;
+	font-weight: bold;
 }
 
-	.coteDroit{
-	flex-direction: column;	
-	margin-left: 50px;
-	margin-right: 50px;
-	color: #303030;
+.classCrea{
+	margin-top: 6px;
+	width: 40%;
 }
-	.coteGauche {
-	flex-direction: column;
-	margin-left: 50px;
-	margin-right: 50px;
-	color: #303030;
+
+.caseCrea {
+	width: 250px;
+	height: 25px;
+	border-radius: 30px;
+	border : solid 1px #154A80;
+	text-align: center;
 }
+
+
 .containerBtnPageCreCompte {
 	display: flex;
 	justify-content: center;
