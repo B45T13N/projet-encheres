@@ -56,6 +56,9 @@ a:hover{
 .titreH3{
 	margin-left: 4em;
 }
+.imgArticle{
+	width: 150px;
+}
 
 #btnRech{
 /*	display: inline-block; */

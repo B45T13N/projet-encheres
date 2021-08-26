@@ -21,7 +21,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ " VALUES(?,?,?,?,?,?,?,?,?)";
 	public static final String DELETE_ARTICLE = "DELETE FROM ARTICLES_VENDUS WHERE no_article = ?";
 	public static final String UPDATE_ARTICLE = "UPDATE ARTICLES_VENDUS SET nom_article = ?, description = ?, prix_initial=?, date_debut_encheres = ?, "
-			+ "date_fin_encheres = ?, no_categorie =?, prix_vente = ? url_photo = ?  WHERE no_article = ?";
+			+ "date_fin_encheres = ?, no_categorie =?, prix_vente = ?, url_photo = ?  WHERE no_article = ?";
 	public static final String SELECT_ALL = "SELECT u.no_utilisateur, nom_article, description, url_photo, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
 			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
