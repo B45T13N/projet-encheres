@@ -27,7 +27,7 @@ public class ArticleDAOJdbcImpl implements DAOArticle {
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";
 	public static final String SELECT_ALL_WHERE = "SELECT u.no_utilisateur, nom_article, description, url_photo, c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle "
 			+ "FROM ARTICLES_VENDUS a " + "INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
-			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE()) AND nom_article LIKE ?";
+			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE nom_article LIKE ?";
 	public static final String SELECT_BY_CATEGORIE = "SELECT u.no_utilisateur, nom_article, description, url_photo , c.libelle as libelle, prix_vente, date_fin_encheres, pseudo, a.no_categorie, a.no_article as noArticle, "
 			+ "pseudo FROM ARTICLES_VENDUS a INNER JOIN UTILISATEURS u ON u.no_utilisateur = a.no_utilisateur "
 			+ "INNER JOIN CATEGORIES c ON c.no_categorie = a.no_categorie WHERE c.no_categorie=? AND (date_debut_encheres < GETDATE() OR date_debut_encheres = GETDATE())";

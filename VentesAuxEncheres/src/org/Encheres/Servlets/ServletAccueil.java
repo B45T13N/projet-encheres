@@ -72,8 +72,9 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		int noUtilisateur = 0;
 		String articleRechercher = "";
 		List<Article> listeAAfficher = new ArrayList<>();
-		List<Article> listeTampon = new ArrayList<>();
-		List<Article> listeTmp = new ArrayList<>();
+		List<Article> listeTampon1 = new ArrayList<>();
+		List<Article> listeTampon2 = new ArrayList<>();
+		List<Article> listeTampon3 = new ArrayList<>();
 		List<Integer> listeCodesErreur = new ArrayList<>();
 		String contient = "";
 
@@ -88,104 +89,110 @@ public class ServletAccueil<BeanFiltreRecherche> extends HttpServlet {
 		try {
 			if (!request.getParameter("categorie").equals("")) {
 				categorie = request.getParameter("categorie");
-				listeTmp = am.selectArticleByCategorie(categorie);
-				if (!request.getParameter("contient").equals("")) {
-					contient = request.getParameter("contient");
-					for (Article art : listeTmp) {
-						listeTampon.addAll(am.selectArticleWhere(contient));
-						if (art.getlibelle() != contient) {
-							listeTampon.remove(art);
-						}
-					}
-				}
-
+				listeTampon1 = am.selectArticleByCategorie(categorie);
+				listeTampon3 = am.selectArticleByCategorie(categorie);
 				// Radio boutons et checkbox
 				// 1ere checkbox Achat
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
 					if (request.getParameter("enCours") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), -1));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), -1));
 						}
 					}
 					if (request.getParameter("mesEnCours") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur));
 						}
 					}
 					if (request.getParameter("remportes") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectByNoAcquereurIfEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectByNoAcquereurIfEnd(art.getNoArticle(), noUtilisateur));
 						}
 					}
 				}
 				// check box filtreVente
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
 					if (request.getParameter("venteEnCours") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectVenteIfNotEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectVenteIfNotEnd(art.getNoArticle(), noUtilisateur));
 						}
 					}
 					if (request.getParameter("venteNonDebut") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectVenteIfNotBegin(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectVenteIfNotBegin(art.getNoArticle(), noUtilisateur));
 						}
 					}
 					if (request.getParameter("venteTerminee") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectByNoVendeurIfEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectByNoVendeurIfEnd(art.getNoArticle(), noUtilisateur));
 						}
+					}
+				}
+				listeTampon1.clear();
+				if (!request.getParameter("contient").equals("")) {
+					contient = request.getParameter("contient");
+					for (Article art : listeTampon2) {
+						listeTampon1.addAll(am.selectArticleWhere(contient));
+						if (art.getNomArticle() != contient) {
+							listeTampon1.remove(art);
+						}
+
 					}
 				}
 			} else {
 				// Radio boutons et checkbox
 				// 1ere checkbox Achat
-				listeTmp = am.selectAllArticle();
-				if (!request.getParameter("contient").equals("")) {
-					contient = request.getParameter("contient");
-					for (Article art : listeTmp) {
-						listeTampon.addAll(am.selectArticleWhere(contient));
-					}
-				}
+				listeTampon1 = am.selectAllArticle();
+				listeTampon3 = am.selectAllArticle();
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("1")) {
 					if (request.getParameter("enCours") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), -1));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), -1));
 						}
 					}
 					if (request.getParameter("mesEnCours") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectArticleIfNotEnd(art.getNoArticle(), noUtilisateur));
 						}
 					}
 					if (request.getParameter("remportes") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectByNoAcquereurIfEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectByNoAcquereurIfEnd(art.getNoArticle(), noUtilisateur));
 						}
 					}
 				}
 				// check box filtreVente
 				if (request.getParameter("radioBtn") != null && request.getParameter("radioBtn").equals("2")) {
 					if (request.getParameter("venteEnCours") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectVenteIfNotEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectVenteIfNotEnd(art.getNoArticle(), noUtilisateur));
 						}
 					}
 					if (request.getParameter("venteNonDebut") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectVenteIfNotBegin(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectVenteIfNotBegin(art.getNoArticle(), noUtilisateur));
 						}
 					}
 					if (request.getParameter("venteTerminee") != null) {
-						for (Article art : listeTmp) {
-							listeTampon.addAll(am.selectByNoVendeurIfEnd(art.getNoArticle(), noUtilisateur));
+						for (Article art : listeTampon1) {
+							listeTampon2.addAll(am.selectByNoVendeurIfEnd(art.getNoArticle(), noUtilisateur));
 						}
+					}
+				}
+				listeTampon1.clear();
+				if (!request.getParameter("contient").equals("")) {
+					contient = request.getParameter("contient");
+					for (Article art : listeTampon2) {
+						listeTampon1.addAll(am.selectArticleWhere(contient));
 					}
 				}
 			}
-			if (listeTampon.size() != 0) {
-				listeAAfficher = removeDuplicates(listeTampon);
+			if (listeTampon1.size() != 0) {
+				listeAAfficher = removeDuplicates(listeTampon1);
+			} else if (listeTampon2.size() != 0) {
+				listeAAfficher = removeDuplicates(listeTampon2);
 			} else {
-				listeAAfficher = removeDuplicates(listeTmp);
+				listeAAfficher = removeDuplicates(listeTampon3);
 			}
 
 			request.setAttribute("listeAAfficher", listeAAfficher);
