@@ -7,6 +7,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <link rel="icon" href="Images/IconeENI.jpg">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <meta charset="UTF-8">
 <title>Mot de Passe Oublié</title>
 </head>
