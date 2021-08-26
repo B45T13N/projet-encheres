@@ -188,14 +188,20 @@ a:hover{
 
 /*Nouvelle vente*/
 .logoNouvelleVente{
-/*	float: left;*/
-	margin-left: 5em;
+	float: left;
+	
 }
 .nouvelleVenteH2{
 	text-align: center;
-	
 }
-
+.formNouvelleVente{
+	width: 30em;
+	margin: auto;
+}
+.blocBtnNouvelleVente{
+	display: flex;
+	justify-content: space-between;
+}
 
 /*PAGE DE CONNEXION*/
 

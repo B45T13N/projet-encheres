@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="icon" href="Images/IconeENI.jpg">
  <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/style.css">
 <title>Nouvelle vente</title>
 </head>
@@ -17,8 +18,9 @@
 				<%@ include file="/WEB-INF/JSP/LogoAccueil.jsp" %>
 			</div>
 	</header>
-	<h2 class="nouvelleVenteH2">Nouvelle vente</h2>
-	<form action="<%=request.getContextPath()%>/NouvelleVente" method="post">
+	
+	<form action="<%=request.getContextPath()%>/NouvelleVente" method="post" class="formNouvelleVente">
+		<h2 class="nouvelleVenteH2">Nouvelle vente</h2>
 		<div>
 			<label for="nomArticle">Article :</label>
 			<input type="text" required="required" name="nomArticle" size="30" value="${currentArticle.getNomArticle()}">
@@ -66,8 +68,10 @@
 			<input required="required" type="text" name="ville" value="${currentUser.getVille()}">
 		</div>
 		<br/>
-		<input type="submit" value="Enregistrer">
-		<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler"></a>		
+		<span class="blocBtnNouvelleVente">
+			<input type="submit" value="Enregistrer" id="btnRech">
+			<a href="<%=request.getContextPath()%>/Accueil"><input type="button" value="Annuler" id="btnRech"></a>	
+		</span>	
 	</form>
 	<c:if test="${currentArticle.getDateFinEncheres().isAfter(dateJour)}">
 		<form action="<%=request.getContextPath()%>/DeleteVente" method="post">
