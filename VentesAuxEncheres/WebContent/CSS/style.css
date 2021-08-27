@@ -425,6 +425,17 @@ a:hover{
 	margin-bottom: 100px;
 	justify-content: center;
 	
+	
+}
+.formulairepModifProfil{
+	display: grid;
+    grid-template-columns: 110px 100px 100px;
+    align-items: end;
+    align-content: end;
+
+}
+.correctifFormulaire {
+	 grid-template-columns: 110px 100px 100px;
 }
 .formulaireModifierProfil {
 	display: flex;
