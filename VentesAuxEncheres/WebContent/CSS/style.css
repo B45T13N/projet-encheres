@@ -214,13 +214,14 @@ a:hover{
 
 .divZoneCrea {
 	flex-direction: column;
-	width: 400px;
+	margin-left : 17%;
+	width: 1em;
 }
 
 .classCrea{
 	margin: 0 auto;
 	margin-bottom: 7px;
-	margin-right: 170px;
+	margin-right: 60px;
 }
 	
 } /* Fin partie responsive */
