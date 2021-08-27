@@ -54,7 +54,7 @@
 				<h3>${gagnantVente.getPseudo()} a remporté l'enchère !</h3>
 				<div class="container">	
 			        <%@include file="AffichageDUnArticle.jsp"%>
-			        <a href="<%=request.getContextPath()%>/DeleteVente">Retrait effectué</a>
+			        <button id="btnRetour"><a href="<%=request.getContextPath()%>/DeleteVente">Retrait effectué</a></button>
 			        <br/>
 					<button id="btnRetour"><a href="<%=request.getContextPath()%>/Accueil">Retour</a></button>
 				</div>	

@@ -1,5 +1,5 @@
 <h3 class="colonne1">${currentArticle.getNomArticle()}</h3>
-<img src="/VentesAuxEncheres/Images/${currentArticle.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"  class="imgArticle">
+<img src="<%=request.getContextPath()%>/Images/${currentArticle.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"  class="imgArticle">
 
 	<p class="colonne1">	
 		Description : 	
