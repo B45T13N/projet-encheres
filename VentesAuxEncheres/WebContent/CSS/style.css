@@ -208,9 +208,6 @@ a:hover{
 	margin-bottom: 7px;
 	margin-right: 170px;
 }
-.correctifTexte {
-
-}
 
 .divZoneCrea {
 	flex-direction: column;
@@ -422,6 +419,17 @@ a:hover{
 	margin-bottom: 100px;
 	justify-content: center;
 	
+	
+}
+.formulairepModifProfil{
+	display: grid;
+    grid-template-columns: 110px 100px 100px;
+    align-items: end;
+    align-content: end;
+
+}
+.correctifFormulaire {
+	 grid-template-columns: 110px 100px 100px;
 }
 .formulaireModifierProfil {
 	display: flex;
@@ -505,8 +513,6 @@ a:hover{
 	display: flex;
 	justify-content: center;
 }
-
-
 
 /*Mon profil*/
 
