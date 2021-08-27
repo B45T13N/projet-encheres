@@ -36,12 +36,9 @@ public class ServletPageDeConnexion extends HttpServlet {
 			request.setAttribute("pseudo", cookies[0].getValue());
 			request.setAttribute("mdp", cookies[1].getValue());
 		}
-		if (request.getParameter("utilisateur") != null) {
-			response.sendRedirect("/Accueil");
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
-			rd.forward(request, response);
-		}
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
+		rd.forward(request, response);
 
 	}
 
@@ -90,7 +87,6 @@ public class ServletPageDeConnexion extends HttpServlet {
 						response.addCookie(cookies[0]);
 						response.addCookie(cookies[1]);
 					}
-					
 
 				}
 
