@@ -1,25 +1,25 @@
+<h4>${currentArticle.getNomArticle()}</h4>
+<img src="/VentesAuxEncheres/Images/${currentArticle.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"  class="imgArticle">
 
-
-	<h4>${currentArticle.getNomArticle()}</h4>
-	<img src="/VentesAuxEncheres/Images/${currentArticle.getUrlPhoto()}" alt="Descriptif de l'image pour mal voyant"  class="imgArticle">
-	<p class="colonne1">	
-		Description : 	<span class="colonne2">${currentArticle.getDescription()}</span>
+	<p>	
+		Description : 	
+		${currentArticle.getDescription()}
 	</p>
-	<p class="colonne1">
-		Catégorie : <span class="colonne2">${currentArticle.getlibelle()}</span>
+	<p>
+		Catégorie : ${currentArticle.getlibelle()}
 	</p>
-	<p class="colonne1">
-		Meilleure offre : <span class="colonne2">${currentArticle.getPrixVente()}</span>
+	<p>
+		Meilleure offre : ${currentArticle.getPrixVente()}
 	</p>
-	<p class="colonne1">
-		Mise à prix : <span class="colonne2">${currentArticle.getMiseAPrix()}</span>
+	<p>
+		Mise à prix : ${currentArticle.getMiseAPrix()}
 	</p>
-	<p class="colonne1">
-		Fin de l'enchère : <span class="colonne2">${currentArticle.getDateFinEncheres()}</span>
+	<p>
+		Fin de l'enchère : ${currentArticle.getDateFinEncheres()}
 	</p>
-	<p class="colonne1">
-		Retrait : <span class="colonne2">${currentArticle.getLieuRetrait()}</span>
+	<p>
+		Retrait : ${currentArticle.getLieuRetrait()}
 	</p>
-	<p class="colonne1">
-		Vendeur : <span class="colonne2"><a href="<%=request.getContextPath()%>/Profil?idVendeur=${seller.getNoUtilisateur()}">${seller.getPseudo()}</a></span>
+	<p>
+		Vendeur : <a href="<%=request.getContextPath()%>/Profil?idVendeur=${seller.getNoUtilisateur()}">${seller.getPseudo()}</a>
 	</p>
