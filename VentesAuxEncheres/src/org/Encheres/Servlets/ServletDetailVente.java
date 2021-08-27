@@ -38,11 +38,11 @@ public class ServletDetailVente extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(300);
 		request.setCharacterEncoding("UTF-8");
-		int idUser = (int) session.getAttribute("id");
 		if (session.getAttribute("id") == null) {
 			rd = request.getRequestDispatcher("/WEB-INF/JSP/PageDeConnexion.jsp");
 			rd.forward(request, response);
 		} else {
+			int idUser = (int) session.getAttribute("id");
 			request.setAttribute("session", session);
 			int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 			int idGagnant = 0;
@@ -52,7 +52,7 @@ public class ServletDetailVente extends HttpServlet {
 			ArticleManager am = new ArticleManager();
 			UtilisateurManager um = new UtilisateurManager();
 			Utilisateur seller = new Utilisateur();
-			Utilisateur user = new Utilisateur();
+			Utilisateur currentUser = new Utilisateur();
 			Utilisateur gagnantVente = new Utilisateur();
 			LocalDate date;
 			try {
@@ -60,8 +60,8 @@ public class ServletDetailVente extends HttpServlet {
 				request.setAttribute("currentArticle", currentArticle);
 				seller = um.selectByNoUtilisateur(currentArticle.getNoUtilisateur());
 				request.setAttribute("seller", seller);
-				user = um.selectByNoUtilisateur(idUser);
-				request.setAttribute("user", user);
+				currentUser = um.selectByNoUtilisateur(idUser);
+				request.setAttribute("user", currentUser);
 				idGagnant = em.selectAcheteur(noArticle);
 				gagnantVente = um.selectByNoUtilisateur(idGagnant);
 				request.setAttribute("gagnantVente", gagnantVente);
