@@ -19,41 +19,40 @@
 	</header>
 	<h2 class="titreModif">Modifier mon profil</h2>
 	<form action="<%=request.getContextPath()%>/ModifierProfil" method="post">
-           <div style="display: flex; flex-direction : column;">
+           <div>
                 <div class="formulaireModifierProfil">
-                    <p class="formulairepModifProfil">Pseudo : 
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Pseudo :
                     <input type="text" name="pseudo" class="caseFormModifProfil"></p>
-                    <p class="formulairepModifProfil">Nom : 
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Nom : 
                     <input type="text" name="nom" class="caseFormModifProfil"></p>
                 </div>
                 <div class="formulaireModifierProfil">
-                    <p class="formulairepModifProfil">Prenom :
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Prenom :
                     <input type="text" name="prenom" class="caseFormModifProfil"> </p>
-                    <p class="formulairepModifProfil">Email : 
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Email : 
                     <input type="text" name="email" class="caseFormModifProfil"> </p>
                 </div> 
                 <div class="formulaireModifierProfil" class="caseFormModifProfil">
-                    <p class="formulairepModifProfil">Téléphone :
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;" >Téléphone :
                     <input type="text" name="telephone" class="caseFormModifProfil"> </p>
-                    <p class="formulairepModifProfil">Rue :
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Rue :
                     <input type="text" name="rue" class="caseFormModifProfil" > </p>
                 </div> 
                 <div class="formulaireModifierProfil">
-                    <p class="formulairepModifProfil">Code Postal : 
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Code Postal : 
                     <input type="text" name="code_postal" class="caseFormModifProfil"></p>
-                    <p class="formulairepModifProfil">Ville : 
+                    <p class="formulairepModifProfil"style="grid-template-columns: 110px 100px 100px;">Ville : 
                     <input type="text" name="ville" class="caseFormModifProfil"></p>
                 </div> 
-                
                <div class="mdpModif">
                 <div class="formulaireModifierProfil">
-                    <p class="formulairepModifProfil correctifTexte">Mot de passe actuel : 
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Mot de passe actuel : 
                     <input type="password" name="motDePasse" required class="caseFormModifProfil correctifSolo"></p>
                 </div>
                 <div class="formulaireModifierProfil">
-                    <p class="formulairepModifProfil">Nouveau mot de passe :
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Nouveau mot de passe :
                     <input type="password" name="newMotDePasse" class="caseFormModifProfil">  </p>
-                    <p class="formulairepModifProfil">Confirmation :
+                    <p class="formulairepModifProfil" style="grid-template-columns: 110px 100px 100px;">Confirmation :
                     <input type="password" name="confirmMotDePasse"class="caseFormModifProfil">  </p>
                 </div>
                </div>
